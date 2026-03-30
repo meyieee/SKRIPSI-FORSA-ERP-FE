@@ -1,0 +1,57 @@
+/* Tema-aware helpers untuk Analytical & KPI Overview */
+.kpi-card {
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  border-color: var(--bs-border-color);
+
+  .card-header {
+    background: var(--bs-tertiary-bg); /* nyesuai tema */
+    color: var(--bs-emphasis-color); /* kontras otomatis */
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+}
+
+/* Header tabel (kolom judul) yang tetap kontras & tidak silau */
+.kpi-thead {
+  background: var(--bs-secondary-bg);
+  color: var(--bs-emphasis-color);
+}
+
+/* Sel “judul indikator” sedikit indent seperti di foto */
+.kpi-indicator {
+  padding-left: 1.25rem !important;
+}
+
+/* Tombol ikon di kolom Action — tetap kontras di dua tema */
+.kpi-action-btn {
+  --icon-size: 1.15rem;
+  .svg-icon-4,
+  .svg-icon-3 {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+/* Tabel bawah: agar header gelap di light, tetap kontras di dark */
+.kpi-recap-head {
+  background: var(--bs-emphasis-bg); /* gelap di light, terang di dark */
+  color: var(--bs-emphasis-color-2, #fff); /* fallback untuk metronic lama */
+}
+
+/* Spasi antar blok top */
+.kpi-toprow > .col-lg-4 {
+  margin-bottom: 1rem;
+}
+
+/* Responsif kecil: kompres padding kartu */
+@media (max-width: 575.98px) {
+  .kpi-card .card-header {
+    padding: 0.5rem 0.75rem;
+  }
+  .kpi-card .card-body {
+    padding: 0;
+  }
+}

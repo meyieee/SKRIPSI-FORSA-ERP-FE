@@ -1,0 +1,46 @@
+.btn-sm {
+  padding: 10px 8px !important; /* Menurunkan padding agar tombol lebih kecil */
+  font-size: 12px !important; /* Ukuran font lebih kecil */
+}
+.card-filter {
+  width: 50% !important;
+}
+
+.tasks-date-filter {
+  position: relative;
+}
+
+.tasks-date-filter-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 1050;
+  width: min(420px, calc(100vw - 3rem)) !important;
+  min-width: 320px;
+  margin-top: 0 !important;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.16);
+}
+
+.button {
+  z-index: 10 !important; /* Membuat button berada di atas */
+}
+
+.d-flex {
+  gap: 8px !important; /* Menambah jarak antar tombol */
+}
+
+.mb-2 {
+  margin-bottom: 10px !important; /* Menyesuaikan jarak antar grup tombol */
+}
+
+.btn-task {
+  padding: 8px 8px !important;
+  font-size: 12px !important;
+  min-width: 12px !important;
+  white-space: nowrap !important;
+}
+
+/* Styling tombol Create E-Tasks dengan position absolute */
+.create-task-button {
+  z-index: 11; /* Membuat tombol muncul di atas elemen lainnya */
+}

@@ -1,0 +1,100 @@
+.request-view-modal {
+  .modal-dialog {
+    width: min(1080px, 92vw);
+    max-width: 1080px;
+  }
+
+  .modal-header {
+    background-color: var(--bs-body-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+
+    .modal-title {
+      font-weight: 600;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      color: var(--bs-body-color);
+    }
+  }
+
+  .modal-body {
+    padding: 1.75rem;
+
+    .detail-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-section-card {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.25rem 1rem;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.75rem;
+      background: var(--bs-gray-100);
+    }
+
+    .detail-section-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--bs-dark);
+      margin-bottom: 1rem;
+    }
+
+    .detail-field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 1.25rem;
+    }
+
+    .request-detail-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      margin-bottom: 0;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 0.65rem;
+      background: var(--bs-body-bg);
+
+      .label {
+        font-weight: 600;
+        color: var(--bs-secondary-color);
+        font-size: 0.85rem;
+      }
+
+      .value {
+        font-weight: 500;
+        color: var(--bs-body-color);
+        text-align: left;
+        max-width: 100%;
+        width: 100%;
+        word-break: break-word;
+      }
+    }
+
+    table td {
+      vertical-align: top;
+    }
+  }
+
+  @media (max-width: 991.98px) {
+    .modal-body {
+      .detail-summary-grid,
+      .detail-field-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid var(--bs-border-color);
+  }
+}
+
+.small-modal .modal-dialog {
+  width: min(1080px, 92vw);
+  max-width: 1080px;
+}

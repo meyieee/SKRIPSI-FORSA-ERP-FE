@@ -1,0 +1,13 @@
+.table.table-hover .task-row-group:hover tr > * {
+  background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.04));
+  transition: background-color 0.15s ease;
+}
+
+.table.table-hover .task-row-group:hover .short-description-row > td {
+  background-color: var(--bs-table-hover-bg, rgba(0, 0, 0, 0.04));
+}
+
+.table.task-table {
+  --task-hover-bg: color-mix(in srgb, var(--bs-body-color) 8%, transparent);
+  --bs-table-hover-bg: var(--task-hover-bg);
+}

@@ -1,0 +1,22 @@
+.status-badge-wrap {
+  position: relative;
+  display: inline-block;
+}
+.badge-precheck {
+  position: absolute;
+  top: -12px;
+  left: -6px;
+  z-index: 1;
+  padding: 0.15rem 0.4rem;
+  line-height: 1;
+  border-radius: 0.5rem;
+  pointer-events: none;
+}
+.badge-precheck-approve {
+  background: rgba(var(--bs-success-rgb));
+  color: var(--bs-dark);
+}
+.badge-precheck-reject {
+  background: rgba(var(--bs-danger-rgb));
+  color: var(--bs-dark);
+}

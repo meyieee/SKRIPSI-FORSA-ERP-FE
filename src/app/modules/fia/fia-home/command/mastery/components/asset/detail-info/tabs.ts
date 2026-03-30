@@ -1,0 +1,7 @@
+export {default as DetailTab} from './detail/DetailTab'
+export {default as SpecsTab} from './specs/SpecsTab'
+export {default as FinanceTab} from './finance/FinanceTab'
+export {default as HireTab} from './hire/HireTab'
+export {default as WarrantyTab} from './warranty/WarrantyTab'
+export {default as LeasingTab} from './leasing/LeasingTab'
+export {default as DocumentsTab} from './documents/DocumentsTab'

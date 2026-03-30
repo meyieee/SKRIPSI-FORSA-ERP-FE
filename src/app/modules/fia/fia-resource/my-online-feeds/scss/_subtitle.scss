@@ -1,0 +1,11 @@
+/* styling subjudul di samping judul */
+
+.sub-title-hover {
+  color: #ffffff;
+  cursor: default;
+  transition: color 0.1s;
+
+  &:hover {
+    color: #2548fb; /* warna putih saat hover */
+  }
+}

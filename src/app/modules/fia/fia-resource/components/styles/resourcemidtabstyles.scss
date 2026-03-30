@@ -1,0 +1,127 @@
+/* GRID CONTAINER (dinamis pakai CSS vars) */
+.midtab-grid {
+  display: grid !important;
+  gap: 0;
+  background-color: var(--bs-gray-300);
+  border-radius: 1rem;
+  overflow: hidden;
+
+  /* default (mobile) - selalu 2 kolom */
+  grid-template-columns: repeat(var(--nav-cols-sm, 2), minmax(0, 1fr));
+}
+
+/* Dark mode support */
+[data-bs-theme='dark'] .midtab-grid {
+  background-color: var(--bs-gray-dark-200);
+}
+
+@media (min-width: 768px) {
+  .midtab-grid {
+    grid-template-columns: repeat(var(--nav-cols-md, 4), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .midtab-grid {
+    grid-template-columns: repeat(var(--nav-cols-lg, var(--nav-cols-md, 4)), minmax(0, 1fr));
+  }
+}
+
+/* TILE */
+.midtab-tile {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 30px;
+  padding: 1.5rem;
+  text-align: center;
+  text-decoration: none !important;
+  color: var(--bs-body-color) !important;
+  background: transparent;
+  border-right: 1px solid var(--bs-border-color);
+  border-bottom: 1px solid var(--bs-border-color);
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hapus border kanan untuk item terakhir di setiap baris */
+.midtab-tile:nth-child(2n) {
+  border-right: none;
+}
+
+@media (min-width: 768px) {
+  .midtab-tile:nth-child(2n) {
+    border-right: 1px solid var(--bs-border-color);
+  }
+  .midtab-tile:nth-child(4n) {
+    border-right: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .midtab-tile:nth-child(4n) {
+    border-right: 1px solid var(--bs-border-color);
+  }
+  /* Dinamis berdasarkan --nav-cols-lg */
+  .midtab-grid[style*='--nav-cols-lg: 3'] .midtab-tile:nth-child(3n) {
+    border-right: none;
+  }
+  .midtab-grid[style*='--nav-cols-lg: 4'] .midtab-tile:nth-child(4n) {
+    border-right: none;
+  }
+  .midtab-grid[style*='--nav-cols-lg: 5'] .midtab-tile:nth-child(5n) {
+    border-right: none;
+  }
+  .midtab-grid[style*='--nav-cols-lg: 6'] .midtab-tile:nth-child(6n) {
+    border-right: none;
+  }
+}
+
+/* Span untuk item yang perlu melebar */
+.midtab-tile[data-span] {
+  grid-column: span var(--tile-span, 1);
+}
+
+/* TEKS */
+.midtab-title {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  line-height: 1.1;
+  font-size: 1rem;
+}
+
+@media (min-width: 1200px) {
+  .midtab-title {
+    font-size: 1.1rem;
+  }
+}
+
+.midtab-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--bs-text-muted) !important;
+}
+
+/* ACTIVE */
+.midtab-tile.active {
+  color: #fff !important;
+  background-color: var(--bs-primary) !important;
+  border-color: var(--bs-primary) !important;
+  outline: none;
+}
+
+.midtab-tile.active:hover {
+  filter: brightness(1.1);
+}
+
+.midtab-tile:not(.active):hover {
+  background: var(--bs-primary-light);
+  color: var(--bs-primary) !important;
+}
+
+/* Dark mode hover state */
+[data-bs-theme='dark'] .midtab-tile:not(.active):hover {
+  background: rgba(var(--bs-success-rgb), 0.15);
+}

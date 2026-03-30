@@ -1,0 +1,95 @@
+/* calendarStyle.scss */
+.fc-header-custom-label {
+  position: absolute;
+  left: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  z-index: 10;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.fc .fc-toolbar-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin: 0 3px;
+}
+
+.fc-button {
+  height: 40px;
+  line-height: 32px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Highlight untuk tanggal hari ini */
+.fc-daygrid-day.fc-day-today {
+  box-shadow: 0 0 0 1px currentColor;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  position: relative;
+}
+
+.fc-day-today .fc-daygrid-day-number::before {
+  content: 'Today';
+  position: absolute;
+  left: -30px; /* geser ke kiri */
+  top: 47%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: currentColor;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.fc-daygrid-day-frame {
+  position: relative;
+}
+
+/* Semua event jadi abu-abu */
+.fc-event {
+  background-color: var(--bs-secondary) !important;
+  border: none !important;
+  color: var(--bs-dark) !important;
+  font-weight: 500;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.fc-event,
+.fc-event .fc-event-main,
+.fc-event .fc-event-title,
+.fc-event .fc-daygrid-event-dot,
+.fc-event .fc-event-time {
+  color: inherit !important;
+}
+
+.fc-event.roster-note-d {
+  background-color: var(--bs-warning) !important;
+  color: var(--bs-dark) !important;
+}
+
+.fc-event.roster-note-o {
+  background-color: var(--bs-danger) !important;
+  color: var(--bs-white) !important;
+}
+
+.fc-event.roster-note-n {
+  background-color: var(--bs-info) !important;
+  color: var(--bs-white) !important;
+}
+
+.fc-event.roster-note-default {
+  background-color: var(--bs-secondary) !important;
+  color: var(--bs-dark) !important;
+}

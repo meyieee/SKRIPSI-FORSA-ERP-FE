@@ -1,0 +1,2537 @@
+[
+	{
+		"id":"1101",
+		"province":"ACEH",
+		"name":"KABUPATEN SIMEULUE"
+	},
+	{
+		"id":"1102",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH SINGKIL"
+	},
+	{
+		"id":"1103",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH SELATAN"
+	},
+	{
+		"id":"1104",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH TENGGARA"
+	},
+	{
+		"id":"1105",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH TIMUR"
+	},
+	{
+		"id":"1106",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH TENGAH"
+	},
+	{
+		"id":"1107",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH BARAT"
+	},
+	{
+		"id":"1108",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH BESAR"
+	},
+	{
+		"id":"1109",
+		"province":"ACEH",
+		"name":"KABUPATEN PIDIE"
+	},
+	{
+		"id":"1110",
+		"province":"ACEH",
+		"name":"KABUPATEN BIREUEN"
+	},
+	{
+		"id":"1111",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH UTARA"
+	},
+	{
+		"id":"1112",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH BARAT DAYA"
+	},
+	{
+		"id":"1113",
+		"province":"ACEH",
+		"name":"KABUPATEN GAYO LUES"
+	},
+	{
+		"id":"1114",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH TAMIANG"
+	},
+	{
+		"id":"1115",
+		"province":"ACEH",
+		"name":"KABUPATEN NAGAN RAYA"
+	},
+	{
+		"id":"1116",
+		"province":"ACEH",
+		"name":"KABUPATEN ACEH JAYA"
+	},
+	{
+		"id":"1117",
+		"province":"ACEH",
+		"name":"KABUPATEN BENER MERIAH"
+	},
+	{
+		"id":"1118",
+		"province":"ACEH",
+		"name":"KABUPATEN PIDIE JAYA"
+	},
+	{
+		"id":"1171",
+		"province":"ACEH",
+		"name":"KOTA BANDA ACEH"
+	},
+	{
+		"id":"1172",
+		"province":"ACEH",
+		"name":"KOTA SABANG"
+	},
+	{
+		"id":"1173",
+		"province":"ACEH",
+		"name":"KOTA LANGSA"
+	},
+	{
+		"id":"1174",
+		"province":"ACEH",
+		"name":"KOTA LHOKSEUMAWE"
+	},
+	{
+		"id":"1175",
+		"province":"ACEH",
+		"name":"KOTA SUBULUSSALAM"
+	},
+	{
+		"id":"1201",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN NIAS"
+	},
+	{
+		"id":"1202",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN MANDAILING NATAL"
+	},
+	{
+		"id":"1203",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN TAPANULI SELATAN"
+	},
+	{
+		"id":"1204",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN TAPANULI TENGAH"
+	},
+	{
+		"id":"1205",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN TAPANULI UTARA"
+	},
+	{
+		"id":"1206",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN TOBA SAMOSIR"
+	},
+	{
+		"id":"1207",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN LABUHAN BATU"
+	},
+	{
+		"id":"1208",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN ASAHAN"
+	},
+	{
+		"id":"1209",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN SIMALUNGUN"
+	},
+	{
+		"id":"1210",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN DAIRI"
+	},
+	{
+		"id":"1211",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN KARO"
+	},
+	{
+		"id":"1212",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN DELI SERDANG"
+	},
+	{
+		"id":"1213",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN LANGKAT"
+	},
+	{
+		"id":"1214",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN NIAS SELATAN"
+	},
+	{
+		"id":"1215",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN HUMBANG HASUNDUTAN"
+	},
+	{
+		"id":"1216",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN PAKPAK BHARAT"
+	},
+	{
+		"id":"1217",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN SAMOSIR"
+	},
+	{
+		"id":"1218",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN SERDANG BEDAGAI"
+	},
+	{
+		"id":"1219",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN BATU BARA"
+	},
+	{
+		"id":"1220",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN PADANG LAWAS UTARA"
+	},
+	{
+		"id":"1221",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN PADANG LAWAS"
+	},
+	{
+		"id":"1222",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN LABUHAN BATU SELATAN"
+	},
+	{
+		"id":"1223",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN LABUHAN BATU UTARA"
+	},
+	{
+		"id":"1224",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN NIAS UTARA"
+	},
+	{
+		"id":"1225",
+		"province":"SUMATERA UTARA",
+		"name":"KABUPATEN NIAS BARAT"
+	},
+	{
+		"id":"1271",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA SIBOLGA"
+	},
+	{
+		"id":"1272",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA TANJUNG BALAI"
+	},
+	{
+		"id":"1273",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA PEMATANG SIANTAR"
+	},
+	{
+		"id":"1274",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA TEBING TINGGI"
+	},
+	{
+		"id":"1275",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA MEDAN"
+	},
+	{
+		"id":"1276",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA BINJAI"
+	},
+	{
+		"id":"1277",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA PADANG SIDEMPUAN"
+	},
+	{
+		"id":"1278",
+		"province":"SUMATERA UTARA",
+		"name":"KOTA GUNUNGSITOLI"
+	},
+	{
+		"id":"1301",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN KEPULAUAN MENTAWAI"
+	},
+	{
+		"id":"1302",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN PESISIR SELATAN"
+	},
+	{
+		"id":"1303",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN SOLOK"
+	},
+	{
+		"id":"1304",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN SIJUNJUNG"
+	},
+	{
+		"id":"1305",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN TANAH DATAR"
+	},
+	{
+		"id":"1306",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN PADANG PARIAMAN"
+	},
+	{
+		"id":"1307",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN AGAM"
+	},
+	{
+		"id":"1308",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN LIMA PULUH KOTA"
+	},
+	{
+		"id":"1309",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN PASAMAN"
+	},
+	{
+		"id":"1310",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN SOLOK SELATAN"
+	},
+	{
+		"id":"1311",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN DHARMASRAYA"
+	},
+	{
+		"id":"1312",
+		"province":"SUMATERA Barat",
+		"name":"KABUPATEN PASAMAN BARAT"
+	},
+	{
+		"id":"1371",
+		"province":"SUMATERA Barat",
+		"name":"KOTA PADANG"
+	},
+	{
+		"id":"1372",
+		"province":"SUMATERA Barat",
+		"name":"KOTA SOLOK"
+	},
+	{
+		"id":"1373",
+		"province":"SUMATERA Barat",
+		"name":"KOTA SAWAH LUNTO"
+	},
+	{
+		"id":"1374",
+		"province":"SUMATERA Barat",
+		"name":"KOTA PADANG PANJANG"
+	},
+	{
+		"id":"1375",
+		"province":"SUMATERA Barat",
+		"name":"KOTA BUKITTINGGI"
+	},
+	{
+		"id":"1376",
+		"province":"SUMATERA Barat",
+		"name":"KOTA PAYAKUMBUH"
+	},
+	{
+		"id":"1377",
+		"province":"SUMATERA Barat",
+		"name":"KOTA PARIAMAN"
+	},
+	{
+		"id":"1401",
+		"province":"RIAU",
+		"name":"KABUPATEN KUANTAN SINGINGI"
+	},
+	{
+		"id":"1402",
+		"province":"RIAU",
+		"name":"KABUPATEN INDRAGIRI HULU"
+	},
+	{
+		"id":"1403",
+		"province":"RIAU",
+		"name":"KABUPATEN INDRAGIRI HILIR"
+	},
+	{
+		"id":"1404",
+		"province":"RIAU",
+		"name":"KABUPATEN PELALAWAN"
+	},
+	{
+		"id":"1405",
+		"province":"RIAU",
+		"name":"KABUPATEN SIAK"
+	},
+	{
+		"id":"1406",
+		"province":"RIAU",
+		"name":"KABUPATEN KAMPAR"
+	},
+	{
+		"id":"1407",
+		"province":"RIAU",
+		"name":"KABUPATEN ROKAN HULU"
+	},
+	{
+		"id":"1408",
+		"province":"RIAU",
+		"name":"KABUPATEN BENGKALIS"
+	},
+	{
+		"id":"1409",
+		"province":"RIAU",
+		"name":"KABUPATEN ROKAN HILIR"
+	},
+	{
+		"id":"1410",
+		"province":"RIAU",
+		"name":"KABUPATEN KEPULAUAN MERANTI"
+	},
+	{
+		"id":"1471",
+		"province":"RIAU",
+		"name":"KOTA PEKANBARU"
+	},
+	{
+		"id":"1473",
+		"province":"RIAU",
+		"name":"KOTA DUMAI"
+	},
+	{
+		"id":"1501",
+		"province":"JAMBI",
+		"name":"KABUPATEN KERINCI"
+	},
+	{
+		"id":"1502",
+		"province":"JAMBI",
+		"name":"KABUPATEN MERANGIN"
+	},
+	{
+		"id":"1503",
+		"province":"JAMBI",
+		"name":"KABUPATEN SAROLANGUN"
+	},
+	{
+		"id":"1504",
+		"province":"JAMBI",
+		"name":"KABUPATEN BATANG HARI"
+	},
+	{
+		"id":"1505",
+		"province":"JAMBI",
+		"name":"KABUPATEN MUARO JAMBI"
+	},
+	{
+		"id":"1506",
+		"province":"JAMBI",
+		"name":"KABUPATEN TANJUNG JABUNG TIMUR"
+	},
+	{
+		"id":"1507",
+		"province":"JAMBI",
+		"name":"KABUPATEN TANJUNG JABUNG BARAT"
+	},
+	{
+		"id":"1508",
+		"province":"JAMBI",
+		"name":"KABUPATEN TEBO"
+	},
+	{
+		"id":"1509",
+		"province":"JAMBI",
+		"name":"KABUPATEN BUNGO"
+	},
+	{
+		"id":"1571",
+		"province":"JAMBI",
+		"name":"KOTA JAMBI"
+	},
+	{
+		"id":"1572",
+		"province":"JAMBI",
+		"name":"KOTA SUNGAI PENUH"
+	},
+	{
+		"id":"1601",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN OGAN KOMERING ULU"
+	},
+	{
+		"id":"1602",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN OGAN KOMERING ILIR"
+	},
+	{
+		"id":"1603",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN MUARA ENIM"
+	},
+	{
+		"id":"1604",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN LAHAT"
+	},
+	{
+		"id":"1605",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN MUSI RAWAS"
+	},
+	{
+		"id":"1606",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN MUSI BANYU ASIN"
+	},
+	{
+		"id":"1607",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN BANYU ASIN"
+	},
+	{
+		"id":"1608",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN OGAN KOMERING ULU SELATAN"
+	},
+	{
+		"id":"1609",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN OGAN KOMERING ULU TIMUR"
+	},
+	{
+		"id":"1610",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN OGAN ILIR"
+	},
+	{
+		"id":"1611",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN EMPAT LAWANG"
+	},
+	{
+		"id":"1612",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN PENUKAL ABAB LEMATANG ILIR"
+	},
+	{
+		"id":"1613",
+		"province":"SUMATERA SELATAN",
+		"name":"KABUPATEN MUSI RAWAS UTARA"
+	},
+	{
+		"id":"1671",
+		"province":"SUMATERA SELATAN",
+		"name":"KOTA PALEMBANG"
+	},
+	{
+		"id":"1672",
+		"province":"SUMATERA SELATAN",
+		"name":"KOTA PRABUMULIH"
+	},
+	{
+		"id":"1673",
+		"province":"SUMATERA SELATAN",
+		"name":"KOTA PAGAR ALAM"
+	},
+	{
+		"id":"1674",
+		"province":"SUMATERA SELATAN",
+		"name":"KOTA LUBUK LINGGAU"
+	},
+	{
+		"id":"1701",
+		"province":"BENGKULU",
+		"name":"KABUPATEN BENGKULU SELATAN"
+	},
+	{
+		"id":"1702",
+		"province":"BENGKULU",
+		"name":"KABUPATEN REJANG LEBONG"
+	},
+	{
+		"id":"1703",
+		"province":"BENGKULU",
+		"name":"KABUPATEN BENGKULU UTARA"
+	},
+	{
+		"id":"1704",
+		"province":"BENGKULU",
+		"name":"KABUPATEN KAUR"
+	},
+	{
+		"id":"1705",
+		"province":"BENGKULU",
+		"name":"KABUPATEN SELUMA"
+	},
+	{
+		"id":"1706",
+		"province":"BENGKULU",
+		"name":"KABUPATEN MUKOMUKO"
+	},
+	{
+		"id":"1707",
+		"province":"BENGKULU",
+		"name":"KABUPATEN LEBONG"
+	},
+	{
+		"id":"1708",
+		"province":"BENGKULU",
+		"name":"KABUPATEN KEPAHIANG"
+	},
+	{
+		"id":"1709",
+		"province":"BENGKULU",
+		"name":"KABUPATEN BENGKULU TENGAH"
+	},
+	{
+		"id":"1771",
+		"province":"BENGKULU",
+		"name":"KOTA BENGKULU"
+	},
+	{
+		"id":"1801",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN LAMPUNG BARAT"
+	},
+	{
+		"id":"1802",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN TANGGAMUS"
+	},
+	{
+		"id":"1803",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN LAMPUNG SELATAN"
+	},
+	{
+		"id":"1804",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN LAMPUNG TIMUR"
+	},
+	{
+		"id":"1805",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN LAMPUNG TENGAH"
+	},
+	{
+		"id":"1806",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN LAMPUNG UTARA"
+	},
+	{
+		"id":"1807",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN WAY KANAN"
+	},
+	{
+		"id":"1808",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN TULANGBAWANG"
+	},
+	{
+		"id":"1809",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN PESAWARAN"
+	},
+	{
+		"id":"1810",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN PRINGSEWU"
+	},
+	{
+		"id":"1811",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN MESUJI"
+	},
+	{
+		"id":"1812",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN TULANG BAWANG BARAT"
+	},
+	{
+		"id":"1813",
+		"province":"LAMPUNG",
+		"name":"KABUPATEN PESISIR BARAT"
+	},
+	{
+		"id":"1871",
+		"province":"LAMPUNG",
+		"name":"KOTA BANDAR LAMPUNG"
+	},
+	{
+		"id":"1872",
+		"province":"LAMPUNG",
+		"name":"KOTA METRO"
+	},
+	{
+		"id":"1901",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BANGKA"
+	},
+	{
+		"id":"1902",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BELITUNG"
+	},
+	{
+		"id":"1903",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BANGKA BARAT"
+	},
+	{
+		"id":"1904",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BANGKA TENGAH"
+	},
+	{
+		"id":"1905",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BANGKA SELATAN"
+	},
+	{
+		"id":"1906",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KABUPATEN BELITUNG TIMUR"
+	},
+	{
+		"id":"1971",
+		"province":"KEPULAUAN BANGKA BELITUNG",
+		"name":"KOTA PANGKAL PINANG"
+	},
+	{
+		"id":"2101",
+		"province":"KEPULAUAN RIAU",
+		"name":"KABUPATEN KARIMUN"
+	},
+	{
+		"id":"2102",
+		"province":"KEPULAUAN RIAU",
+		"name":"KABUPATEN BINTAN"
+	},
+	{
+		"id":"2103",
+		"province":"KEPULAUAN RIAU",
+		"name":"KABUPATEN NATUNA"
+	},
+	{
+		"id":"2104",
+		"province":"KEPULAUAN RIAU",
+		"name":"KABUPATEN LINGGA"
+	},
+	{
+		"id":"2105",
+		"province":"KEPULAUAN RIAU",
+		"name":"KABUPATEN KEPULAUAN ANAMBAS"
+	},
+	{
+		"id":"2171",
+		"province":"KEPULAUAN RIAU",
+		"name":"KOTA BATAM"
+	},
+	{
+		"id":"2172",
+		"province":"KEPULAUAN RIAU",
+		"name":"KOTA TANJUNG PINANG"
+	},
+	{
+		"id":"3101",
+		"province":"DKI JAKARTA",
+		"name":"KABUPATEN KEPULAUAN SERIBU"
+	},
+	{
+		"id":"3171",
+		"province":"DKI JAKARTA",
+		"name":"KOTA JAKARTA SELATAN"
+	},
+	{
+		"id":"3172",
+		"province":"DKI JAKARTA",
+		"name":"KOTA JAKARTA TIMUR"
+	},
+	{
+		"id":"3173",
+		"province":"DKI JAKARTA",
+		"name":"KOTA JAKARTA PUSAT"
+	},
+	{
+		"id":"3174",
+		"province":"DKI JAKARTA",
+		"name":"KOTA JAKARTA BARAT"
+	},
+	{
+		"id":"3175",
+		"province":"DKI JAKARTA",
+		"name":"KOTA JAKARTA UTARA"
+	},
+	{
+		"id":"3201",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN BOGOR"
+	},
+	{
+		"id":"3202",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN SUKABUMI"
+	},
+	{
+		"id":"3203",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN CIANJUR"
+	},
+	{
+		"id":"3204",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN BANDUNG"
+	},
+	{
+		"id":"3205",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN GARUT"
+	},
+	{
+		"id":"3206",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN TASIKMALAYA"
+	},
+	{
+		"id":"3207",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN CIAMIS"
+	},
+	{
+		"id":"3208",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN KUNINGAN"
+	},
+	{
+		"id":"3209",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN CIREBON"
+	},
+	{
+		"id":"3210",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN MAJALENGKA"
+	},
+	{
+		"id":"3211",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN SUMEDANG"
+	},
+	{
+		"id":"3212",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN INDRAMAYU"
+	},
+	{
+		"id":"3213",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN SUBANG"
+	},
+	{
+		"id":"3214",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN PURWAKARTA"
+	},
+	{
+		"id":"3215",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN KARAWANG"
+	},
+	{
+		"id":"3216",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN BEKASI"
+	},
+	{
+		"id":"3217",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN BANDUNG BARAT"
+	},
+	{
+		"id":"3218",
+		"province":"JAWA BARAT",
+		"name":"KABUPATEN PANGANDARAN"
+	},
+	{
+		"id":"3271",
+		"province":"JAWA BARAT",
+		"name":"KOTA BOGOR"
+	},
+	{
+		"id":"3272",
+		"province":"JAWA BARAT",
+		"name":"KOTA SUKABUMI"
+	},
+	{
+		"id":"3273",
+		"province":"JAWA BARAT",
+		"name":"KOTA BANDUNG"
+	},
+	{
+		"id":"3274",
+		"province":"JAWA BARAT",
+		"name":"KOTA CIREBON"
+	},
+	{
+		"id":"3275",
+		"province":"JAWA BARAT",
+		"name":"KOTA BEKASI"
+	},
+	{
+		"id":"3276",
+		"province":"JAWA BARAT",
+		"name":"KOTA DEPOK"
+	},
+	{
+		"id":"3277",
+		"province":"JAWA BARAT",
+		"name":"KOTA CIMAHI"
+	},
+	{
+		"id":"3278",
+		"province":"JAWA BARAT",
+		"name":"KOTA TASIKMALAYA"
+	},
+	{
+		"id":"3279",
+		"province":"JAWA BARAT",
+		"name":"KOTA BANJAR"
+	},
+	{
+		"id":"3301",
+		"province":"JAWA TENGAH","name":"KABUPATEN CILACAP"
+	},
+	{
+		"id":"3302",
+		"province":"JAWA TENGAH","name":"KABUPATEN BANYUMAS"
+	},
+	{
+		"id":"3303",
+		"province":"JAWA TENGAH","name":"KABUPATEN PURBALINGGA"
+	},
+	{
+		"id":"3304",
+		"province":"JAWA TENGAH","name":"KABUPATEN BANJARNEGARA"
+	},
+	{
+		"id":"3305",
+		"province":"JAWA TENGAH","name":"KABUPATEN KEBUMEN"
+	},
+	{
+		"id":"3306",
+		"province":"JAWA TENGAH","name":"KABUPATEN PURWOREJO"
+	},
+	{
+		"id":"3307",
+		"province":"JAWA TENGAH","name":"KABUPATEN WONOSOBO"
+	},
+	{
+		"id":"3308",
+		"province":"JAWA TENGAH","name":"KABUPATEN MAGELANG"
+	},
+	{
+		"id":"3309",
+		"province":"JAWA TENGAH","name":"KABUPATEN BOYOLALI"
+	},
+	{
+		"id":"3310",
+		"province":"JAWA TENGAH","name":"KABUPATEN KLATEN"
+	},
+	{
+		"id":"3311",
+		"province":"JAWA TENGAH","name":"KABUPATEN SUKOHARJO"
+	},
+	{
+		"id":"3312",
+		"province":"JAWA TENGAH","name":"KABUPATEN WONOGIRI"
+	},
+	{
+		"id":"3313",
+		"province":"JAWA TENGAH","name":"KABUPATEN KARANGANYAR"
+	},
+	{
+		"id":"3314",
+		"province":"JAWA TENGAH","name":"KABUPATEN SRAGEN"
+	},
+	{
+		"id":"3315",
+		"province":"JAWA TENGAH","name":"KABUPATEN GROBOGAN"
+	},
+	{
+		"id":"3316",
+		"province":"JAWA TENGAH","name":"KABUPATEN BLORA"
+	},
+	{
+		"id":"3317",
+		"province":"JAWA TENGAH","name":"KABUPATEN REMBANG"
+	},
+	{
+		"id":"3318",
+		"province":"JAWA TENGAH","name":"KABUPATEN PATI"
+	},
+	{
+		"id":"3319",
+		"province":"JAWA TENGAH","name":"KABUPATEN KUDUS"
+	},
+	{
+		"id":"3320",
+		"province":"JAWA TENGAH","name":"KABUPATEN JEPARA"
+	},
+	{
+		"id":"3321",
+		"province":"JAWA TENGAH","name":"KABUPATEN DEMAK"
+	},
+	{
+		"id":"3322",
+		"province":"JAWA TENGAH","name":"KABUPATEN SEMARANG"
+	},
+	{
+		"id":"3323",
+		"province":"JAWA TENGAH","name":"KABUPATEN TEMANGGUNG"
+	},
+	{
+		"id":"3324",
+		"province":"JAWA TENGAH","name":"KABUPATEN KENDAL"
+	},
+	{
+		"id":"3325",
+		"province":"JAWA TENGAH","name":"KABUPATEN BATANG"
+	},
+	{
+		"id":"3326",
+		"province":"JAWA TENGAH","name":"KABUPATEN PEKALONGAN"
+	},
+	{
+		"id":"3327",
+		"province":"JAWA TENGAH","name":"KABUPATEN PEMALANG"
+	},
+	{
+		"id":"3328",
+		"province":"JAWA TENGAH","name":"KABUPATEN TEGAL"
+	},
+	{
+		"id":"3329",
+		"province":"JAWA TENGAH","name":"KABUPATEN BREBES"
+	},
+	{
+		"id":"3371",
+		"province":"JAWA TENGAH","name":"KOTA MAGELANG"
+	},
+	{
+		"id":"3372",
+		"province":"JAWA TENGAH","name":"KOTA SURAKARTA"
+	},
+	{
+		"id":"3373",
+		"province":"JAWA TENGAH","name":"KOTA SALATIGA"
+	},
+	{
+		"id":"3374",
+		"province":"JAWA TENGAH","name":"KOTA SEMARANG"
+	},
+	{
+		"id":"3375",
+		"province":"JAWA TENGAH","name":"KOTA PEKALONGAN"
+	},
+	{
+		"id":"3376",
+		"province":"JAWA TENGAH","name":"KOTA TEGAL"
+	},
+	{
+		"id":"3401",
+		"province":"DI YOGYAKARTA",
+		"name":"KABUPATEN KULON PROGO"
+	},
+	{
+		"id":"3402",
+		"province":"DI YOGYAKARTA",
+		"name":"KABUPATEN BANTUL"
+	},
+	{
+		"id":"3403",
+		"province":"DI YOGYAKARTA",
+		"name":"KABUPATEN GUNUNG KIDUL"
+	},
+	{
+		"id":"3404",
+		"province":"DI YOGYAKARTA",
+		"name":"KABUPATEN SLEMAN"
+	},
+	{
+		"id":"3471",
+		"province":"DI YOGYAKARTA",
+		"name":"KOTA YOGYAKARTA"
+	},
+	{
+		"id":"3501",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN PACITAN"
+	},
+	{
+		"id":"3502",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN PONOROGO"
+	},
+	{
+		"id":"3503",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN TRENGGALEK"
+	},
+	{
+		"id":"3504",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN TULUNGAGUNG"
+	},
+	{
+		"id":"3505",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN BLITAR"
+	},
+	{
+		"id":"3506",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN KEDIRI"
+	},
+	{
+		"id":"3507",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN MALANG"
+	},
+	{
+		"id":"3508",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN LUMAJANG"
+	},
+	{
+		"id":"3509",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN JEMBER"
+	},
+	{
+		"id":"3510",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN BANYUWANGI"
+	},
+	{
+		"id":"3511",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN BONDOWOSO"
+	},
+	{
+		"id":"3512",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN SITUBONDO"
+	},
+	{
+		"id":"3513",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN PROBOLINGGO"
+	},
+	{
+		"id":"3514",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN PASURUAN"
+	},
+	{
+		"id":"3515",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN SIDOARJO"
+	},
+	{
+		"id":"3516",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN MOJOKERTO"
+	},
+	{
+		"id":"3517",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN JOMBANG"
+	},
+	{
+		"id":"3518",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN NGANJUK"
+	},
+	{
+		"id":"3519",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN MADIUN"
+	},
+	{
+		"id":"3520",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN MAGETAN"
+	},
+	{
+		"id":"3521",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN NGAWI"
+	},
+	{
+		"id":"3522",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN BOJONEGORO"
+	},
+	{
+		"id":"3523",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN TUBAN"
+	},
+	{
+		"id":"3524",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN LAMONGAN"
+	},
+	{
+		"id":"3525",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN GRESIK"
+	},
+	{
+		"id":"3526",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN BANGKALAN"
+	},
+	{
+		"id":"3527",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN SAMPANG"
+	},
+	{
+		"id":"3528",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN PAMEKASAN"
+	},
+	{
+		"id":"3529",
+		"province":"JAWA TIMUR",
+		"name":"KABUPATEN SUMENEP"
+	},
+	{
+		"id":"3571",
+		"province":"JAWA TIMUR",
+		"name":"KOTA KEDIRI"
+	},
+	{
+		"id":"3572",
+		"province":"JAWA TIMUR",
+		"name":"KOTA BLITAR"
+	},
+	{
+		"id":"3573",
+		"province":"JAWA TIMUR",
+		"name":"KOTA MALANG"
+	},
+	{
+		"id":"3574",
+		"province":"JAWA TIMUR",
+		"name":"KOTA PROBOLINGGO"
+	},
+	{
+		"id":"3575",
+		"province":"JAWA TIMUR",
+		"name":"KOTA PASURUAN"
+	},
+	{
+		"id":"3576",
+		"province":"JAWA TIMUR",
+		"name":"KOTA MOJOKERTO"
+	},
+	{
+		"id":"3577",
+		"province":"JAWA TIMUR",
+		"name":"KOTA MADIUN"
+	},
+	{
+		"id":"3578",
+		"province":"JAWA TIMUR",
+		"name":"KOTA SURABAYA"
+	},
+	{
+		"id":"3579",
+		"province":"JAWA TIMUR",
+		"name":"KOTA BATU"
+	},
+	{
+		"id":"3601",
+		"province":"BANTEN",
+		"name":"KABUPATEN PANDEGLANG"
+	},
+	{
+		"id":"3602",
+		"province":"BANTEN",
+		"name":"KABUPATEN LEBAK"
+	},
+	{
+		"id":"3603",
+		"province":"BANTEN",
+		"name":"KABUPATEN TANGERANG"
+	},
+	{
+		"id":"3604",
+		"province":"BANTEN",
+		"name":"KABUPATEN SERANG"
+	},
+	{
+		"id":"3671",
+		"province":"BANTEN",
+		"name":"KOTA TANGERANG"
+	},
+	{
+		"id":"3672",
+		"province":"BANTEN",
+		"name":"KOTA CILEGON"
+	},
+	{
+		"id":"3673",
+		"province":"BANTEN",
+		"name":"KOTA SERANG"
+	},
+	{
+		"id":"3674",
+		"province":"BANTEN",
+		"name":"KOTA TANGERANG SELATAN"
+	},
+	{
+		"id":"5101",
+		"province":"BALI",
+		"name":"KABUPATEN JEMBRANA"
+	},
+	{
+		"id":"5102",
+		"province":"BALI",
+		"name":"KABUPATEN TABANAN"
+	},
+	{
+		"id":"5103",
+		"province":"BALI",
+		"name":"KABUPATEN BADUNG"
+	},
+	{
+		"id":"5104",
+		"province":"BALI",
+		"name":"KABUPATEN GIANYAR"
+	},
+	{
+		"id":"5105",
+		"province":"BALI",
+		"name":"KABUPATEN KLUNGKUNG"
+	},
+	{
+		"id":"5106",
+		"province":"BALI",
+		"name":"KABUPATEN BANGLI"
+	},
+	{
+		"id":"5107",
+		"province":"BALI",
+		"name":"KABUPATEN KARANG ASEM"
+	},
+	{
+		"id":"5108",
+		"province":"BALI",
+		"name":"KABUPATEN BULELENG"
+	},
+	{
+		"id":"5171",
+		"province":"BALI",
+		"name":"KOTA DENPASAR"
+	},
+	{
+		"id":"5201",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN LOMBOK BARAT"
+	},
+	{
+		"id":"5202",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN LOMBOK TENGAH"
+	},
+	{
+		"id":"5203",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN LOMBOK TIMUR"
+	},
+	{
+		"id":"5204",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN SUMBAWA"
+	},
+	{
+		"id":"5205",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN DOMPU"
+	},
+	{
+		"id":"5206",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN BIMA"
+	},
+	{
+		"id":"5207",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN SUMBAWA BARAT"
+	},
+	{
+		"id":"5208",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KABUPATEN LOMBOK UTARA"
+	},
+	{
+		"id":"5271",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KOTA MATARAM"
+	},
+	{
+		"id":"5272",
+		"province":"NUSA TENGGARA BARAT",
+		"name":"KOTA BIMA"
+	},
+	{
+		"id":"5301",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SUMBA BARAT"
+	},
+	{
+		"id":"5302",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SUMBA TIMUR"
+	},
+	{
+		"id":"5303",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN KUPANG"
+	},
+	{
+		"id":"5304",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN TIMOR TENGAH SELATAN"
+	},
+	{
+		"id":"5305",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN TIMOR TENGAH UTARA"
+	},
+	{
+		"id":"5306",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN BELU"
+	},
+	{
+		"id":"5307",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN ALOR"
+	},
+	{
+		"id":"5308",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN LEMBATA"
+	},
+	{
+		"id":"5309",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN FLORES TIMUR"
+	},
+	{
+		"id":"5310",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SIKKA"
+	},
+	{
+		"id":"5311",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN ENDE"
+	},
+	{
+		"id":"5312",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN NGADA"
+	},
+	{
+		"id":"5313",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN MANGGARAI"
+	},
+	{
+		"id":"5314",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN ROTE NDAO"
+	},
+	{
+		"id":"5315",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN MANGGARAI BARAT"
+	},
+	{
+		"id":"5316",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SUMBA TENGAH"
+	},
+	{
+		"id":"5317",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SUMBA BARAT DAYA"
+	},
+	{
+		"id":"5318",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN NAGEKEO"
+	},
+	{
+		"id":"5319",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN MANGGARAI TIMUR"
+	},
+	{
+		"id":"5320",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN SABU RAIJUA"
+	},
+	{
+		"id":"5321",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KABUPATEN MALAKA"
+	},
+	{
+		"id":"5371",
+		"province":"NUSA TENGGARA TIMUR",
+		"name":"KOTA KUPANG"
+	},
+	{
+		"id":"6101",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN SAMBAS"
+	},
+	{
+		"id":"6102",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN BENGKAYANG"
+	},
+	{
+		"id":"6103",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN LANDAK"
+	},
+	{
+		"id":"6104",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN MEMPAWAH"
+	},
+	{
+		"id":"6105",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN SANGGAU"
+	},
+	{
+		"id":"6106",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN KETAPANG"
+	},
+	{
+		"id":"6107",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN SINTANG"
+	},
+	{
+		"id":"6108",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN KAPUAS HULU"
+	},
+	{
+		"id":"6109",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN SEKADAU"
+	},
+	{
+		"id":"6110",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN MELAWI"
+	},
+	{
+		"id":"6111",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN KAYONG UTARA"
+	},
+	{
+		"id":"6112",
+		"province":"KALIMANTAN BARAT",
+		"name":"KABUPATEN KUBU RAYA"
+	},
+	{
+		"id":"6171",
+		"province":"KALIMANTAN BARAT",
+		"name":"KOTA PONTIANAK"
+	},
+	{
+		"id":"6172",
+		"province":"KALIMANTAN BARAT",
+		"name":"KOTA SINGKAWANG"
+	},
+	{
+		"id":"6201",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN KOTAWARINGIN BARAT"
+	},
+	{
+		"id":"6202",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN KOTAWARINGIN TIMUR"
+	},
+	{
+		"id":"6203",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN KAPUAS"
+	},
+	{
+		"id":"6204",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN BARITO SELATAN"
+	},
+	{
+		"id":"6205",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN BARITO UTARA"
+	},
+	{
+		"id":"6206",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN SUKAMARA"
+	},
+	{
+		"id":"6207",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN LAMANDAU"
+	},
+	{
+		"id":"6208",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN SERUYAN"
+	},
+	{
+		"id":"6209",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN KATINGAN"
+	},
+	{
+		"id":"6210",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN PULANG PISAU"
+	},
+	{
+		"id":"6211",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN GUNUNG MAS"
+	},
+	{
+		"id":"6212",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN BARITO TIMUR"
+	},
+	{
+		"id":"6213",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KABUPATEN MURUNG RAYA"
+	},
+	{
+		"id":"6271",
+		"province":"KALIMANTAN TENGAH",
+		"name":"KOTA PALANGKA RAYA"
+	},
+	{
+		"id":"6301",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN TANAH LAUT"
+	},
+	{
+		"id":"6302",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN KOTA BARU"
+	},
+	{
+		"id":"6303",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN BANJAR"
+	},
+	{
+		"id":"6304",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN BARITO KUALA"
+	},
+	{
+		"id":"6305",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN TAPIN"
+	},
+	{
+		"id":"6306",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN HULU SUNGAI SELATAN"
+	},
+	{
+		"id":"6307",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN HULU SUNGAI TENGAH"
+	},
+	{
+		"id":"6308",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN HULU SUNGAI UTARA"
+	},
+	{
+		"id":"6309",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN TABALONG"
+	},
+	{
+		"id":"6310",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN TANAH BUMBU"
+	},
+	{
+		"id":"6311",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KABUPATEN BALANGAN"
+	},
+	{
+		"id":"6371",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KOTA BANJARMASIN"
+	},
+	{
+		"id":"6372",
+		"province":"KALIMANTAN SELATAN",
+		"name":"KOTA BANJAR BARU"
+	},
+	{
+		"id":"6401",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN PASER"
+	},
+	{
+		"id":"6402",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN KUTAI BARAT"
+	},
+	{
+		"id":"6403",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN KUTAI KARTANEGARA"
+	},
+	{
+		"id":"6404",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN KUTAI TIMUR"
+	},
+	{
+		"id":"6405",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN BERAU"
+	},
+	{
+		"id":"6409",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN PENAJAM PASER UTARA"
+	},
+	{
+		"id":"6411",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KABUPATEN MAHAKAM HULU"
+	},
+	{
+		"id":"6471",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KOTA BALIKPAPAN"
+	},
+	{
+		"id":"6472",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KOTA SAMARINDA"
+	},
+	{
+		"id":"6474",
+		"province":"KALIMANTAN TIMUR",
+		"name":"KOTA BONTANG"
+	},
+	{
+		"id":"6501",
+		"province":"KALIMANTAN UTARA",
+		"name":"KABUPATEN MALINAU"
+	},
+	{
+		"id":"6502",
+		"province":"KALIMANTAN UTARA",
+		"name":"KABUPATEN BULUNGAN"
+	},
+	{
+		"id":"6503",
+		"province":"KALIMANTAN UTARA",
+		"name":"KABUPATEN TANA TIDUNG"
+	},
+	{
+		"id":"6504",
+		"province":"KALIMANTAN UTARA",
+		"name":"KABUPATEN NUNUKAN"
+	},
+	{
+		"id":"6571",
+		"province":"KALIMANTAN UTARA",
+		"name":"KOTA TARAKAN"
+	},
+	{
+		"id":"7101",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN BOLAANG MONGONDOW"
+	},
+	{
+		"id":"7102",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN MINAHASA"
+	},
+	{
+		"id":"7103",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN KEPULAUAN SANGIHE"
+	},
+	{
+		"id":"7104",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN KEPULAUAN TALAUD"
+	},
+	{
+		"id":"7105",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN MINAHASA SELATAN"
+	},
+	{
+		"id":"7106",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN MINAHASA UTARA"
+	},
+	{
+		"id":"7107",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN BOLAANG MONGONDOW UTARA"
+	},
+	{
+		"id":"7108",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN SIAU TAGULANDANG BIARO"
+	},
+	{
+		"id":"7109",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN MINAHASA TENGGARA"
+	},
+	{
+		"id":"7110",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN BOLAANG MONGONDOW SELATAN"
+	},
+	{
+		"id":"7111",
+		"province":"SULAWESI UTARA",
+		"name":"KABUPATEN BOLAANG MONGONDOW TIMUR"
+	},
+	{
+		"id":"7171",
+		"province":"SULAWESI UTARA",
+		"name":"KOTA MANADO"
+	},
+	{
+		"id":"7172",
+		"province":"SULAWESI UTARA",
+		"name":"KOTA BITUNG"
+	},
+	{
+		"id":"7173",
+		"province":"SULAWESI UTARA",
+		"name":"KOTA TOMOHON"
+	},
+	{
+		"id":"7174",
+		"province":"SULAWESI UTARA",
+		"name":"KOTA KOTAMOBAGU"
+	},
+	{
+		"id":"7201",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN BANGGAI KEPULAUAN"
+	},
+	{
+		"id":"7202",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN BANGGAI"
+	},
+	{
+		"id":"7203",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN MOROWALI"
+	},
+	{
+		"id":"7204",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN POSO"
+	},
+	{
+		"id":"7205",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN DONGGALA"
+	},
+	{
+		"id":"7206",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN TOLI-TOLI"
+	},
+	{
+		"id":"7207",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN BUOL"
+	},
+	{
+		"id":"7208",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN PARIGI MOUTONG"
+	},
+	{
+		"id":"7209",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN TOJO UNA-UNA"
+	},
+	{
+		"id":"7210",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN SIGI"
+	},
+	{
+		"id":"7211",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN BANGGAI LAUT"
+	},
+	{
+		"id":"7212",
+		"province":"SULAWESI TENGAH",
+		"name":"KABUPATEN MOROWALI UTARA"
+	},
+	{
+		"id":"7271",
+		"province":"SULAWESI TENGAH",
+		"name":"KOTA PALU"
+	},
+	{
+		"id":"7301",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN KEPULAUAN SELAYAR"
+	},
+	{
+		"id":"7302",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN BULUKUMBA"
+	},
+	{
+		"id":"7303",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN BANTAENG"
+	},
+	{
+		"id":"7304",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN JENEPONTO"
+	},
+	{
+		"id":"7305",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN TAKALAR"
+	},
+	{
+		"id":"7306",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN GOWA"
+	},
+	{
+		"id":"7307",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN SINJAI"
+	},
+	{
+		"id":"7308",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN MAROS"
+	},
+	{
+		"id":"7309",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN PANGKAJENE DAN KEPULAUAN"
+	},
+	{
+		"id":"7310",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN BARRU"
+	},
+	{
+		"id":"7311",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN BONE"
+	},
+	{
+		"id":"7312",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN SOPPENG"
+	},
+	{
+		"id":"7313",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN WAJO"
+	},
+	{
+		"id":"7314",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN SIDENRENG RAPPANG"
+	},
+	{
+		"id":"7315",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN PINRANG"
+	},
+	{
+		"id":"7316",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN ENREKANG"
+	},
+	{
+		"id":"7317",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN LUWU"
+	},
+	{
+		"id":"7318",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN TANA TORAJA"
+	},
+	{
+		"id":"7322",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN LUWU UTARA"
+	},
+	{
+		"id":"7325",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN LUWU TIMUR"
+	},
+	{
+		"id":"7326",
+		"province":"SULAWESI SELATAN",
+		"name":"KABUPATEN TORAJA UTARA"
+	},
+	{
+		"id":"7371",
+		"province":"SULAWESI SELATAN",
+		"name":"KOTA MAKASSAR"
+	},
+	{
+		"id":"7372",
+		"province":"SULAWESI SELATAN",
+		"name":"KOTA PARE-PARE"
+	},
+	{
+		"id":"7373",
+		"province":"SULAWESI SELATAN",
+		"name":"KOTA PALOPO"
+	},
+	{
+		"id":"7401",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN BUTON"
+	},
+	{
+		"id":"7402",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN MUNA"
+	},
+	{
+		"id":"7403",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KONAWE"
+	},
+	{
+		"id":"7404",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KOLAKA"
+	},
+	{
+		"id":"7405",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KONAWE SELATAN"
+	},
+	{
+		"id":"7406",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN BOMBANA"
+	},
+	{
+		"id":"7407",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN WAKATOBI"
+	},
+	{
+		"id":"7408",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KOLAKA UTARA"
+	},
+	{
+		"id":"7409",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN BUTON UTARA"
+	},
+	{
+		"id":"7410",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KONAWE UTARA"
+	},
+	{
+		"id":"7411",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KOLAKA TIMUR"
+	},
+	{
+		"id":"7412",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN KONAWE KEPULAUAN"
+	},
+	{
+		"id":"7413",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN MUNA BARAT"
+	},
+	{
+		"id":"7414",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN BUTON TENGAH"
+	},
+	{
+		"id":"7415",
+		"province":"SULAWESI TENGGARA",
+		"name":"KABUPATEN BUTON SELATAN"
+	},
+	{
+		"id":"7471",
+		"province":"SULAWESI TENGGARA",
+		"name":"KOTA KENDARI"
+	},
+	{
+		"id":"7472",
+		"province":"SULAWESI TENGGARA",
+		"name":"KOTA BAUBAU"
+	},
+	{
+		"id":"7501",
+		"province":"GORONTALO",
+		"name":"KABUPATEN BOALEMO"
+	},
+	{
+		"id":"7502",
+		"province":"GORONTALO",
+		"name":"KABUPATEN GORONTALO"
+	},
+	{
+		"id":"7503",
+		"province":"GORONTALO",
+		"name":"KABUPATEN POHUWATO"
+	},
+	{
+		"id":"7504",
+		"province":"GORONTALO",
+		"name":"KABUPATEN BONE BOLANGO"
+	},
+	{
+		"id":"7505",
+		"province":"GORONTALO",
+		"name":"KABUPATEN GORONTALO UTARA"
+	},
+	{
+		"id":"7571",
+		"province":"GORONTALO",
+		"name":"KOTA GORONTALO"
+	},
+	{
+		"id":"7601",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN MAJENE"
+	},
+	{
+		"id":"7602",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN POLEWALI MANDAR"
+	},
+	{
+		"id":"7603",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN MAMASA"
+	},
+	{
+		"id":"7604",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN MAMUJU"
+	},
+	{
+		"id":"7605",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN MAMUJU UTARA"
+	},
+	{
+		"id":"7606",
+		"province":"SULAWESI BARAT",
+		"name":"KABUPATEN MAMUJU TENGAH"
+	},
+	{
+		"id":"8101",
+		"province":"MALUKU",
+		"name":"KABUPATEN MALUKU TENGGARA BARAT"
+	},
+	{
+		"id":"8102",
+		"province":"MALUKU",
+		"name":"KABUPATEN MALUKU TENGGARA"
+	},
+	{
+		"id":"8103",
+		"province":"MALUKU",
+		"name":"KABUPATEN MALUKU TENGAH"
+	},
+	{
+		"id":"8104",
+		"province":"MALUKU",
+		"name":"KABUPATEN BURU"
+	},
+	{
+		"id":"8105",
+		"province":"MALUKU",
+		"name":"KABUPATEN KEPULAUAN ARU"
+	},
+	{
+		"id":"8106",
+		"province":"MALUKU",
+		"name":"KABUPATEN SERAM BAGIAN BARAT"
+	},
+	{
+		"id":"8107",
+		"province":"MALUKU",
+		"name":"KABUPATEN SERAM BAGIAN TIMUR"
+	},
+	{
+		"id":"8108",
+		"province":"MALUKU",
+		"name":"KABUPATEN MALUKU BARAT DAYA"
+	},
+	{
+		"id":"8109",
+		"province":"MALUKU",
+		"name":"KABUPATEN BURU SELATAN"
+	},
+	{
+		"id":"8171",
+		"province":"MALUKU",
+		"name":"KOTA AMBON"
+	},
+	{
+		"id":"8172",
+		"province":"MALUKU",
+		"name":"KOTA TUAL"
+	},
+	{
+		"id":"8201",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN HALMAHERA BARAT"
+	},
+	{
+		"id":"8202",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN HALMAHERA TENGAH"
+	},
+	{
+		"id":"8203",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN KEPULAUAN SULA"
+	},
+	{
+		"id":"8204",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN HALMAHERA SELATAN"
+	},
+	{
+		"id":"8205",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN HALMAHERA UTARA"
+	},
+	{
+		"id":"8206",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN HALMAHERA TIMUR"
+	},
+	{
+		"id":"8207",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN PULAU MOROTAI"
+	},
+	{
+		"id":"8208",
+		"province":"MALUKU UTARA",
+		"name":"KABUPATEN PULAU TALIABU"
+	},
+	{
+		"id":"8271",
+		"province":"MALUKU UTARA",
+		"name":"KOTA TERNATE"
+	},
+	{
+		"id":"8272",
+		"province":"MALUKU UTARA",
+		"name":"KOTA TIDORE KEPULAUAN"
+	},
+	{
+		"id":"9101",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN FAK-FAK"
+	},
+	{
+		"id":"9102",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN KAIMANA"
+	},
+	{
+		"id":"9103",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN TELUK WONDAMA"
+	},
+	{
+		"id":"9104",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN TELUK BINTUNI"
+	},
+	{
+		"id":"9105",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN MANOKWARI"
+	},
+	{
+		"id":"9106",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN SORONG SELATAN"
+	},
+	{
+		"id":"9107",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN SORONG"
+	},
+	{
+		"id":"9108",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN RAJA AMPAT"
+	},
+	{
+		"id":"9109",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN TAMBRAUW"
+	},
+	{
+		"id":"9110",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN MAYBRAT"
+	},
+	{
+		"id":"9111",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN MANOKWARI SELATAN"
+	},
+	{
+		"id":"9112",
+		"province":"PAPUA BARAT",
+		"name":"KABUPATEN PEGUNUNGAN ARFAK"
+	},
+	{
+		"id":"9171",
+		"province":"PAPUA BARAT",
+		"name":"KOTA SORONG"
+	},
+	{
+		"id":"9401",
+		"province":"PAPUA",
+		"name":"KABUPATEN MERAUKE"
+	},
+	{
+		"id":"9402",
+		"province":"PAPUA",
+		"name":"KABUPATEN JAYAWIJAYA"
+	},
+	{
+		"id":"9403",
+		"province":"PAPUA",
+		"name":"KABUPATEN JAYAPURA"
+	},
+	{
+		"id":"9404",
+		"province":"PAPUA",
+		"name":"KABUPATEN NABIRE"
+	},
+	{
+		"id":"9408",
+		"province":"PAPUA",
+		"name":"KABUPATEN KEPULAUAN YAPEN"
+	},
+	{
+		"id":"9409",
+		"province":"PAPUA",
+		"name":"KABUPATEN BIAK NUMFOR"
+	},
+	{
+		"id":"9410",
+		"province":"PAPUA",
+		"name":"KABUPATEN PANIAI"
+	},
+	{
+		"id":"9411",
+		"province":"PAPUA",
+		"name":"KABUPATEN PUNCAK JAYA"
+	},
+	{
+		"id":"9412",
+		"province":"PAPUA",
+		"name":"KABUPATEN MIMIKA"
+	},
+	{
+		"id":"9413",
+		"province":"PAPUA",
+		"name":"KABUPATEN BOVEN DIGOEL"
+	},
+	{
+		"id":"9414",
+		"province":"PAPUA",
+		"name":"KABUPATEN MAPPI"
+	},
+	{
+		"id":"9415",
+		"province":"PAPUA",
+		"name":"KABUPATEN ASMAT"
+	},
+	{
+		"id":"9416",
+		"province":"PAPUA",
+		"name":"KABUPATEN YAHUKIMO"
+	},
+	{
+		"id":"9417",
+		"province":"PAPUA",
+		"name":"KABUPATEN PEGUNUNGAN BINTANG"
+	},
+	{
+		"id":"9418",
+		"province":"PAPUA",
+		"name":"KABUPATEN TOLIKARA"
+	},
+	{
+		"id":"9419",
+		"province":"PAPUA",
+		"name":"KABUPATEN SARMI"
+	},
+	{
+		"id":"9420",
+		"province":"PAPUA",
+		"name":"KABUPATEN KEEROM"
+	},
+	{
+		"id":"9426",
+		"province":"PAPUA",
+		"name":"KABUPATEN WAROPEN"
+	},
+	{
+		"id":"9427",
+		"province":"PAPUA",
+		"name":"KABUPATEN SUPIORI"
+	},
+	{
+		"id":"9428",
+		"province":"PAPUA",
+		"name":"KABUPATEN MAMBERAMO RAYA"
+	},
+	{
+		"id":"9429",
+		"province":"PAPUA",
+		"name":"KABUPATEN NDUGA"
+	},
+	{
+		"id":"9430",
+		"province":"PAPUA",
+		"name":"KABUPATEN LANNY JAYA"
+	},
+	{
+		"id":"9431",
+		"province":"PAPUA",
+		"name":"KABUPATEN MAMBERAMO TENGAH"
+	},
+	{
+		"id":"9432",
+		"province":"PAPUA",
+		"name":"KABUPATEN YALIMO"
+	},
+	{
+		"id":"9433",
+		"province":"PAPUA",
+		"name":"KABUPATEN PUNCAK"
+	},
+	{
+		"id":"9434",
+		"province":"PAPUA",
+		"name":"KABUPATEN DOGIYAI"
+	},
+	{
+		"id":"9435",
+		"province":"PAPUA",
+		"name":"KABUPATEN INTAN JAYA"
+	},
+	{
+		"id":"9436",
+		"province":"PAPUA",
+		"name":"KABUPATEN DEIYAI"
+	},
+	{
+		"id":"9471",
+		"province":"PAPUA",
+		"name":"KOTA JAYAPURA"
+	}
+]

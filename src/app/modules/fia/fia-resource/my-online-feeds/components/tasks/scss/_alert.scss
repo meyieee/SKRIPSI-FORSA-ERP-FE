@@ -1,0 +1,9 @@
+/* approvalstyles.scss */
+.fixed-alert {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1060; /* di atas card */
+  border-radius: 0.75rem;
+}

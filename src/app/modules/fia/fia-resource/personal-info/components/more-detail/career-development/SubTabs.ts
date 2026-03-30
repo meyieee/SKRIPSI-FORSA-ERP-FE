@@ -1,0 +1,5 @@
+export {default as CareerTab} from './career/CareerTab'
+export {default as EducationTab} from './education/EducationTab'
+export {default as TrainingTab} from './training/TrainingTab'
+export {default as LanguageHobbyTab} from './language-hobby/LanguageHobbyTab'
+export {default as AppraisalTab} from './appraisal/AppraisalTab'

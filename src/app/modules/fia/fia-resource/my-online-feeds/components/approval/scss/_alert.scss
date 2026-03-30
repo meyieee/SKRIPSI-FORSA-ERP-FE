@@ -1,0 +1,10 @@
+/* CSS untuk menempatkan alert di atas tabel */
+.fixed-alert-approval {
+  position: fixed;
+  top: 80px; /* Atur posisi sesuai kebutuhan */
+  left: 52%;
+  transform: translateX(-50%);
+  z-index: 9999; /* Pastikan alert muncul di atas konten lainnya */
+  width: 50%;
+  max-width: 1000px; /* Sesuaikan lebar alert */
+}

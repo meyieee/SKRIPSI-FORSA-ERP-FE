@@ -1,0 +1,5 @@
+export {default as DependentTab} from './dependent/DependentTab'
+export {default as JobInfoTab} from './job-info/JobInfoTab'
+export {default as JobServiceTab} from './job-service/JobServiceTab'
+export {default as KINTab} from './kin/KINTab'
+export {default as PersonalDataTab} from './personal-data/PersonalDataTab'

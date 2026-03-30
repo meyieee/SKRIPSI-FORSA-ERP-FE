@@ -1,0 +1,7 @@
+export {default as AssetTab} from './asset/AssetTab'
+export {default as EarningsTab} from './earnings/EarningsTab'
+export {default as ExpenseClaimTab} from './expense-claim/ExpenseClaimTab'
+export {default as LeaveTravelTab} from './leave-travel/LeaveTravelTab'
+export {default as LoanTab} from './loan/LoanTab'
+export {default as MedicalTab} from './medical/MedicalTab'
+export {default as PpeTab} from './ppe/PPETab'

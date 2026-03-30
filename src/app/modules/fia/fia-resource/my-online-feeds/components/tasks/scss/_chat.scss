@@ -1,0 +1,142 @@
+/* ===== Chat overlay & panel (mobile full-screen, md+ panel kanan) ===== */
+/* default variable */
+:root {
+  --vh: 1vh;
+}
+
+/* Overlay & panel pakai tinggi dinamis */
+.chat-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  justify-content: flex-end;
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+}
+.chat-panel {
+  width: 100vw;
+  height: calc(var(--vh) * 100);
+}
+@media (min-width: 768px) {
+  .chat-panel {
+    width: clamp(340px, 32vw, 420px);
+    border-left: 1px solid var(--bs-border-color);
+  }
+}
+/* Body scroll halus saat keyboard naik */
+.card-body.overflow-auto {
+  scrollbar-width: thin;
+  overscroll-behavior-y: contain;
+  min-height: 0;
+}
+
+/* ===== Chat bubbles ===== */
+.bubble {
+  position: relative;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  max-width: 70%;
+  word-break: break-word;
+  padding-bottom: 0rem;
+}
+.bubble img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  display: block;
+}
+
+/* Tombol delete: DI BAWAH bubble, sisi kanan untuk pesan saya */
+.bubble .delete-btn {
+  position: absolute;
+  bottom: 6px;
+  right: 8px;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  background: transparent;
+  border: none;
+  padding: 0px;
+  cursor: pointer;
+}
+
+/* Muncul saat hover (desktop) */
+.bubble:hover .delete-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== FIX: link/file selalu terlihat di bubble ===== */
+.bubble a {
+  color: inherit !important; /* ikut warna teks bubble (mis. putih di bg-primary) */
+  text-decoration: underline !important;
+}
+
+.bubble a:hover,
+.bubble a:focus,
+.bubble a:active,
+.bubble a:visited {
+  color: inherit !important;
+  text-decoration: underline !important;
+}
+
+/* Mobile: tampil saat long-press (class ditambahkan via JS) */
+@media (max-width: 576px) {
+  .bubble .delete-btn {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .bubble.show-delete .delete-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* ===== Draft preview tiles ===== */
+/* Draft tiles */
+.chat-draft-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chat-draft-tile {
+  position: relative;
+  height: 72px;
+  width: 72px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bs-secondary-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-draft-tile img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.chat-draft-tile .remove-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(25%, -25%);
+}
+
+/* Input row agar tidak pecah */
+.chat-input-row .form-control {
+  min-width: 0;
+}
+
+/* ===== Utilities ===== */
+.card-body.overflow-auto {
+  scrollbar-width: thin;
+}
+.chat-input-row .form-control {
+  min-width: 0;
+}
+
+/* Footer: beri ruang untuk notch / home indicator di iOS */
+.card-footer {
+  padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 0.25rem);
+}

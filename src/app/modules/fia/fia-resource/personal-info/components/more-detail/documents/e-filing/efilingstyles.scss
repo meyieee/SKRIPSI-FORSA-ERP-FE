@@ -1,0 +1,51 @@
+/* styling modal */
+.efile-view-modal {
+  .modal-header {
+    border-bottom: 1px solid var(--bs-border-color);
+  }
+  .modal-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .modal-footer {
+    border-top: 1px solid var(--bs-border-color);
+  }
+
+  /* panggung dokumen */
+  .doc-stage {
+    background: #f4f6f8; /* abu muda seperti meja scan */
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  /* bingkai kertas */
+  .doc-frame {
+    background: #fff; /* kertas putih */
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.375rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* bayangan lembut */
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 900px; /* batasi lebar kertas */
+  }
+
+  /* isi file gambar */
+  .doc-file {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 72vh; /* biar tidak kepanjangan */
+    background: #fff;
+  }
+
+  /* caption sederhana di bawah gambar */
+  .doc-caption {
+    padding: 0.5rem 0.75rem;
+    border-top: 1px solid var(--bs-border-color);
+    background: #fafafa;
+    font-size: 0.875rem;
+    color: var(--bs-secondary-color);
+  }
+}

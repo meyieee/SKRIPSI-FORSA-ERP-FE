@@ -1,0 +1,103 @@
+/* Online Services link hover styles */
+.online-request-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 0.475rem; /* Metronic border radius */
+  padding: 0.75rem 0.875rem;
+  color: #5e6278; /* text-gray-600 */
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.online-request-link .label {
+  color: #3f4254; /* text-gray-700 */
+}
+
+.online-request-link .dot {
+  color: #a1a5b7; /* text-gray-400 */
+}
+
+/* Hover turns into green light box */
+.online-request-link:hover {
+  background-color: #e8fff3; /* light-success */
+  border-color: #50cd89; /* success */
+  color: #50cd89;
+}
+
+.online-request-link:hover .label,
+.online-request-link:hover .dot {
+  color: #50cd89;
+}
+
+/* Permanent success variant (for highlighted items) */
+.online-request-link--success {
+  background-color: #e8fff3;
+  border-color: #50cd89;
+  color: #50cd89;
+}
+
+.online-request-link--success .label,
+.online-request-link--success .dot {
+  color: #50cd89;
+}
+
+/* New: top navbar styling to match dark header blocks */
+.online-navbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.online-navbar__block {
+  border-radius: 0.475rem;
+  overflow: hidden;
+  background: #fff; /* white */
+  border: 1px solid #e1e3ea;
+}
+
+.online-navbar__header {
+  background: #1e1e2d;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.online-navbar__title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.online-navbar__more {
+  color: #fff;
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.online-navbar__links {
+  background: #fff;
+  padding: 0.75rem 1rem;
+}
+
+.online-navbar__link {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  color: #3f4254;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.online-navbar__link .dot { 
+  color: #a1a5b7; 
+  margin-right: 0.75rem;
+}
+.online-navbar__link:hover { 
+  color: #50cd89; 
+}
+.online-navbar__link.active {
+  color: #50cd89;
+  font-weight: 600;
+}
