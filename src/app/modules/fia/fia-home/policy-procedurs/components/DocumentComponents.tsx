@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import React, {useMemo, FC} from 'react'
-import {RegisterAsset as AssetRow} from '../../../../operations/ops-asset-mgt/core/_models'
+
+type AssetRow = {asset_no?: string | null}
 
 type Props = {asset?: AssetRow | null}
 

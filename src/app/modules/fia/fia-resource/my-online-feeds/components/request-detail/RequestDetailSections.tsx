@@ -430,7 +430,7 @@ const sortKeys = (keys: string[], scope: string) => {
 
 const renderArrayTable = (title: string, rows: any[]) => {
   const normalizedRows = Array.isArray(rows) ? rows : []
-  const discoveredColumns = Array.from(
+  const discoveredColumns: string[] = Array.from(
     normalizedRows.reduce((set, row) => {
       Object.keys(row || {}).forEach((key) => {
         if (!hiddenNestedKeys.has(key)) set.add(key)

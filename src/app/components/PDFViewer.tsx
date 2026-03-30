@@ -30,7 +30,9 @@ const PDFViewer = ({
     }
   }, [instance]);
 
-  useEffect(updateInstance, [children]);
+  useEffect(() => {
+    updateInstance(children)
+  }, [children, updateInstance]);
 
   return (
     <iframe
