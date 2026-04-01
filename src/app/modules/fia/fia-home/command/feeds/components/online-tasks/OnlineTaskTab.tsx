@@ -1,23 +1,27 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { useOnlineTaskContext } from './OnlineTaskContext'
 import OnlineTaskTable from './OnlineTaskTable'
 import OnlineTaskViewModal from './modal/OnlineTaskViewModal'
-import { OnlineTask } from './types'
+import { matchesOnlineTaskFilters, OnlineTask } from './types'
 import { FeedsFilters } from '../../core/types'
 
 type Props = {
   filters: FeedsFilters
+  refreshKey: number
 }
 
-const OnlineTaskTab: React.FC<Props> = ({ filters }) => {
-  const { tasks } = useOnlineTaskContext()
+const OnlineTaskTab: React.FC<Props> = ({ filters, refreshKey }) => {
+  const { tasks, isLoading, error, refreshTasks } = useOnlineTaskContext()
   const [showTaskModal, setShowTaskModal] = useState(false)
   const [selectedTask, setSelectedTask] = useState<OnlineTask | null>(null)
 
+  useEffect(() => {
+    if (refreshKey === 0) return
+    refreshTasks(filters)
+  }, [refreshKey])
+
   const filteredTasks = useMemo(() => {
-    let result: OnlineTask[] = [...tasks]
-    // Apply filter logic
-    return result
+    return tasks.filter((task) => matchesOnlineTaskFilters(task, filters))
   }, [tasks, filters])
 
   const handleView = (task: OnlineTask) => {
@@ -27,7 +31,12 @@ const OnlineTaskTab: React.FC<Props> = ({ filters }) => {
 
   return (
     <div>
-      <OnlineTaskTable tasks={filteredTasks} onView={handleView} />
+      <OnlineTaskTable
+        tasks={filteredTasks}
+        onView={handleView}
+        isLoading={isLoading}
+        error={error}
+      />
       <OnlineTaskViewModal
         show={showTaskModal}
         onHide={() => setShowTaskModal(false)}

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { KTSVG } from '../../../../../../../../../_metronic/helpers/components'
-import { OnlineRequest } from '../types'
+import { normalizeStatus, OnlineRequest, OnlineRequestDetailPayload } from '../types'
+import { getOnlineRequestDetail } from '../../../core/onlineRequest.requests'
 
 interface OnlineRequestViewModalProps {
   show: boolean
@@ -14,6 +15,36 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
   onHide,
   request,
 }) => {
+  const [detail, setDetail] = useState<OnlineRequestDetailPayload | null>(null)
+  const [isLoadingDetail, setIsLoadingDetail] = useState(false)
+  const [detailError, setDetailError] = useState('')
+
+  useEffect(() => {
+    if (!show || !request?.refDocNo) return
+
+    let isMounted = true
+    const loadDetail = async () => {
+      try {
+        setIsLoadingDetail(true)
+        setDetailError('')
+        const payload = await getOnlineRequestDetail(request.refDocNo)
+        if (!isMounted) return
+        setDetail(payload)
+      } catch (err: any) {
+        if (!isMounted) return
+        setDetail(null)
+        setDetailError(err?.response?.data?.message ?? err?.message ?? 'Failed to load request detail')
+      } finally {
+        if (isMounted) setIsLoadingDetail(false)
+      }
+    }
+
+    loadDetail()
+    return () => {
+      isMounted = false
+    }
+  }, [show, request?.refDocNo])
+
   if (!request) return null
 
   const getPriorityClass = (priority: string) => {
@@ -30,7 +61,16 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
   }
 
   const getStatusClass = (status: string) => {
-    if (status === 'Waiting Approval') {
+    if (status === 'Waiting Approval' || status === 'Waiting for Approval') {
+      return 'badge badge-warning fs-7 fw-semibold'
+    }
+    if (status === 'Waiting for Verification') {
+      return 'badge badge-info fs-7 fw-semibold'
+    }
+    if (status === 'Waiting for Review') {
+      return 'badge badge-primary fs-7 fw-semibold'
+    }
+    if (status.startsWith('Approval -') || status.startsWith('Approver -')) {
       return 'badge badge-warning fs-7 fw-semibold'
     }
     if (status === 'Cancelled') {
@@ -41,6 +81,21 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
     }
     return 'badge badge-light fs-7 fw-semibold'
   }
+
+  const detailEntries = Object.entries(detail || {}).filter(
+    ([key]) =>
+      ![
+        'id',
+        'refDocNo',
+        'description',
+        'transType',
+        'requestor',
+        'priority',
+        'requestDate',
+        'expired',
+        'status',
+      ].includes(key)
+  )
 
   return (
     <Modal show={show} onHide={onHide} centered size='lg'>
@@ -93,8 +148,23 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Status:</span>
-            <span className={getStatusClass(request.status)}>{request.status}</span>
+            <span className={getStatusClass(request.status)}>{normalizeStatus(request.status)}</span>
           </div>
+
+          {isLoadingDetail ? (
+            <div className='text-center text-muted py-4'>Loading request detail...</div>
+          ) : detailError ? (
+            <div className='alert alert-warning py-3 mb-0 mt-2'>{detailError}</div>
+          ) : detailEntries.length > 0 ? (
+            <div className='border-top pt-3 mt-2'>
+              {detailEntries.map(([key, value]) => (
+                <div className='d-flex justify-content-between align-items-center py-1' key={key}>
+                  <span className='fw-semibold text-gray-700 text-capitalize'>{key}:</span>
+                  <span className='text-gray-800'>{String(value ?? '-')}</span>
+                </div>
+              ))}
+            </div>
+          ) : null}
         </div>
       </Modal.Body>
     </Modal>

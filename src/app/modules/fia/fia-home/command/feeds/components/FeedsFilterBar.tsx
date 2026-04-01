@@ -11,13 +11,15 @@ import {
 type Props = {
   filters: FeedsFilters
   onFilterChange: (filters: FeedsFilters) => void
-  onView: () => void
-  onUpdate: () => void
 }
 
-const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange, onView, onUpdate }) => {
+const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange }) => {
   const handleChange = (field: keyof FeedsFilters, value: string) => {
     onFilterChange({ ...filters, [field]: value })
+  }
+
+  const handleReset = () => {
+    onFilterChange({ site: '', department: '', section: '', element: '', date: '' })
   }
 
   return (
@@ -87,12 +89,9 @@ const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange, onView, onUp
         </Col>
         <Col>
           <Form.Label className='fw-semibold invisible'>Actions</Form.Label>
-          <div className='d-flex align-items-center justify-content-between gap-2 flex-wrap'>
-            <Button variant='primary' onClick={onView} className='flex-grow-1'>
-              View
-            </Button>
-            <Button variant='primary' onClick={onUpdate} className='flex-grow-1'>
-              Update
+          <div className='d-flex flex-column flex-md-row gap-2 w-100 justify-content-end'>
+            <Button variant='secondary' onClick={handleReset}>
+              Reset
             </Button>
           </div>
         </Col>

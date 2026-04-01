@@ -30,7 +30,7 @@ const FeedsNavTab: FC<Props> = ({ className }) => {
           Online Tasks
         </Nav.Link>
       </Nav.Item>
-      <Nav.Item>
+      {/* <Nav.Item>
         <Nav.Link as={NavLink} to='online-reminder' eventKey='online-reminder'>
           Online Reminder
         </Nav.Link>
@@ -39,7 +39,7 @@ const FeedsNavTab: FC<Props> = ({ className }) => {
         <Nav.Link as={NavLink} to='online-roster' eventKey='online-roster'>
           Online Roster
         </Nav.Link>
-      </Nav.Item>
+      </Nav.Item> */}
     </Nav>
   )
 }

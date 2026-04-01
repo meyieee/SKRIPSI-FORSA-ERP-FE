@@ -15,19 +15,11 @@ import OnlineRosterTab from './components/online-roster/OnlineRosterTab'
 
 const FeedsPage: React.FC = () => {
   const [filters, setFilters] = useState<FeedsFilters>(defaultFeedsFilters)
+  const [onlineRequestRefreshKey, setOnlineRequestRefreshKey] = useState(0)
+  const [onlineTaskRefreshKey, setOnlineTaskRefreshKey] = useState(0)
 
   const handleFilterChange = (newFilters: FeedsFilters) => {
     setFilters(newFilters)
-  }
-
-  const handleView = () => {
-    // Handle view action
-    console.log('View clicked', filters)
-  }
-
-  const handleUpdate = () => {
-    // Handle update action
-    console.log('Update clicked', filters)
   }
 
   return (
@@ -35,8 +27,6 @@ const FeedsPage: React.FC = () => {
       <FeedsFilterBar
         filters={filters}
         onFilterChange={handleFilterChange}
-        onView={handleView}
-        onUpdate={handleUpdate}
       />
       <FeedsNavTab />
       <div className='tab-content'>
@@ -45,8 +35,16 @@ const FeedsPage: React.FC = () => {
             <OnlineReminderProvider>
               <OnlineRosterProvider>
                 <Routes>
-                  <Route path='online-request' element={<OnlineRequestTab filters={filters} />} />
-                  <Route path='online-tasks' element={<OnlineTaskTab filters={filters} />} />
+                  <Route
+                    path='online-request'
+                    element={
+                      <OnlineRequestTab filters={filters} refreshKey={onlineRequestRefreshKey} />
+                    }
+                  />
+                  <Route
+                    path='online-tasks'
+                    element={<OnlineTaskTab filters={filters} refreshKey={onlineTaskRefreshKey} />}
+                  />
                   <Route
                     path='online-reminder'
                     element={<OnlineReminderTab filters={filters} />}
