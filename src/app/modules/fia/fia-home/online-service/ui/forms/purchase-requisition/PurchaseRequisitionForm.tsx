@@ -16,7 +16,6 @@ import {
   getLocationOptions,
   getDepartmentOptions,
   getCostCenterOptions,
-  getUserOptions,
   PurchaseRequisitionForm as PurchaseRequisitionFormType,
 } from '../../../core/purchase-requisition'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -41,10 +40,6 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
   const queryClient = useQueryClient()
   const [submitting, setSubmitting] = useState(false)
   const { currentUser } = useAuth()
-  
-  // State untuk employee options
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [optionsLoading, setOptionsLoading] = useState(true)
   
   // State for async options
   const [branchSiteOptions, setBranchSiteOptions] = useState<Array<{ value: string; label: string }>>([])
@@ -78,25 +73,20 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
   // Fetch all async options on component mount
   useEffect(() => {
     const fetchOptions = async () => {
-      setOptionsLoading(true)
       try {
-        const [branches, locations, departments, costCenters, users] = await Promise.all([
+        const [branches, locations, departments, costCenters] = await Promise.all([
           getBranchSiteOptions(),
           getLocationOptions(),
           getDepartmentOptions(),
           getCostCenterOptions(),
-          getUserOptions(),
         ])
 
         setBranchSiteOptions(branches)
         setLocationOptions(locations)
         setDepartmentOptions(departments)
         setCostCenterOptions(costCenters)
-        setEmployeeOptions(users)
       } catch (error) {
         console.error('Error fetching options:', error)
-      } finally {
-        setOptionsLoading(false)
       }
     }
 
@@ -292,7 +282,6 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
                         locationOptions={locationOptions}
                         departmentOptions={departmentOptions}
                         costCenterOptions={costCenterOptions}
-                        employeeOptions={employeeOptions}
                         currentUser={currentUser}
                       />
 

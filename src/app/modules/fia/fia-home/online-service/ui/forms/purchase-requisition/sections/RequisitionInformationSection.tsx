@@ -33,7 +33,6 @@ export default function RequisitionInformationSection({
             onChange={(value) => setFieldValue('requisitionInfo.supplierAddress', value)}
             placeholder='field yang di ambil dari master supplier'
             readOnly={true}
-            className='bg-light'
           />
         </div>
       </div>
@@ -47,7 +46,6 @@ export default function RequisitionInformationSection({
             onChange={(value) => setFieldValue('requisitionInfo.supplierContact', value)}
             placeholder='field yang di ambil dari master supplier'
             readOnly={true}
-            className='bg-light'
           />
         </div>
         <div className='col-md-6'>

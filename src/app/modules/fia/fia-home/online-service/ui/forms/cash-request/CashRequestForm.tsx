@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import { useQueryClient } from '@tanstack/react-query'
 import { OnlineCategoryKey } from '../../../registry'
@@ -17,7 +17,6 @@ import {
   getDepartmentOptions,
   getExpenseTypeOptions,
   getPaymentMethodOptions,
-  getUserOptions,
   CashRequestForm as CashRequestFormType,
 } from '../../../core/cash-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -42,9 +41,6 @@ function CashRequestForm({ cat, type }: Props) {
   const [submitting, setSubmitting] = useState(false)
   const { currentUser } = useAuth()
   
-  // State untuk employee options
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
-  
   // Use form notification hook for modals
   const {
     showSuccess,
@@ -67,20 +63,6 @@ function CashRequestForm({ cat, type }: Props) {
     cacheName: cache_cashrequest_new,
     enabled: true,
   })
-
-  // Fetch employee options on component mount
-  useEffect(() => {
-    const fetchEmployeeOptions = async () => {
-      try {
-        const employees = await getUserOptions()
-        setEmployeeOptions(employees)
-      } catch (error) {
-        console.error('Error fetching employee options:', error)
-      }
-    }
-    
-    fetchEmployeeOptions()
-  }, [])
 
   // Handle form submission
   const onSubmit = async (values: CashRequestFormType, actions: any) => {
@@ -250,7 +232,6 @@ function CashRequestForm({ cat, type }: Props) {
                         getBranchSiteOptions={getBranchSiteOptions}
                         getLocationOptions={getLocationOptions}
                         getDepartmentOptions={getDepartmentOptions}
-                        employeeOptions={employeeOptions}
                         currentUser={currentUser}
                       />
 

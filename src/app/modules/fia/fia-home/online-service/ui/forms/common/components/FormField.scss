@@ -1,0 +1,7 @@
+// Readonly inputs still use default Metronic [readonly] fill in dark mode; online forms use a light card (.form-section).
+.form-section .form-control.online-form-control-readonly {
+  background-color: #fff !important;
+  color: #212529 !important;
+  border-color: #ddd !important;
+  cursor: default;
+}

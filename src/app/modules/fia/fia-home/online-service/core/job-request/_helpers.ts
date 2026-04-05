@@ -201,11 +201,12 @@ export function getRequestPurposeOptions() {
 
 export function getPriorityOptions() {
   return [
-    { value: '1', label: 'High' },
-    { value: '2', label: 'Medium' },
-    { value: '3', label: 'Low' },
+    { value: 'P#1', label: 'P#1' },
+    { value: 'P#2', label: 'P#2' },
+    { value: 'P#3', label: 'P#3' },
   ]
 }
+
 
 export function getJobTypeOptions() {
   return [
@@ -546,41 +547,3 @@ function getDummyAssetEquipmentOptions(): Array<{ value: string; label: string }
     { value: 'AST-010', label: 'AST-010 - Forklift J10' },
   ]
 }
-
-/**
- * Fetch User options from backend API (for Request By, Request For, Approvals, etc.)
- * Uses Employee API as users are employees
- */
-export async function getUserOptions(): Promise<Array<{ value: string; label: string }>> {
-  try {
-    const response = await fetch('/api/employeeregister', {
-      credentials: 'include',
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to fetch user options:', response.statusText);
-      return [];
-    }
-    
-    const result = await response.json();
-    const employees = result.data || [];
-    
-    return employees
-      .filter((emp: any) => emp.status === 'Active')
-      .map((emp: any) => {
-        const fullName = `${emp.first_name || ''} ${emp.middle_name || ''} ${emp.last_name || ''}`.trim();
-        const jobTitle = emp.job_title_detail?.title_des || emp.job_title || emp.position || '';
-        const label = jobTitle ? `${fullName} - ${jobTitle}` : fullName;
-        
-        return {
-          value: emp.id_number || emp.id?.toString() || '',
-          label: label || 'Unknown User',
-        };
-      });
-  } catch (error) {
-    console.error('Error fetching user options:', error);
-    return [];
-  }
-}
-
-

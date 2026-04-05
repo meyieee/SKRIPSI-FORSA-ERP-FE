@@ -1,0 +1,4 @@
+// Form *Form.scss sets .header-info-section .fw-bold to dark colors; Metronic uses data-theme on <html>.
+[data-theme='dark'] .header-info-section .fw-bold {
+  color: #fff !important;
+}

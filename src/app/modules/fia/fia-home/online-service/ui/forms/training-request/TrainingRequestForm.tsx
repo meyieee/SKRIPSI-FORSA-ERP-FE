@@ -17,7 +17,6 @@ import {
   getLocationOptions,
   getDepartmentOptions,
   getSupervisorOptions,
-  getUserOptions,
   TrainingRequestForm as TrainingRequestFormType,
 } from '../../../core/training-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -69,7 +68,6 @@ function TrainingRequestForm({ cat, type }: Props) {
   const [branchSiteOptions, setBranchSiteOptions] = useState<Array<{ value: string; label: string }>>([])
   const [locationOptions, setLocationOptions] = useState<Array<{ value: string; label: string }>>([])
   const [departmentOptions, setDepartmentOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
   const [optionsLoading, setOptionsLoading] = useState(true)
 
   // Fetch all async options on component mount
@@ -77,17 +75,15 @@ function TrainingRequestForm({ cat, type }: Props) {
     const fetchOptions = async () => {
       setOptionsLoading(true)
       try {
-        const [branches, locations, departments, employees] = await Promise.all([
+        const [branches, locations, departments] = await Promise.all([
           getBranchSiteOptions(),
           getLocationOptions(),
           getDepartmentOptions(),
-          getUserOptions(),
         ])
 
         setBranchSiteOptions(branches)
         setLocationOptions(locations)
         setDepartmentOptions(departments)
-        setEmployeeOptions(employees)
       } catch (error) {
         console.error('Error fetching options:', error)
       } finally {
@@ -266,7 +262,6 @@ function TrainingRequestForm({ cat, type }: Props) {
                         branchSiteOptions={branchSiteOptions}
                         locationOptions={locationOptions}
                         getDepartmentOptions={getDepartmentOptions}
-                        employeeOptions={employeeOptions}
                         currentUser={currentUser}
                       />
 

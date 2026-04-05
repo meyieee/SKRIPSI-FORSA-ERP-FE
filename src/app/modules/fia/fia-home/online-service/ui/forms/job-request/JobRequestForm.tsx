@@ -21,7 +21,6 @@ import {
   getWorkOrderClosureOptions,
   getAssignedToOptions,
   getAssetEquipmentOptions,
-  getUserOptions,
   JobRequestForm as JobRequestFormType,
 } from '../../../core/job-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -78,7 +77,6 @@ function JobRequestForm({ cat, type }: Props) {
   const [costCenterOptions, setCostCenterOptions] = useState<Array<{ value: string; label: string }>>([])
   const [assignedToOptions, setAssignedToOptions] = useState<Array<{ value: string; label: string }>>([])
   const [assetEquipmentOptions, setAssetEquipmentOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
   const [optionsLoading, setOptionsLoading] = useState(true)
 
   // Fetch all async options on component mount
@@ -86,14 +84,13 @@ function JobRequestForm({ cat, type }: Props) {
     const fetchOptions = async () => {
       setOptionsLoading(true)
       try {
-        const [branches, locations, departments, costCenters, employees, assets, users] = await Promise.all([
+        const [branches, locations, departments, costCenters, employees, assets] = await Promise.all([
           getBranchSiteOptions(),
           getLocationOptions(),
           getDepartmentOptions(),
           getCostCenterOptions(),
           getAssignedToOptions(),
           getAssetEquipmentOptions(),
-          getUserOptions(),
         ])
 
         setBranchSiteOptions(branches)
@@ -102,7 +99,6 @@ function JobRequestForm({ cat, type }: Props) {
         setCostCenterOptions(costCenters)
         setAssignedToOptions(employees)
         setAssetEquipmentOptions(assets)
-        setEmployeeOptions(users)
       } catch (error) {
         console.error('Error fetching options:', error)
       } finally {
@@ -282,7 +278,6 @@ function JobRequestForm({ cat, type }: Props) {
                       locationOptions={locationOptions}
                       departmentOptions={departmentOptions}
                       costCenterOptions={costCenterOptions}
-                      employeeOptions={employeeOptions}
                       currentUser={currentUser}
                     />
 

@@ -20,7 +20,6 @@ import {
   getSpecificationsOptions,
   getFleetLocationOptions,
   getReasonForTransferOptions,
-  getUserOptions,
   FleetForm as FleetFormType,
 } from '../../../core/fleet-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -74,7 +73,6 @@ function FleetRequestForm({ cat, type }: Props) {
   const [locationOptions, setLocationOptions] = useState<Array<{ value: string; label: string }>>([])
   const [departmentOptions, setDepartmentOptions] = useState<Array<{ value: string; label: string }>>([])
   const [fleetLocationOptions, setFleetLocationOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
   const [optionsLoading, setOptionsLoading] = useState(true)
 
   // Fetch all async options on component mount
@@ -82,19 +80,17 @@ function FleetRequestForm({ cat, type }: Props) {
     const fetchOptions = async () => {
       setOptionsLoading(true)
       try {
-        const [branches, locations, departments, fleetLocations, users] = await Promise.all([
+        const [branches, locations, departments, fleetLocations] = await Promise.all([
           getBranchSiteOptions(),
           getLocationOptions(),
           getDepartmentOptions(),
           getFleetLocationOptions(),
-          getUserOptions(),
         ])
 
         setBranchSiteOptions(branches)
         setLocationOptions(locations)
         setDepartmentOptions(departments)
         setFleetLocationOptions(fleetLocations)
-        setEmployeeOptions(users)
       } catch (error) {
         console.error('Error fetching options:', error)
       } finally {
@@ -273,7 +269,6 @@ function FleetRequestForm({ cat, type }: Props) {
                       branchSiteOptions={branchSiteOptions}
                       locationOptions={locationOptions}
                       departmentOptions={departmentOptions}
-                      employeeOptions={employeeOptions}
                       currentUser={currentUser}
                     />
 

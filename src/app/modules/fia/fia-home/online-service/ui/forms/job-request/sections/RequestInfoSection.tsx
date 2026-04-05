@@ -5,6 +5,7 @@ import FormSection from '../../common/components/FormSection'
 import FormField from '../../common/components/FormField'
 import FormSelect from '../../common/components/FormSelect'
 import FormTextarea from '../../common/components/FormTextarea'
+import EmployeeSearchTypeahead from '../../common/components/EmployeeSearchTypeahead'
 
 type RequestInfoSectionProps = {
   values: JobRequestInfo
@@ -15,7 +16,6 @@ type RequestInfoSectionProps = {
   locationOptions: Array<{ value: string; label: string }>
   departmentOptions: Array<{ value: string; label: string }>
   costCenterOptions: Array<{ value: string; label: string }>
-  employeeOptions: Array<{ value: string; label: string }>
   currentUser?: UserModel | null
 }
 
@@ -28,7 +28,6 @@ export default function RequestInfoSection({
   locationOptions,
   departmentOptions,
   costCenterOptions,
-  employeeOptions,
   currentUser,
 }: RequestInfoSectionProps) {
   // Helper untuk mendapatkan name/username dari current user untuk display
@@ -69,18 +68,15 @@ export default function RequestInfoSection({
             placeholder='(name / member)'
             required
             readOnly={true}
-            className='bg-light'
           />
         </div>
         <div className='col-md-4'>
-          {/* Request For - Combo box dengan default current user, bisa diubah */}
-          <FormSelect
+          <EmployeeSearchTypeahead
             label='Request For'
             name='requestInfo.requestFor'
             value={values.requestFor}
-            onChange={(value) => setFieldValue('requestInfo.requestFor', value)}
-            options={employeeOptions}
-            placeholder='Select employee...'
+            onChange={(id) => setFieldValue('requestInfo.requestFor', id)}
+            currentUser={currentUser}
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import { useQueryClient } from '@tanstack/react-query'
 import { OnlineCategoryKey } from '../../../registry'
@@ -15,7 +15,6 @@ import {
   getBranchSiteOptions,
   getLocationOptions,
   getDepartmentOptions,
-  getUserOptions,
   TravelRequestForm as TravelRequestFormType,
 } from '../../../core/travel-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -41,10 +40,6 @@ function TravelRequestForm({ cat, type }: Props) {
   const [submitting, setSubmitting] = useState(false)
   const { currentUser } = useAuth()
   
-  // State untuk employee options
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [optionsLoading, setOptionsLoading] = useState(true)
-  
   // Use form notification hook for modals
   const {
     showSuccess,
@@ -67,23 +62,6 @@ function TravelRequestForm({ cat, type }: Props) {
     cacheName: cache_travelrequest_new,
     enabled: true,
   })
-
-  // Fetch employee options on component mount
-  useEffect(() => {
-    const fetchEmployeeOptions = async () => {
-      setOptionsLoading(true)
-      try {
-        const employees = await getUserOptions()
-        setEmployeeOptions(employees)
-      } catch (error) {
-        console.error('Error fetching employee options:', error)
-      } finally {
-        setOptionsLoading(false)
-      }
-    }
-    
-    fetchEmployeeOptions()
-  }, [])
 
   // Handle form submission
   const onSubmit = async (values: TravelRequestFormType, actions: any) => {
@@ -253,7 +231,6 @@ function TravelRequestForm({ cat, type }: Props) {
                         getBranchSiteOptions={getBranchSiteOptions}
                         getLocationOptions={getLocationOptions}
                         getDepartmentOptions={getDepartmentOptions}
-                        employeeOptions={employeeOptions}
                         currentUser={currentUser}
                       />
 

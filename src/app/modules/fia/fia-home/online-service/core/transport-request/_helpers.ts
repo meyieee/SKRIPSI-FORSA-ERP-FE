@@ -193,12 +193,12 @@ export function getRequestPurposeOptions() {
 
 export function getPriorityOptions() {
   return [
-    { value: 'low', label: 'Low' },
-    { value: 'medium', label: 'Medium' },
-    { value: 'high', label: 'High' },
-    { value: 'urgent', label: 'Urgent' },
+    { value: 'P#1', label: 'P#1' },
+    { value: 'P#2', label: 'P#2' },
+    { value: 'P#3', label: 'P#3' },
   ]
 }
+
 
 export function getModeOfTransportOptions() {
   return [
@@ -287,69 +287,6 @@ export function getSupervisorOptions() {
     { value: 'manager-1', label: 'Manager 1' },
     { value: 'manager-2', label: 'Manager 2' },
     { value: 'director-1', label: 'Director 1' },
-  ]
-}
-
-/**
- * Fetch User/Employee options from backend API (for Request By, Request For, etc.)
- * Uses Employee API as users are employees
- * With fallback dummy data
- */
-export async function getUserOptions(): Promise<Array<{ value: string; label: string }>> {
-  try {
-    const response = await fetch('/api/employeeregister', {
-      credentials: 'include',
-    })
-    
-    if (!response.ok) {
-      console.error('Failed to fetch user options:', response.statusText)
-      return getDummyUserOptions() // ← FALLBACK
-    }
-    
-    const result = await response.json()
-    const employees = result.data || []
-    
-    if (employees.length === 0) {
-      return getDummyUserOptions() // ← FALLBACK jika kosong
-    }
-    
-    const mappedUsers = employees
-      .filter((emp: any) => emp.status === 'Active')
-      .map((emp: any) => {
-        const fullName = `${emp.first_name || ''} ${emp.middle_name || ''} ${emp.last_name || ''}`.trim()
-        const jobTitle = emp.job_title_detail?.title_des || emp.job_title || emp.position || ''
-        const label = jobTitle ? `${fullName} - ${jobTitle}` : fullName
-        
-        return {
-          value: emp.id_number || emp.id?.toString() || '',
-          label: label || 'Unknown User',
-        }
-      })
-    
-    // Jika setelah filter tidak ada data, gunakan dummy
-    if (mappedUsers.length === 0) {
-      return getDummyUserOptions() // ← FALLBACK
-    }
-    
-    return mappedUsers
-  } catch (error) {
-    console.error('Error fetching user options:', error)
-    return getDummyUserOptions() // ← FALLBACK
-  }
-}
-
-/**
- * Dummy User options for fallback
- */
-function getDummyUserOptions(): Array<{ value: string; label: string }> {
-  return [
-    { value: 'user-001', label: 'John Doe - Manager' },
-    { value: 'user-002', label: 'Jane Smith - Supervisor' },
-    { value: 'user-003', label: 'Bob Johnson - Director' },
-    { value: 'user-004', label: 'Alice Williams - Manager' },
-    { value: 'user-005', label: 'Charlie Brown - Supervisor' },
-    { value: 'user-006', label: 'Diana Prince - Director' },
-    { value: 'user-007', label: 'Edward Wilson - Manager' },
   ]
 }
 

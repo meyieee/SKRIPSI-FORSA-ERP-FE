@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import { useQueryClient } from '@tanstack/react-query'
 import { OnlineCategoryKey } from '../../../registry'
@@ -17,7 +17,6 @@ import {
   getDepartmentOptions,
   getEmploymentTypeOptions,
   getShiftOptions,
-  getUserOptions,
   WorkforceRequestForm as WorkforceRequestFormType,
 } from '../../../core/workforce-request'
 import HeaderSection from '../common/sections/HeaderSection'
@@ -43,10 +42,6 @@ function WorkforceRequestForm({ cat, type }: Props) {
   const [submitting, setSubmitting] = useState(false)
   const { currentUser } = useAuth()
   
-  // State untuk employee options
-  const [employeeOptions, setEmployeeOptions] = useState<Array<{ value: string; label: string }>>([])
-  const [optionsLoading, setOptionsLoading] = useState(true)
-  
   // Use form notification hook for modals
   const {
     showSuccess,
@@ -69,23 +64,6 @@ function WorkforceRequestForm({ cat, type }: Props) {
     cacheName: cache_workforcerequest_new,
     enabled: true,
   })
-
-  // Fetch employee options on component mount
-  useEffect(() => {
-    const fetchEmployeeOptions = async () => {
-      setOptionsLoading(true)
-      try {
-        const employees = await getUserOptions()
-        setEmployeeOptions(employees)
-      } catch (error) {
-        console.error('Error fetching employee options:', error)
-      } finally {
-        setOptionsLoading(false)
-      }
-    }
-    
-    fetchEmployeeOptions()
-  }, [])
 
   // Handle form submission
   const onSubmit = async (values: WorkforceRequestFormType, actions: any) => {
@@ -255,7 +233,6 @@ function WorkforceRequestForm({ cat, type }: Props) {
                         getBranchSiteOptions={getBranchSiteOptions}
                         getLocationOptions={getLocationOptions}
                         getDepartmentOptions={getDepartmentOptions}
-                        employeeOptions={employeeOptions}
                         currentUser={currentUser}
                       />
 

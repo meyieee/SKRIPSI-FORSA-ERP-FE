@@ -1,4 +1,5 @@
 import React from 'react'
+import './FormField.scss'
 
 type FormFieldProps = {
   label: string
@@ -35,7 +36,7 @@ export default function FormField({
       <input
         type={type}
         name={name}
-        className='form-control'
+        className={readOnly ? 'form-control online-form-control-readonly' : 'form-control'}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}

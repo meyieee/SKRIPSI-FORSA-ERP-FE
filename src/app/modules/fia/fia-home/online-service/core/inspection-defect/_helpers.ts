@@ -155,12 +155,12 @@ export function getRequestPurposeOptions() {
 
 export function getPriorityOptions() {
   return [
-    { value: 'Low', label: 'Low' },
-    { value: 'Medium', label: 'Medium' },
-    { value: 'High', label: 'High' },
-    { value: 'Urgent', label: 'Urgent' },
+    { value: 'P#1', label: 'P#1' },
+    { value: 'P#2', label: 'P#2' },
+    { value: 'P#3', label: 'P#3' },
   ]
 }
+
 
 export function getBranchSiteOptions() {
   return [
@@ -278,18 +278,6 @@ export function getAssetDetails(assetNo: string) {
     assetType: asset.type,
     assetModel: asset.model
   } : null
-}
-
-export function getUserOptions() {
-  return [
-    { value: 'user-001', label: 'John Doe - Manager' },
-    { value: 'user-002', label: 'Jane Smith - Supervisor' },
-    { value: 'user-003', label: 'Bob Johnson - Director' },
-    { value: 'user-004', label: 'Alice Williams - Manager' },
-    { value: 'user-005', label: 'Charlie Brown - Supervisor' },
-    { value: 'user-006', label: 'Diana Prince - Director' },
-    { value: 'user-007', label: 'Edward Wilson - Manager' },
-  ]
 }
 
 export function getDateOptions() {
