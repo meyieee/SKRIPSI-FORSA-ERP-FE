@@ -191,7 +191,7 @@ function AccommodationRequestForm({ cat, type }: Props) {
       <div className='card'>
         <Formik 
           initialValues={(() => {
-            // Set initial values dengan current user untuk requestBy dan requestFor
+            // requestBy: current user; requestFor: dari API/draft saja (kosong = user pilih typeahead)
             if (data && currentUser) {
               const currentUserId = currentUser.id_number || currentUser.id?.toString() || ''
               return {
@@ -199,7 +199,7 @@ function AccommodationRequestForm({ cat, type }: Props) {
                 requestInfo: {
                   ...data.requestInfo,
                   requestBy: currentUserId || data.requestInfo.requestBy || '',
-                  requestFor: currentUserId || data.requestInfo.requestFor || '',
+                  requestFor: data.requestInfo.requestFor || '',
                 }
               }
             }

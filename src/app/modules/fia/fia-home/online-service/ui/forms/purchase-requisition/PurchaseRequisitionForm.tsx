@@ -215,7 +215,7 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
       <div className='card'>
         <Formik 
           initialValues={(() => {
-            // Set initial values dengan current user untuk requestBy dan requestFor
+            // requestBy: current user; requestFor: dari API/draft saja (kosong = user pilih typeahead)
             // Pastikan semua nested objects ada dengan default values
             const defaultItemDetails = [
               {
@@ -237,7 +237,7 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
                 requestInfo: {
                   ...data.requestInfo,
                   requestBy: currentUserId || data.requestInfo?.requestBy || '',
-                  requestFor: currentUserId || data.requestInfo?.requestFor || '',
+                  requestFor: data.requestInfo?.requestFor || '',
                 },
                 itemDetails: data.itemDetails || defaultItemDetails,
               }

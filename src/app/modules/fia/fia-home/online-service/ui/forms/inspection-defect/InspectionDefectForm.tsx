@@ -194,7 +194,7 @@ function InspectionDefectForm({ cat, type }: Props) {
       <div className='card'>
         <Formik 
           initialValues={(() => {
-            // Set initial values dengan current user untuk requestBy dan requestFor
+            // requestBy: current user; requestFor: dari API/draft saja (kosong = user pilih typeahead)
             // Pastikan semua nested objects ada dengan default values
             const defaultInspectionInfo = {
               inspectionDate: new Date().toISOString().slice(0, 10),
@@ -230,7 +230,7 @@ function InspectionDefectForm({ cat, type }: Props) {
                 requestInfo: {
                   ...data.requestInfo,
                   requestBy: currentUserId || data.requestInfo?.requestBy || '',
-                  requestFor: currentUserId || data.requestInfo?.requestFor || '',
+                  requestFor: data.requestInfo?.requestFor || '',
                 },
                 inspectionInfo: data.inspectionInfo || defaultInspectionInfo,
                 inspectionDetailInfo: data.inspectionDetailInfo || defaultInspectionDetailInfo,

@@ -42,7 +42,7 @@ export async function getInspectionDefectForm(cat: OnlineCategoryKey, type: stri
     requestInfo: {
       requestDate: new Date().toISOString().slice(0, 10),
       requestBy: 'EMP001 - John Doe',
-      requestFor: 'EMP002 - Jane Smith',
+      requestFor: '',
       requestPurpose: '',
       priority: 'Medium',
       branchSite: '',

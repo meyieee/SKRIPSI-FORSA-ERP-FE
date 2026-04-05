@@ -22,6 +22,8 @@ export interface UserModel {
   password?: string | null
   email?: string | null
   name?: string | null
+  /** Full name from tbl_emp_regs (set by API normalizeAuthUser); fallback for header label */
+  display_name?: string | null
   first_name?: string | null
   last_name?: string | null
   fullname?: string | null
@@ -41,4 +43,8 @@ export interface UserModel {
   'employees.branch_detail.branch_code'?: string | null
   'employees.status'?: string | null
   'employees.photo'?: string | null // to access respective branch of current user, if any
+  'employees.first_name'?: string | null
+  'employees.middle_name'?: string | null
+  'employees.last_name'?: string | null
+  'employees.nick_name'?: string | null
 }
