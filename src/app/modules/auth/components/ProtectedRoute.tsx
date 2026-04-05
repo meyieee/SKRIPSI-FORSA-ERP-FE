@@ -18,9 +18,10 @@ export const ProtectedRoute: FC<Props> = ({
   children, 
   fallback = <Navigate to="/error/403" replace /> 
 }) => {
-  const canAccess = useCanAccessRoute(routePath)
+  const safeRoutePath = typeof routePath === 'string' ? routePath : ''
+  const canAccess = useCanAccessRoute(safeRoutePath)
   
-  if (!canAccess) {
+  if (!safeRoutePath || !canAccess) {
     return <>{fallback}</>
   }
   

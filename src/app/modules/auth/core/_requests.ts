@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {AuthModel} from './_models'
-import { removeAuth, setAuth } from './AuthHelpers';
+import { normalizeAuth, removeAuth, setAuth } from './AuthHelpers';
 import { client } from '../../../functions';
 
 const API_URL = process.env.REACT_APP_API_URL
@@ -14,24 +14,36 @@ export const CHECKING_EXISTING_ADMIN = `/users/check-existing-admin`
 
 export const getUserSession = async (result: AuthModel  | undefined) => {
   if (!result || typeof result !== "object" || !result.user || !result.user.name || typeof result.user.name !== "string") {
-    return; 
+    return undefined
   }
 
-  await client()
-    .get(`${SESSION_URL}/${result.user.name}`)
-    .then((res) => {
-      if (res.data && res.data.user) {
-        const updatedValue = { ...result, user: res.data.user };
-        setAuth(updatedValue)
+  try {
+    const res = await client().get(`${SESSION_URL}/${result.user.name}`)
+    if (res.data && res.data.user) {
+      const updatedValue = normalizeAuth({
+        ...result,
+        user: res.data.user,
+        permissions: Array.isArray(res.data.permissions) ? res.data.permissions : result.permissions,
+      })
 
-        if ((updatedValue.user.status === 0 || updatedValue.user['employees.status'] !== 'Active') && updatedValue.user.id_number !== 'HO') {
+      if (updatedValue) {
+        setAuth(updatedValue)
+        if (
+          (updatedValue.user?.status === 0 || updatedValue.user?.['employees.status'] !== 'Active') &&
+          updatedValue.user?.id_number !== 'HO'
+        ) {
           removeAuth()
+          return undefined
         }
       }
-    })
-    .catch((err) => {
-      // console.log("error:", err.response.data.message)
-    });
+
+      return updatedValue
+    }
+  } catch (err) {
+    // do nothing, consumer handles fallback/recovery
+  }
+
+  return normalizeAuth(result)
 };
 
 

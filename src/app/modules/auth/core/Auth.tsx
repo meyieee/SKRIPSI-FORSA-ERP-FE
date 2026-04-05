@@ -48,8 +48,6 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     auth?.permissions || []
   )
   
-  getUserSession(auth)
-  
   // Sync permissions when auth changes (e.g., on page refresh)
   useEffect(() => {
     if (auth?.permissions) {
@@ -60,10 +58,11 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   }, [auth])
   
   const saveAuth = (auth: AuthModel | undefined) => {
-    setAuth(auth)
-    setPermissions(auth?.permissions || [])
-    if (auth) {
-      authHelper.setAuth(auth)
+    const normalized = auth ? authHelper.normalizeAuth(auth) : undefined
+    setAuth(normalized)
+    setPermissions(normalized?.permissions || [])
+    if (normalized) {
+      authHelper.setAuth(normalized)
     } else {
       authHelper.removeAuth()
     }
@@ -95,36 +94,50 @@ const AuthInit: FC<WithChildren> = ({children}) => {
   const [showSplashScreen, setShowSplashScreen] = useState(true)
   
   useEffect(() => {
-    if(auth && auth?.user){ 
-      //untuk handle Join Room Socket Io
-      const branch = getBranchUserSession(auth?.user)
-      handleSocketJoinRoom(branch)
-    }
-
-    const requestUser = async (user: any) => {
+    let isMounted = true
+    const requestUser = async () => {
       try {
-        if (!didRequest.current) {
-          setCurrentUser(user)
-          return null
+        if (didRequest.current) return
+
+        const normalizedAuth = auth ? authHelper.normalizeAuth(auth) : undefined
+        if (!normalizedAuth || !normalizedAuth.user) {
+          logout()
+          return
+        }
+
+        const refreshedAuth = await getUserSession(normalizedAuth)
+        const activeAuth =
+          authHelper.normalizeAuth(refreshedAuth) ||
+          authHelper.normalizeAuth(authHelper.getAuth()) ||
+          normalizedAuth
+
+        if (!activeAuth || !activeAuth.user) {
+          logout()
+          return
+        }
+
+        setCurrentUser(activeAuth.user)
+
+        // Handle join room safely only when branch resolved
+        const branch = getBranchUserSession(activeAuth.user)
+        if (branch) {
+          handleSocketJoinRoom(branch)
         }
       } catch (error) {
-        if (!didRequest.current) {
-          logout()
-        }
+        logout()
       } finally {
-        setShowSplashScreen(false)
+        if (isMounted) {
+          setShowSplashScreen(false)
+        }
+        didRequest.current = true
       }
-
-      return () => (didRequest.current = true)
     }
 
-    if (auth) {
-      requestUser(auth?.user)
-    } else {
-      logout()
-      setShowSplashScreen(false)
+    requestUser()
+    return () => {
+      isMounted = false
     }
-  }, [])
+  }, [auth, logout, setCurrentUser])
 
   return showSplashScreen ? <LayoutSplashScreen /> : <>{children}</>
 }

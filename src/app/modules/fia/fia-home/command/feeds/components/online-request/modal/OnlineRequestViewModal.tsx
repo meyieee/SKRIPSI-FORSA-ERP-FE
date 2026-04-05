@@ -47,6 +47,15 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
 
   if (!request) return null
 
+  const resolvedRefDocNo = String(detail?.refDocNo ?? request.refDocNo ?? '-')
+  const resolvedDescription = String(detail?.description ?? request.description ?? '-')
+  const resolvedTransType = String(detail?.transType ?? request.transType ?? '-')
+  const resolvedRequestor = String(detail?.requestor ?? request.requestor ?? '-')
+  const resolvedPriority = String(detail?.priority ?? request.priority ?? '')
+  const resolvedRequestDate = String(detail?.requestDate ?? request.requestDate ?? '-')
+  const resolvedExpired = String(detail?.expired ?? request.expired ?? '-')
+  const resolvedStatus = String(detail?.status ?? request.status ?? '')
+
   const getPriorityClass = (priority: string) => {
     switch (priority) {
       case 'P#1':
@@ -82,20 +91,44 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
     return 'badge badge-light fs-7 fw-semibold'
   }
 
-  const detailEntries = Object.entries(detail || {}).filter(
-    ([key]) =>
-      ![
-        'id',
-        'refDocNo',
-        'description',
-        'transType',
-        'requestor',
-        'priority',
-        'requestDate',
-        'expired',
-        'status',
-      ].includes(key)
-  )
+  const formatDetailLabel = (key: string) =>
+    key
+      .replace(/\.(\d+)\b/g, ' [$1]')
+      .replace(/\./g, ' ')
+      .replace(/[_-]+/g, ' ')
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .trim()
+      .replace(/^./, (s) => s.toUpperCase())
+
+  const flattenDetailEntries = (payload: unknown, parentKey = ''): Array<[string, unknown]> => {
+    if (payload === null || payload === undefined) {
+      return parentKey ? [[parentKey, '-']] : []
+    }
+
+    if (Array.isArray(payload)) {
+      if (payload.length === 0) return parentKey ? [[parentKey, '-']] : []
+      return payload.flatMap((item, index) =>
+        flattenDetailEntries(item, parentKey ? `${parentKey}.${index}` : String(index))
+      )
+    }
+
+    if (typeof payload === 'object') {
+      const entries = Object.entries(payload as Record<string, unknown>)
+      if (entries.length === 0) return parentKey ? [[parentKey, '-']] : []
+      return entries.flatMap(([key, value]) =>
+        flattenDetailEntries(value, parentKey ? `${parentKey}.${key}` : key)
+      )
+    }
+
+    return [[parentKey, payload]]
+  }
+
+  const formatDetailValue = (value: unknown): string => {
+    if (value === null || value === undefined || value === '') return '-'
+    return String(value)
+  }
+
+  const detailEntries = flattenDetailEntries(detail || {})
 
   return (
     <Modal show={show} onHide={onHide} centered size='lg'>
@@ -113,42 +146,42 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
         <div className='d-flex flex-column gap-3'>
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Ref Doc No:</span>
-            <span className='text-gray-800'>{request.refDocNo}</span>
+            <span className='text-gray-800'>{resolvedRefDocNo}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Description:</span>
-            <span className='text-gray-800'>{request.description}</span>
+            <span className='text-gray-800'>{resolvedDescription}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Transaction Type:</span>
-            <span className='text-gray-800'>{request.transType}</span>
+            <span className='text-gray-800'>{resolvedTransType}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Requestor:</span>
-            <span className='text-gray-800'>{request.requestor}</span>
+            <span className='text-gray-800'>{resolvedRequestor}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Priority:</span>
-            <span className={getPriorityClass(request.priority)}>{request.priority}</span>
+            <span className={getPriorityClass(resolvedPriority)}>{resolvedPriority || '-'}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Request Date:</span>
-            <span className='text-gray-800'>{request.requestDate}</span>
+            <span className='text-gray-800'>{resolvedRequestDate}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Expired:</span>
-            <span className='text-gray-800'>{request.expired}</span>
+            <span className='text-gray-800'>{resolvedExpired}</span>
           </div>
 
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-semibold text-gray-700'>Status:</span>
-            <span className={getStatusClass(request.status)}>{normalizeStatus(request.status)}</span>
+            <span className={getStatusClass(resolvedStatus)}>{normalizeStatus(resolvedStatus)}</span>
           </div>
 
           {isLoadingDetail ? (
@@ -157,14 +190,20 @@ const OnlineRequestViewModal: React.FC<OnlineRequestViewModalProps> = ({
             <div className='alert alert-warning py-3 mb-0 mt-2'>{detailError}</div>
           ) : detailEntries.length > 0 ? (
             <div className='border-top pt-3 mt-2'>
+              <div className='fw-bold text-gray-800 mb-2'>All Detail Fields</div>
               {detailEntries.map(([key, value]) => (
-                <div className='d-flex justify-content-between align-items-center py-1' key={key}>
-                  <span className='fw-semibold text-gray-700 text-capitalize'>{key}:</span>
-                  <span className='text-gray-800'>{String(value ?? '-')}</span>
+                <div
+                  className='d-flex justify-content-between align-items-center py-1'
+                  key={`${key}-${String(value)}`}
+                >
+                  <span className='fw-semibold text-gray-700'>{formatDetailLabel(key)}:</span>
+                  <span className='text-gray-800 text-end'>{formatDetailValue(value)}</span>
                 </div>
               ))}
             </div>
-          ) : null}
+          ) : (
+            <div className='text-muted pt-2'>No detail payload available for this request.</div>
+          )}
         </div>
       </Modal.Body>
     </Modal>

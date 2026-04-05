@@ -1,6 +1,9 @@
 import { useAuth } from '../modules/auth/core/Auth'
 import { PermissionModel } from '../modules/auth/core/_models'
 
+const normalizeRoute = (routePath: string) => String(routePath || '').trim().toLowerCase()
+const normalizePrivilege = (privilege: string) => String(privilege || '').trim().toLowerCase()
+
 /**
  * Check if user has a specific permission for a route
  * @param routePath - Route path (e.g., '/home/overview')
@@ -9,8 +12,14 @@ import { PermissionModel } from '../modules/auth/core/_models'
  */
 export const usePermission = (routePath: string, privilege: string): boolean => {
   const { permissions } = useAuth()
-  return permissions.some(
-    p => p.routePath === routePath && p.privilege === privilege
+  const safePermissions = Array.isArray(permissions) ? permissions : []
+  const normalizedRoute = normalizeRoute(routePath)
+  const normalizedPrivilege = normalizePrivilege(privilege)
+
+  return safePermissions.some(
+    p =>
+      normalizeRoute(p.routePath || '') === normalizedRoute &&
+      normalizePrivilege(p.privilege || '') === normalizedPrivilege
   )
 }
 
@@ -31,10 +40,14 @@ export const useCanAccessRoute = (routePath: string): boolean => {
  */
 export const useAnyPermission = (routePath: string, privileges: string[]): boolean => {
   const { permissions } = useAuth()
-  return privileges.some(privilege =>
-    permissions.some(
-      p => p.routePath === routePath && p.privilege === privilege
-    )
+  const safePermissions = Array.isArray(permissions) ? permissions : []
+  const normalizedRoute = normalizeRoute(routePath)
+  const normalizedPrivileges = privileges.map((x) => normalizePrivilege(x))
+
+  return safePermissions.some(
+    (p) =>
+      normalizeRoute(p.routePath || '') === normalizedRoute &&
+      normalizedPrivileges.includes(normalizePrivilege(p.privilege || ''))
   )
 }
 
@@ -45,8 +58,11 @@ export const useAnyPermission = (routePath: string, privileges: string[]): boole
  */
 export const useRoutePermissions = (routePath: string): string[] => {
   const { permissions } = useAuth()
-  return permissions
-    .filter(p => p.routePath === routePath)
-    .map(p => p.privilege)
+  const safePermissions = Array.isArray(permissions) ? permissions : []
+  const normalizedRoute = normalizeRoute(routePath)
+  return safePermissions
+    .filter((p) => normalizeRoute(p.routePath || '') === normalizedRoute)
+    .map((p) => p.privilege)
+    .filter((x): x is string => Boolean(x))
 }
 

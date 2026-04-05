@@ -1,10 +1,12 @@
 import { functionCheckingHORoutesAPI } from "./functionCheckingHORoutesAPI";
 
 type CurrentUser = {
-  'employees.branch_detail.com_type': string
-  'employees.branch_detail.com_code': string
+  'employees.branch_detail.com_type'?: string | null
+  'employees.branch_detail.com_code'?: string | null
 } | undefined;
 
 export const functionCheckComTypeRoutesAPI = (getRequest: Function, currentUser: CurrentUser) =>{
- return getRequest(functionCheckingHORoutesAPI(currentUser?.['employees.branch_detail.com_type'], currentUser?.['employees.branch_detail.com_code']))
+  const comType = currentUser?.['employees.branch_detail.com_type'] ?? ''
+  const comCode = currentUser?.['employees.branch_detail.com_code'] ?? ''
+  return getRequest(functionCheckingHORoutesAPI(comType, comCode))
 }

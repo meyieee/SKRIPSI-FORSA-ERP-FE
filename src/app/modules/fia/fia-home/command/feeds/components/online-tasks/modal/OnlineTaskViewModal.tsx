@@ -62,7 +62,8 @@ const OnlineTaskViewModal: React.FC<OnlineTaskViewModalProps> = ({ show, onHide,
     return 'badge badge-light fs-7 fw-semibold'
   }
 
-  const messages = Array.isArray(detail?.messages) ? detail.messages : []
+  const rawMessages = detail?.messages
+  const messages = Array.isArray(rawMessages) ? rawMessages : []
 
   return (
     <Modal show={show} onHide={onHide} centered size='lg'>

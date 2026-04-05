@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fullUrlServer } from "./base_url";
-import { getAuth, setAuth } from '../modules/auth/core/AuthHelpers';
+import { getAuth, normalizeAuth, removeAuth, setAuth } from '../modules/auth/core/AuthHelpers';
 import { forceLogout } from './forceLogout';
 
 let isRefreshing = false;
@@ -8,6 +8,7 @@ let isRefreshing = false;
 export const client = () => {
     const result = getAuth();
     if (!result || !result.user?.name) {
+        removeAuth();
         forceLogout();
         return axios.create(); // Kembalikan instance kosong agar tidak error
     }
@@ -38,16 +39,27 @@ export const client = () => {
                 try {
                     //jika akses token sudah kadaluarsa, maka akan dibuatkan akses token yang baru
                     const { data } = await axios.post(`${fullUrlServer}/api/users/specific`,{ name: result?.user?.name }, { withCredentials: true });
-                    setAuth(data)
-                    
-                    isRefreshing = false;
+                    const normalized = normalizeAuth(data);
+                    if (!normalized || !normalized.user?.name) {
+                        removeAuth();
+                        forceLogout();
+                        return Promise.reject({ message: "Invalid refreshed session payload." });
+                    }
+                    setAuth(normalized)
                     return axiosInstance(originalRequest);
                 } catch (refreshError) {
                     console.error("Error refreshing token:", refreshError);
-                    // isRefreshing = false;
+                    removeAuth();
                     forceLogout();
                     return Promise.reject({ message: "Failed to refresh session. Please log in again." });
+                } finally {
+                    isRefreshing = false;
                 }
+            }
+
+            if (status === 401) {
+                removeAuth();
+                forceLogout();
             }
 
             return Promise.reject(error);

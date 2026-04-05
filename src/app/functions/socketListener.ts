@@ -6,18 +6,27 @@ import { getAuth } from "../modules/auth";
 
 export const getBranchUserSession = (user: any): string => {
   if (!user || typeof user !== 'object') {
-    console.error("Invalid user object");
+    console.warn("Invalid user object for branch session resolution");
     return ''
   }
 
-  //logic ini salah, karena object user sekarang telah berbentuk raw data
-  const branchDetail = user['employees.branch_detail.com_code'] && user['employees.branch_detail.com_type'];
-  if (!branchDetail) {
-    console.error("Branch detail is missing from user data");
+  const comType =
+    user['employees.branch_detail.com_type'] ??
+    user?.employees?.branch_detail?.com_type ??
+    user?.com_type ??
+    null
+  const comCode =
+    user['employees.branch_detail.com_code'] ??
+    user?.employees?.branch_detail?.com_code ??
+    user?.branch_code ??
+    null
+
+  if (!comType && !comCode) {
+    console.warn("Branch detail is missing from user data");
     return ''
   }
 
-  return user['employees.branch_detail.com_type'] === 'HO' ? user['employees.branch_detail.com_type'] : user['employees.branch_detail.com_code'];
+  return String(comType) === 'HO' ? 'HO' : String(comCode || '')
 };
 
 const generateListenerBranchName = (nameListener: string): { processedSocketListenerName: string } => {
@@ -48,10 +57,8 @@ const handleSocketErrorAndDisconnect = () => {
 };
 
 export const handleSocketJoinRoom = (branch:string) => {
-  // Pastikan listener hanya terdaftar sekali
-  if (!socket.hasListeners("join room")) {
-    socket.emit('join room', branch)
-  }
+  if (!branch) return
+  socket.emit('join room', branch)
 };
 
 

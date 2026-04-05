@@ -68,9 +68,9 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
             <thead>
               <tr className='fw-bold align-middle bg-secondary'>
                 <th className='min-w-30px'>No</th>
-                <th className='min-w-120px'>Ref Doc No</th>
+                <th className='min-w-120px'>Ref Request No</th>
                 <th className='min-w-250px'>Description</th>
-                <th className='min-w-120px'>Trans Type</th>
+                <th className='min-w-120px'>Request Type</th>
                 <th className='min-w-120px'>Requestor</th>
                 <th className='min-w-80px text-center'>Priority</th>
                 <th className='min-w-100px'>Request Date</th>
