@@ -1,10 +1,13 @@
 import {AsideMenuItem} from './AsideMenuItem'
-import {useAuth} from '../../../../app/modules/auth'
 import {AsideMenuItemWithSub} from './AsideMenuItemWithSub'
-import {useCanAccessRoute} from '../../../../app/custom-hooks'
+import {useCanAccessRoute, useControlsAccess} from '../../../../app/custom-hooks'
 
 export function AsideMenuMain() {
-  const {currentUser} = useAuth()
+  const {
+    showSection: canAccessControls,
+    showAccountSettings,
+    showChangePassword,
+  } = useControlsAccess()
 
   const canAccessOverview = useCanAccessRoute('/home/overview')
   const canAccessCompanyList = useCanAccessRoute('/home/company_list')
@@ -76,7 +79,7 @@ export function AsideMenuMain() {
         </AsideMenuItemWithSub>
       )}
 
-      {currentUser?.role === 'administrator' && (
+      {canAccessControls && (
         <AsideMenuItemWithSub
           to='/controls'
           title='Controls'
@@ -84,8 +87,12 @@ export function AsideMenuMain() {
           icon='/media/icons/duotune/communication/com006.svg'
           showSubmenu={true}
         >
-          <AsideMenuItem to='/controls/account-settings' title='Account Settings' hasBullet={true} />
-          <AsideMenuItem to='/controls/change-password' title='Change Password' hasBullet={true} />
+          {showAccountSettings && (
+            <AsideMenuItem to='/controls/account-settings' title='Account Settings' hasBullet={true} />
+          )}
+          {showChangePassword && (
+            <AsideMenuItem to='/controls/change-password' title='Change Password' hasBullet={true} />
+          )}
         </AsideMenuItemWithSub>
       )}
     </>

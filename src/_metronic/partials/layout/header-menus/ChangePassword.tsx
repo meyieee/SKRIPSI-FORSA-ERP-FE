@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { ErrorMessage, Field, Form, Formik } from "formik"
-import { useAuth } from "../../../../app/modules/auth"
+import {useAuth} from '../../../../app/modules/auth/core/Auth'
 import { AlertMessengerContext } from "../../../../app/components"
 import { PasswordUpdateSchema } from "../../../../app/modules/cf/controls-user-management/core/_models"
 import { updatePasswordUsers } from "../../../../app/modules/cf/controls-user-management/core/_requests"

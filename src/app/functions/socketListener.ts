@@ -2,7 +2,7 @@ import { QueryClient } from "@tanstack/react-query";
 import { Dispatch, SetStateAction } from 'react';
 import socket from "./socket";
 import { FormikHelpers } from 'formik';
-import { getAuth } from "../modules/auth";
+import { getAuth } from "../modules/auth/core/AuthHelpers";
 
 export const getBranchUserSession = (user: any): string => {
   if (!user || typeof user !== 'object') {

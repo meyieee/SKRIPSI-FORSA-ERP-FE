@@ -1,4 +1,4 @@
-import {KTSVG} from '../../../../../_metronic'
+import {KTSVG} from '../../../../helpers'
 import {StepProps} from '../IAppModels'
 
 const Step1 = ({data, updateData, hasError}: StepProps) => {

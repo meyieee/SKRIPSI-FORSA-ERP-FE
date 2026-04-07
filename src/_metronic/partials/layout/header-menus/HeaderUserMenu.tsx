@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../../../app/modules/auth'
+import {useAuth} from '../../../../app/modules/auth/core/Auth'
 import { fullUrlServer, toAbsoluteUrl } from '../../../helpers'
 
 const HeaderUserMenu: FC = () => {

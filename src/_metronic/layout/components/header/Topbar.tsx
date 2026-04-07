@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import {fullUrlServer, KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
-import {useAuth} from '../../../../app/modules/auth'
+import {useAuth} from '../../../../app/modules/auth/core/Auth'
 // import CompanySizeContext from './CompanySizeContext'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',

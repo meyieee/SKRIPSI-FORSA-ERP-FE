@@ -1,7 +1,6 @@
 import {ReactNode} from 'react'
 import {MenuItem} from './MenuItem'
 import {MenuInnerWithSub} from './MenuInnerWithSub'
-import {useAuth} from '../../../../app/modules/auth'
 import {
   FiaHomeCompanyList,
   FiaHomeCommandCenter,
@@ -15,7 +14,7 @@ import {
   FiaResWorkforceTracking,
 } from './FiaIcons'
 import {FiaSubMenu} from './FiaSubMenu'
-import {useCanAccessRoute} from '../../../../app/custom-hooks'
+import {useCanAccessRoute, useControlsAccess} from '../../../../app/custom-hooks'
 
 interface FiaMenuItem {
   to: string
@@ -24,7 +23,11 @@ interface FiaMenuItem {
 }
 
 export function MenuInner() {
-  const {currentUser} = useAuth()
+  const {
+    showSection: canAccessControls,
+    showAccountSettings,
+    showChangePassword,
+  } = useControlsAccess()
 
   const canAccessOverview = useCanAccessRoute('/home/overview')
   const canAccessCompanyList = useCanAccessRoute('/home/company_list')
@@ -129,15 +132,19 @@ export function MenuInner() {
           )
         })()}
 
-      {currentUser?.role === 'administrator' && (
+      {canAccessControls && (
         <MenuInnerWithSub
           title='Controls'
           to='/controls'
           menuPlacement='bottom-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuItem to='/controls/account-settings' title='Account Settings' icon='/media/icons/duotune/communication/com006.svg' />
-          <MenuItem to='/controls/change-password' title='Change Password' icon='/media/icons/duotune/communication/com006.svg' />
+          {showAccountSettings && (
+            <MenuItem to='/controls/account-settings' title='Account Settings' icon='/media/icons/duotune/communication/com006.svg' />
+          )}
+          {showChangePassword && (
+            <MenuItem to='/controls/change-password' title='Change Password' icon='/media/icons/duotune/communication/com006.svg' />
+          )}
         </MenuInnerWithSub>
       )}
     </>

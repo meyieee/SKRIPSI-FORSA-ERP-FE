@@ -1,4 +1,4 @@
-import {FC, useState, useEffect, createContext, useContext, useRef, Dispatch, SetStateAction} from 'react'
+import {FC, useState, useEffect, useCallback, createContext, useContext, Dispatch, SetStateAction} from 'react'
 import { useQueryClient } from "@tanstack/react-query"
 import api from 'axios'
 import axios from 'axios'
@@ -57,8 +57,8 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     }
   }, [auth])
   
-  const saveAuth = (auth: AuthModel | undefined) => {
-    const normalized = auth ? authHelper.normalizeAuth(auth) : undefined
+  const saveAuth = useCallback((nextAuth: AuthModel | undefined) => {
+    const normalized = nextAuth ? authHelper.normalizeAuth(nextAuth) : undefined
     setAuth(normalized)
     setPermissions(normalized?.permissions || [])
     if (normalized) {
@@ -66,19 +66,19 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     } else {
       authHelper.removeAuth()
     }
-  }
+  }, [])
 
-  const logout = () => {
-    saveAuth(undefined);
-    setCurrentUser(undefined);
-    queryClient.clear();
-  
-    if (auth && auth?.user?.name){
-      return axios.post(LOGOUT_URL, { name: auth.user.name }, {withCredentials:true})
+  const logout = useCallback(() => {
+    saveAuth(undefined)
+    setCurrentUser(undefined)
+    queryClient.clear()
+
+    if (auth && auth?.user?.name) {
+      return axios.post(LOGOUT_URL, {name: auth.user.name}, {withCredentials: true})
     }
-  
-    return null;
-  };
+
+    return null
+  }, [auth, saveAuth, queryClient])
 
   return (
     <AuthContext.Provider value={{auth, saveAuth, currentUser, setCurrentUser, logout, permissions}}>
@@ -87,25 +87,31 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
   )
 }
 
+const SESSION_FETCH_TIMEOUT_MS = 15000
+
 // sebagai state management di App.tsx
 const AuthInit: FC<WithChildren> = ({children}) => {
   const {auth, logout, setCurrentUser} = useAuth()
-  const didRequest = useRef(false)
   const [showSplashScreen, setShowSplashScreen] = useState(true)
-  
+
   useEffect(() => {
-    let isMounted = true
+    let cancelled = false
+
     const requestUser = async () => {
       try {
-        if (didRequest.current) return
-
         const normalizedAuth = auth ? authHelper.normalizeAuth(auth) : undefined
         if (!normalizedAuth || !normalizedAuth.user) {
           logout()
           return
         }
 
-        const refreshedAuth = await getUserSession(normalizedAuth)
+        const refreshedAuth = await Promise.race([
+          getUserSession(normalizedAuth),
+          new Promise<undefined>((resolve) => setTimeout(() => resolve(undefined), SESSION_FETCH_TIMEOUT_MS)),
+        ])
+
+        if (cancelled) return
+
         const activeAuth =
           authHelper.normalizeAuth(refreshedAuth) ||
           authHelper.normalizeAuth(authHelper.getAuth()) ||
@@ -118,7 +124,6 @@ const AuthInit: FC<WithChildren> = ({children}) => {
 
         setCurrentUser(activeAuth.user)
 
-        // Handle join room safely only when branch resolved
         const branch = getBranchUserSession(activeAuth.user)
         if (branch) {
           handleSocketJoinRoom(branch)
@@ -126,16 +131,13 @@ const AuthInit: FC<WithChildren> = ({children}) => {
       } catch (error) {
         logout()
       } finally {
-        if (isMounted) {
-          setShowSplashScreen(false)
-        }
-        didRequest.current = true
+        setShowSplashScreen(false)
       }
     }
 
     requestUser()
     return () => {
-      isMounted = false
+      cancelled = true
     }
   }, [auth, logout, setCurrentUser])
 

@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Link } from "react-router-dom"
 import { KTSVG } from "../../helpers"
-import { useAuth } from "../../../app/modules/auth"
+import {useAuth} from '../../../app/modules/auth/core/Auth'
 import { PageLink, PageTitle } from "../core"
 
 const ControlFile = () => {

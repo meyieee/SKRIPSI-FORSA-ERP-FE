@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import {useState} from 'react'
-import {CreateAppModal} from '../../../partials'
+import {CreateAppModal} from '../../../partials/modals/create-app-stepper/CreateAppModal'
 import {useLayout} from '../../core'
 import {DefaultTitle} from '../header/page-title/DefaultTitle'
 
