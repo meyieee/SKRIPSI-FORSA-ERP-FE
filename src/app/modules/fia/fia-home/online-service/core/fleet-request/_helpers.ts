@@ -4,6 +4,7 @@ import {
   getFleetRequestNew,
   postFleetRequest
 } from './_requests'
+import { fetchHrBranchSiteOptions } from '../employee-search/_hrMasterOptions'
 
 /**
  * Fleet Request Helper Functions
@@ -150,49 +151,8 @@ export function getPriorityOptions() {
 }
 
 
-/**
- * Fetch Branch/Site options from backend API with fallback dummy data
- */
 export async function getBranchSiteOptions(): Promise<Array<{ value: string; label: string }>> {
-  try {
-    const response = await fetch('/api/hoandbranchprofiles', {
-      credentials: 'include',
-    });
-    
-    if (!response.ok) {
-      console.error('Failed to fetch branch/site options:', response.statusText);
-      return getDummyBranchSiteOptions(); // ← FALLBACK
-    }
-    
-    const result = await response.json();
-    const branches = result.data?.rows || result.data || [];
-    
-    if (branches.length === 0) {
-      return getDummyBranchSiteOptions(); // ← FALLBACK jika kosong
-    }
-    
-    return branches.map((branch: any) => ({
-      value: branch.com_code || branch.id?.toString() || '',
-      label: branch.com_name || branch.name || 'Unknown Branch',
-    }));
-  } catch (error) {
-    console.error('Error fetching branch/site options:', error);
-    return getDummyBranchSiteOptions(); // ← FALLBACK
-  }
-}
-
-/**
- * Dummy Branch/Site options for fallback
- */
-function getDummyBranchSiteOptions(): Array<{ value: string; label: string }> {
-  return [
-    { value: 'HO-001', label: 'Head Office - Jakarta' },
-    { value: 'BR-001', label: 'Branch - Surabaya' },
-    { value: 'BR-002', label: 'Branch - Bandung' },
-    { value: 'BR-003', label: 'Branch - Medan' },
-    { value: 'ST-001', label: 'Site - Plant A' },
-    { value: 'ST-002', label: 'Site - Plant B' },
-  ]
+  return fetchHrBranchSiteOptions()
 }
 
 /**

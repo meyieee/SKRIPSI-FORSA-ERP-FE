@@ -5,6 +5,7 @@ import { ChangePassword } from "../../../_metronic/partials/layout/header-menus/
 import { UsersTable } from "../../modules/cf/controls-user-management/UsersTable";
 import { UserCreate } from "../../modules/cf/controls-user-management/add-edit/UserCreate";
 import { UserUpdate } from "../../modules/cf/controls-user-management/add-edit/UserUpdate";
+import { EmployeeRegisterAddAdminGate } from "../../modules/hr/hr-employee-admin/EmployeeRegisterAddAdminGate";
 
 const accountSettingsBreadcrumbs: Array<PageLink> = [
   {
@@ -50,6 +51,15 @@ return (
         <>
           <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>Update User</PageTitle>
           <UserUpdate />
+        </>
+        }
+      />
+      <Route
+        path='employee-register/add'
+        element={
+        <>
+          <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>Add Employee</PageTitle>
+          <EmployeeRegisterAddAdminGate />
         </>
         }
       />

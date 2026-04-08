@@ -6,6 +6,7 @@ export function AsideMenuMain() {
   const {
     showSection: canAccessControls,
     showAccountSettings,
+    showAddEmployee,
     showChangePassword,
   } = useControlsAccess()
 
@@ -89,6 +90,9 @@ export function AsideMenuMain() {
         >
           {showAccountSettings && (
             <AsideMenuItem to='/controls/account-settings' title='Account Settings' hasBullet={true} />
+          )}
+          {showAddEmployee && (
+            <AsideMenuItem to='/controls/employee-register/add' title='Add Employee' hasBullet={true} />
           )}
           {showChangePassword && (
             <AsideMenuItem to='/controls/change-password' title='Change Password' hasBullet={true} />

@@ -121,7 +121,12 @@ export default function EmployeeSearchTypeahead({
         placeholder={placeholder}
         value={query}
         onChange={(e) => {
-          setQuery(normalizeName(e.target.value))
+          const v = normalizeName(e.target.value)
+          setQuery(v)
+          if (!v.trim()) {
+            lastSelectedRef.current = null
+            onChange('')
+          }
         }}
         onFocus={() => {
           focusedRef.current = true

@@ -26,6 +26,7 @@ export function MenuInner() {
   const {
     showSection: canAccessControls,
     showAccountSettings,
+    showAddEmployee,
     showChangePassword,
   } = useControlsAccess()
 
@@ -141,6 +142,9 @@ export function MenuInner() {
         >
           {showAccountSettings && (
             <MenuItem to='/controls/account-settings' title='Account Settings' icon='/media/icons/duotune/communication/com006.svg' />
+          )}
+          {showAddEmployee && (
+            <MenuItem to='/controls/employee-register/add' title='Add Employee' icon='/media/icons/duotune/communication/com006.svg' />
           )}
           {showChangePassword && (
             <MenuItem to='/controls/change-password' title='Change Password' icon='/media/icons/duotune/communication/com006.svg' />

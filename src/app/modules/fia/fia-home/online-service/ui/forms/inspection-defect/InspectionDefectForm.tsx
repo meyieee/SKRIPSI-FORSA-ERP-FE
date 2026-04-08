@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Formik, Form } from 'formik'
 import { useQueryClient } from '@tanstack/react-query'
 import { OnlineCategoryKey } from '../../../registry'
@@ -45,7 +45,22 @@ type Props = {
 function InspectionDefectForm({ cat, type }: Props) {
   const queryClient = useQueryClient()
   const [submitting, setSubmitting] = useState(false)
+  const [branchSiteOptions, setBranchSiteOptions] = useState<
+    Array<{ value: string; label: string }>
+  >([])
   const { currentUser } = useAuth()
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const opts = await getBranchSiteOptions()
+        setBranchSiteOptions(opts)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    void load()
+  }, [])
   
   // Use form notification hook for modals
   const {
@@ -242,7 +257,7 @@ function InspectionDefectForm({ cat, type }: Props) {
                         setFieldValue={formProps.setFieldValue}
                         getRequestPurposeOptions={getRequestPurposeOptions}
                         getPriorityOptions={getPriorityOptions}
-                        getBranchSiteOptions={getBranchSiteOptions}
+                        branchSiteOptions={branchSiteOptions}
                         getLocationOptions={getLocationOptions}
                         getDepartmentOptions={getDepartmentOptions}
                         currentUser={currentUser}

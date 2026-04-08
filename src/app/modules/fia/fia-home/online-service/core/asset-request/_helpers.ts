@@ -4,6 +4,7 @@ import {
   getAssetRequestNew,
   postAssetRequest
 } from './_requests'
+import { fetchHrBranchSiteOptions } from '../employee-search/_hrMasterOptions'
 
 /**
  * Asset Request Helper Functions
@@ -171,15 +172,10 @@ export function getDepartmentOptions() {
   ]
 }
 
-export function getBranchSiteOptions() {
-  return [
-    { value: 'site-1', label: 'Site 1' },
-    { value: 'site-2', label: 'Site 2' },
-    { value: 'site-3', label: 'Site 3' },
-    { value: 'head-office', label: 'Head Office' },
-    { value: 'branch-a', label: 'Branch A' },
-    { value: 'branch-b', label: 'Branch B' },
-  ]
+export async function getBranchSiteOptions(): Promise<
+  Array<{ value: string; label: string }>
+> {
+  return fetchHrBranchSiteOptions()
 }
 
 export function getLocationOptions() {

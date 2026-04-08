@@ -6,13 +6,15 @@ import FormField from '../../common/components/FormField'
 import FormSelect from '../../common/components/FormSelect'
 import FormTextarea from '../../common/components/FormTextarea'
 import EmployeeSearchTypeahead from '../../common/components/EmployeeSearchTypeahead'
+import OrgLockedOrManualField from '../../common/components/OrgLockedOrManualField'
+import { useRequestForOrganizationSync } from '../../common/hooks'
 
 type RequestInfoSectionProps = {
   values: WorkforceRequestInfo
   setFieldValue: (field: string, value: any) => void
   getRequestPurposeOptions: () => Array<{ value: string; label: string }>
   getPriorityOptions: () => Array<{ value: string; label: string }>
-  getBranchSiteOptions: () => Array<{ value: string; label: string }>
+  branchSiteOptions: Array<{ value: string; label: string }>
   getLocationOptions: () => Array<{ value: string; label: string }>
   getDepartmentOptions: () => Array<{ value: string; label: string }>
   currentUser?: UserModel | null
@@ -23,11 +25,13 @@ export default function RequestInfoSection({
   setFieldValue,
   getRequestPurposeOptions,
   getPriorityOptions,
-  getBranchSiteOptions,
+  branchSiteOptions,
   getLocationOptions,
   getDepartmentOptions,
   currentUser,
 }: RequestInfoSectionProps) {
+  const orgSync = useRequestForOrganizationSync(values.requestFor, setFieldValue)
+
   // Helper untuk mendapatkan name/username dari current user untuk display
   const getCurrentUserName = (): string => {
     if (!currentUser) return values.requestBy || ''
@@ -76,6 +80,9 @@ export default function RequestInfoSection({
             onChange={(id) => setFieldValue('requestInfo.requestFor', id)}
             currentUser={currentUser}
           />
+          {orgSync.orgError && (
+            <div className='small text-danger mt-1'>{orgSync.orgError}</div>
+          )}
         </div>
       </div>
 
@@ -100,33 +107,57 @@ export default function RequestInfoSection({
           />
         </div>
         <div className='col-md-4'>
-          <FormSelect
+          <OrgLockedOrManualField
+            orgReadOnly={orgSync.orgReadOnly}
+            displayValue={orgSync.displayBranchSite}
             label='Branch|Site'
             name='requestInfo.branchSite'
-            value={values.branchSite}
-            onChange={(value) => setFieldValue('requestInfo.branchSite', value)}
-            options={getBranchSiteOptions()}
+            manual={
+              <FormSelect
+                label='Branch|Site'
+                name='requestInfo.branchSite'
+                value={values.branchSite}
+                onChange={(value) => setFieldValue('requestInfo.branchSite', value)}
+                options={branchSiteOptions}
+              />
+            }
           />
         </div>
       </div>
 
       <div className='row'>
         <div className='col-md-4'>
-          <FormSelect
+          <OrgLockedOrManualField
+            orgReadOnly={orgSync.orgReadOnly}
+            displayValue={orgSync.displayDepartment}
             label='Department'
             name='requestInfo.department'
-            value={values.department}
-            onChange={(value) => setFieldValue('requestInfo.department', value)}
-            options={getDepartmentOptions()}
+            manual={
+              <FormSelect
+                label='Department'
+                name='requestInfo.department'
+                value={values.department}
+                onChange={(value) => setFieldValue('requestInfo.department', value)}
+                options={getDepartmentOptions()}
+              />
+            }
           />
         </div>
         <div className='col-md-4'>
-          <FormField
+          <OrgLockedOrManualField
+            orgReadOnly={orgSync.orgReadOnly}
+            displayValue={orgSync.displayCostCenter}
             label='Cost Center'
             name='requestInfo.costCenter'
-            value={values.costCenter}
-            onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
-            placeholder='Enter cost center'
+            manual={
+              <FormField
+                label='Cost Center'
+                name='requestInfo.costCenter'
+                value={values.costCenter}
+                onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
+                placeholder='Enter cost center'
+              />
+            }
           />
         </div>
         <div className='col-md-4'>

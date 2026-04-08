@@ -12,6 +12,7 @@ export const CONTROLS_ACCESS_ROUTE_PATHS = [
   '/controls',
   '/controls/account-settings',
   '/controls/change-password',
+  '/controls/employee-register/add',
   '/control-file/master/acc/view',
 ] as const
 
@@ -45,6 +46,7 @@ export const useControlsAccess = () => {
 
   const canAccountSettings = useCanAccessRoute('/controls/account-settings')
   const canChangePassword = useCanAccessRoute('/controls/change-password')
+  const canEmployeeRegisterAdd = useCanAccessRoute('/controls/employee-register/add')
   const canGlAccountView = useCanAccessRoute('/control-file/master/acc/view')
 
   const anyControls = useCanAccessAnyControlsRoute()
@@ -58,6 +60,8 @@ export const useControlsAccess = () => {
     showAccountSettings: umbrella || canAccountSettings,
     /** Sub-item: Change password */
     showChangePassword: umbrella || canChangePassword,
+    /** Sub-item: Add Employee (tbl_emp_regs) */
+    showAddEmployee: umbrella || canEmployeeRegisterAdd,
     /** Mount PrivateRoutes: controls/* (account-settings, change-password) */
     canAccessControlsRoutes: showSection,
     /** Mount PrivateRoutes: control-file/master/acc/* (GL account) */

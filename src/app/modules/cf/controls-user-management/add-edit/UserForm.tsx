@@ -1,5 +1,6 @@
 import { ErrorMessage, Field } from 'formik'
 import { ChangeEvent, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../../auth'
 import { type EmployeeRegisterRow, getEmployee } from '../core/_employeeRegister'
 import { functionCheckComTypeRoutesAPI, UseReactQuery } from '../../../../functions'
@@ -26,6 +27,17 @@ export const UserForm = ({formProps, isUpdate}:Props) => {
                 <span className='required'>Employee</span>
             </label>
 
+            {isUpdate === false && currentUser?.role === 'administrator' && (
+                <div className='mb-3'>
+                    <Link
+                        className='btn btn-sm btn-light-primary'
+                        to='/controls/employee-register/add'
+                        state={{ successReturn: '/controls/account-settings/add' }}
+                    >
+                        Register new employee first
+                    </Link>
+                </div>
+            )}
             {
                 isUpdate === true?
                 <Field

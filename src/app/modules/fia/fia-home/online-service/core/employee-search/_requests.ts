@@ -1,5 +1,5 @@
 import { client } from '../../../../../../functions'
-import type { OnlineServiceEmployeeSearchItem } from './_types'
+import type { OnlineServiceEmployeeOrg, OnlineServiceEmployeeSearchItem } from './_types'
 
 /**
  * GET /api/online-service/employees/search?q=
@@ -19,4 +19,20 @@ export async function searchOnlineServiceEmployees(
   return Array.isArray(data) ? data : []
 }
 
-export type { OnlineServiceEmployeeSearchItem }
+/**
+ * GET /online-service/employees/:idNumber/org
+ * Branch / department / cost center for Request For auto-fill.
+ */
+export async function getOnlineServiceEmployeeOrg(
+  idNumber: string
+): Promise<OnlineServiceEmployeeOrg> {
+  const id = encodeURIComponent((idNumber || '').trim())
+  const response = await client().get(`/online-service/employees/${id}/org`)
+  const data = response.data?.data
+  if (!data || typeof data !== 'object') {
+    throw new Error('Invalid org response')
+  }
+  return data as OnlineServiceEmployeeOrg
+}
+
+export type { OnlineServiceEmployeeOrg, OnlineServiceEmployeeSearchItem }
