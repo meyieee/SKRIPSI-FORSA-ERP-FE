@@ -61,27 +61,6 @@ export const updateInspectionDefect = async (
 }
 
 /**
- * POST /api/inspection-defect/draft
- * Save Inspection Defect Request as Draft
- */
-export const saveInspectionDefectDraftAPI = async (values: InspectionDefectForm): Promise<{
-  message: string
-  data: InspectionDefectForm
-}> => {
-  const response = await client().post('/inspection-defect/draft', values)
-  return response.data
-}
-
-/**
- * GET /api/inspection-defect/draft?request_by=...
- * Get Inspection Defect Request Draft by user
- */
-export const getInspectionDefectDraft = async (request_by: string): Promise<InspectionDefectForm> => {
-  const response = await client().get(`/inspection-defect/draft?request_by=${request_by}`)
-  return response.data.data
-}
-
-/**
  * PUT /api/inspection-defect/:id/status
  * Update workorder status
  */

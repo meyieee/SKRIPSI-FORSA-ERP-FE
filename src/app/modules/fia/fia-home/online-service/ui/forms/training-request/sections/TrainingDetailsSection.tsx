@@ -34,7 +34,7 @@ export default function TrainingDetailsSection({
             name='trainingDetails.trainingDuration'
             value={values.trainingDuration}
             onChange={(value) => setFieldValue('trainingDetails.trainingDuration', value)}
-            placeholder='[combo]'
+            placeholder='Enter training duration'
             required
           />
         </div>
@@ -91,7 +91,7 @@ export default function TrainingDetailsSection({
             name='trainingDetails.organizerVenue'
             value={values.organizerVenue}
             onChange={(value) => setFieldValue('trainingDetails.organizerVenue', value)}
-            placeholder='[combo]'
+            placeholder='Enter venue'
           />
         </div>
         <div className='col-md-6'>
@@ -100,7 +100,7 @@ export default function TrainingDetailsSection({
             name='trainingDetails.organizerFees'
             value={values.organizerFees}
             onChange={(value) => setFieldValue('trainingDetails.organizerFees', value)}
-            placeholder='[combo]'
+            placeholder='Enter fees'
           />
         </div>
       </div>

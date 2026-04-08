@@ -29,7 +29,7 @@ export default function AssignmentSchedulingSection({
             value={values.assignedTo}
             onChange={(value) => setFieldValue('assignment.assignedTo', value)}
             options={assignedToOptions}
-            placeholder='[combo]'
+            placeholder='Select assigned to'
           />
         </div>
         <div className='col-md-4'>
@@ -59,7 +59,7 @@ export default function AssignmentSchedulingSection({
             value={values.scheduleStartDate}
             onChange={(value) => setFieldValue('assignment.scheduleStartDate', value)}
             options={getDateOptions()}
-            placeholder='[combo]'
+            placeholder='Select schedule start date'
           />
         </div>
         <div className='col-md-4'>
@@ -69,7 +69,7 @@ export default function AssignmentSchedulingSection({
             value={values.actualStartDate}
             onChange={(value) => setFieldValue('assignment.actualStartDate', value)}
             options={getDateOptions()}
-            placeholder='[combo]'
+            placeholder='Select actual start date'
           />
         </div>
         <div className='col-md-4'>
@@ -79,7 +79,7 @@ export default function AssignmentSchedulingSection({
             value={values.completionDate}
             onChange={(value) => setFieldValue('assignment.completionDate', value)}
             options={getDateOptions()}
-            placeholder='[combo]'
+            placeholder='Select completion date'
           />
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function AssignmentSchedulingSection({
             value={values.actualCompletionDate}
             onChange={(value) => setFieldValue('assignment.actualCompletionDate', value)}
             options={getDateOptions()}
-            placeholder='[combo]'
+            placeholder='Select actual completion date'
           />
         </div>
         <div className='col-md-6'>
@@ -101,7 +101,7 @@ export default function AssignmentSchedulingSection({
             value={values.additionalComments}
             onChange={(value) => setFieldValue('assignment.additionalComments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter additional comments'
           />
         </div>
       </div>

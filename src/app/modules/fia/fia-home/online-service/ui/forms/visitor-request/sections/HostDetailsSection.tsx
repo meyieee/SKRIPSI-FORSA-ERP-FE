@@ -24,7 +24,7 @@ export default function HostDetailsSection({
             name='hostDetails.hostName'
             value={values.hostName}
             onChange={(value) => setFieldValue('hostDetails.hostName', value)}
-            placeholder='[combo]'
+            placeholder='Enter host name'
             required
           />
         </div>

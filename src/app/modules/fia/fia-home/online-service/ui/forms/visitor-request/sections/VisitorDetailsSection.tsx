@@ -21,7 +21,7 @@ export default function VisitorDetailsSection({
             name='visitorDetails.visitorName'
             value={values.visitorName}
             onChange={(value) => setFieldValue('visitorDetails.visitorName', value)}
-            placeholder='[text input]'
+            placeholder='Enter visitor name'
             required
           />
         </div>
@@ -31,7 +31,7 @@ export default function VisitorDetailsSection({
             name='visitorDetails.companyOrg'
             value={values.companyOrg}
             onChange={(value) => setFieldValue('visitorDetails.companyOrg', value)}
-            placeholder='[text input]'
+            placeholder='Enter company or organization'
           />
         </div>
         <div className='col-md-4'>

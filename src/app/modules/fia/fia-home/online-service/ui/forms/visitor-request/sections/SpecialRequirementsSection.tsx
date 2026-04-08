@@ -47,7 +47,7 @@ export default function SpecialRequirementsSection({
             value={values.comments}
             onChange={(value) => setFieldValue('specialRequirements.comments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter comments'
           />
         </div>
       </div>

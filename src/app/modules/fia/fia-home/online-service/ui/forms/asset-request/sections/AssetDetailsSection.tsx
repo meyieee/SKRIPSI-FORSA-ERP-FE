@@ -40,7 +40,7 @@ export default function AssetDetailsSection({
             name='assetDetails.assetModel'
             value={values.assetModel}
             onChange={(value) => setFieldValue('assetDetails.assetModel', value)}
-            placeholder='[text input]'
+            placeholder='Enter asset model'
             required
           />
         </div>
@@ -53,7 +53,7 @@ export default function AssetDetailsSection({
             name='assetDetails.assetSpecification'
             value={values.assetSpecification}
             onChange={(value) => setFieldValue('assetDetails.assetSpecification', value)}
-            placeholder='[text input]'
+            placeholder='Enter asset specification'
           />
         </div>
         <div className='col-md-6'>
@@ -77,7 +77,7 @@ export default function AssetDetailsSection({
             value={values.comments}
             onChange={(value) => setFieldValue('assetDetails.comments', value)}
             rows={3}
-            placeholder='[text input]'
+            placeholder='Enter comments'
           />
         </div>
       </div>

@@ -8,7 +8,6 @@ import { useAuth } from '../../../../../../../modules/auth'
 import { 
   getAssetRequestNew,
   postAssetRequest,
-  saveAssetRequestDraft,
   validateAssetRequestAll,
   getRequestPurposeOptions,
   getPriorityOptions,
@@ -23,7 +22,6 @@ import {
   FormLoadingState,
   SuccessModal,
   ErrorModal,
-  DraftSavedModal
 } from '../common/components'
 import { useFormNotification } from '../common/hooks'
 import RequestInfoSection from './sections/RequestInfoSection'
@@ -44,7 +42,6 @@ function AssetRequestForm({ cat, type }: Props) {
   const {
     showSuccess,
     showError,
-    showDraftSaved,
     successMessage,
     errorMessage,
     errorDetails,
@@ -52,7 +49,6 @@ function AssetRequestForm({ cat, type }: Props) {
     successRefRequestNo,
     showSuccessModal,
     showErrorModal,
-    showDraftSavedModal,
     closeAllModals
   } = useFormNotification()
 
@@ -95,27 +91,6 @@ function AssetRequestForm({ cat, type }: Props) {
       showErrorModal(errorMessage, errorDetails)
     } finally {
       setSubmitting(false)
-    }
-  }
-
-  // Handle save draft
-  const onSave = async (values: AssetRequestFormType) => {
-    if (!values) return
-    try {
-      await saveAssetRequestDraft(cat, type, values)
-      showDraftSavedModal()
-    } catch (e: any) {
-      showErrorModal(e.message || 'Save failed')
-    }
-  }
-
-  // Handle cancel
-  const onCancel = async () => {
-    try {
-      // Reset form by refetching data
-      queryClient.invalidateQueries({ queryKey: [cache_assetrequest_new] })
-    } catch (e: any) {
-      showErrorModal(e.message || 'Reset failed')
     }
   }
 
@@ -175,17 +150,11 @@ function AssetRequestForm({ cat, type }: Props) {
         message={errorMessage}
         errorDetails={errorDetails}
       />
-      <DraftSavedModal
-        show={showDraftSaved}
-        onClose={closeAllModals}
-        autoClose={true}
-        autoCloseDelay={2000}
-      />
 
       <div className='card'>
         <Formik 
           initialValues={(() => {
-            // requestBy: current user; requestFor: dari API/draft saja (kosong = user pilih typeahead)
+            // requestBy: current user; requestFor: dari API (kosong = user pilih typeahead)
             if (data && currentUser) {
               const currentUserId = currentUser.id_number || currentUser.id?.toString() || ''
               return {
@@ -215,8 +184,6 @@ function AssetRequestForm({ cat, type }: Props) {
                 </div>
                 <div className='d-flex gap-2'>
                   <button className='btn btn-success' onClick={() => onSubmit(formProps.values, formProps)} disabled={submitting}>SUBMIT</button>
-                  <button className='btn btn-secondary' onClick={onCancel} disabled={submitting}>CANCEL</button>
-                  <button className='btn btn-primary' onClick={() => onSave(formProps.values)} disabled={submitting}>SAVE</button>
                 </div>
               </div>
               <div className='card-body'>

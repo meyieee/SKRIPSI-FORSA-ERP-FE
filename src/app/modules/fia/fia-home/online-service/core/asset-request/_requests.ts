@@ -20,7 +20,6 @@ export const getAssetRequestList = async (filters?: {
   status?: string
   limit?: number
   offset?: number
-  include_draft?: string
 }): Promise<{
   data: AssetRequestForm[]
   pagination: {
@@ -34,7 +33,6 @@ export const getAssetRequestList = async (filters?: {
   if (filters?.status) params.append('status', filters.status)
   if (filters?.limit) params.append('limit', filters.limit.toString())
   if (filters?.offset) params.append('offset', filters.offset.toString())
-  if (filters?.include_draft) params.append('include_draft', filters.include_draft)
 
   
   const queryString = params.toString()
@@ -61,16 +59,6 @@ export const updateAssetRequest = async (
 }> => {
   const response = await client().put(`/asset-request/${id}`, values)
   return response.data
-}
-
-
-/**
- * GET /api/asset-request/draft?request_by=...
- * Get Asset Request Draft by user
- */
-export const getAssetRequestDraft = async (request_by: string): Promise<AssetRequestForm> => {
-  const response = await client().get(`/asset-request/draft?request_by=${request_by}`)
-  return response.data.data
 }
 
 /**

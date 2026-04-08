@@ -7,63 +7,29 @@ import {
 
 /**
  * Asset Request Helper Functions
- * Mengikuti pola accommodation-request: sessionStorage untuk draft, API untuk submit
  */
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 /**
- * Get Asset Request Form
- * Flow (mengikuti accommodation-request):
- * 1. Cek sessionStorage untuk draft
- * 2. Jika ada draft, return draft
- * 3. Jika tidak ada, ambil new form dari API
- * 4. Jika API gagal, fallback ke dummy data
+ * Get Asset Request Form — API, atau dummy jika API gagal
  */
 export async function getAssetRequestForm(
   cat: OnlineCategoryKey, 
   type: string
 ): Promise<AssetRequestForm> {
   console.log('🔍 Asset Request API: getForm called for', cat, type)
-  
-  // Step 1: Cek sessionStorage untuk draft (seperti accommodation-request)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Asset Request API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Asset Request API: No draft found, fetching from API')
-  
+
   try {
-    // Step 2: Ambil new form dari API
     const formData = await getAssetRequestNew()
     console.log('✅ Asset Request API: Fetched new form from API:', formData)
     return formData
   } catch (error) {
     console.error('❌ Error fetching asset request form from API, using fallback:', error)
-    // Step 3: Fallback ke dummy data jika API gagal
     return getDummyAssetRequestForm(cat, type)
   }
 }
 
 /**
- * Save draft to sessionStorage (mengikuti accommodation-request)
- * Tidak perlu API untuk draft, cukup sessionStorage
- */
-export async function saveAssetRequestDraft(
-  cat: OnlineCategoryKey, 
-  type: string, 
-  payload: AssetRequestForm
-): Promise<void> {
-  console.log('💾 Asset Request API: Saving draft for', cat, type)
-  await delay(200) // Simulasi delay seperti accommodation-request
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
-/**
  * Submit Asset Request
- * Menggunakan API untuk submit (seperti postAssetRequest)
  */
 export async function submitAssetRequest(
   cat: OnlineCategoryKey, 
@@ -75,9 +41,6 @@ export async function submitAssetRequest(
   try {
     const response = await postAssetRequest(payload)
     console.log('✅ Asset Request API: Submitted successfully:', response)
-    
-    // Clear draft dari sessionStorage setelah submit berhasil
-    sessionStorage.removeItem(`draft:${cat}:${type}`)
     
     // Extract requestId dari response
     const requestId = response.data?.header?.requestId || 

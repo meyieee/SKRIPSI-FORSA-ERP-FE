@@ -80,7 +80,7 @@ export default function TransportationDetailsSection({
             value={values.specialRequirement}
             onChange={(value) => setFieldValue('transportationDetails.specialRequirement', value)}
             rows={1}
-            placeholder='[text input]'
+            placeholder='Enter special requirement'
           />
         </div>
       </div>
@@ -93,7 +93,7 @@ export default function TransportationDetailsSection({
             value={values.comments}
             onChange={(value) => setFieldValue('transportationDetails.comments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter comments'
           />
         </div>
       </div>

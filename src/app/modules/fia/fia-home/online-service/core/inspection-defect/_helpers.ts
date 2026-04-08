@@ -11,13 +11,6 @@ export async function getInspectionDefectForm(cat: OnlineCategoryKey, type: stri
   console.log('🔍 Inspection Defect API: getForm called for', cat, type)
   
   await delay(350 + Math.random() * 300)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Inspection Defect API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Inspection Defect API: No draft found, generating new data')
   
   const deptMap: Record<OnlineCategoryKey, string> = {
     operation: 'Operations',
@@ -126,17 +119,11 @@ export async function getInspectionDefectForm(cat: OnlineCategoryKey, type: stri
   return result
 }
 
-export async function saveInspectionDefectDraft(cat: OnlineCategoryKey, type: string, payload: InspectionDefectForm): Promise<void> {
-  await delay(150)
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
 export async function submitInspectionDefect(cat: OnlineCategoryKey, type: string, payload: InspectionDefectForm): Promise<{ requestId: string }> {
   await delay(400)
   if (Math.random() < 0.05) throw new Error('Random submit failure (dummy)')
   
   const requestId = `ID-${String(Math.floor(Math.random() * 10000000)).padStart(7, '0')}`
-  sessionStorage.removeItem(`draft:${cat}:${type}`)
   return { requestId }
 }
 

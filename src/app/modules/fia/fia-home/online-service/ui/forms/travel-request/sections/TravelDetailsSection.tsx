@@ -54,7 +54,7 @@ export default function TravelDetailsSection({
             name='travelDetails.departure'
             value={values.departure}
             onChange={(value) => setFieldValue('travelDetails.departure', value)}
-            placeholder='[combo]'
+            placeholder='Enter departure'
             required
           />
         </div>
@@ -64,7 +64,7 @@ export default function TravelDetailsSection({
             name='travelDetails.return'
             value={values.return}
             onChange={(value) => setFieldValue('travelDetails.return', value)}
-            placeholder='[combo]'
+            placeholder='Enter return'
             required
           />
         </div>
@@ -83,7 +83,7 @@ export default function TravelDetailsSection({
             name='travelDetails.pointOfLeave'
             value={values.pointOfLeave}
             onChange={(value) => setFieldValue('travelDetails.pointOfLeave', value)}
-            placeholder='[text input]'
+            placeholder='Enter point of leave'
           />
         </div>
         <div className='col-md-4'>

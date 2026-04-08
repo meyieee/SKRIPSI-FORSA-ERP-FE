@@ -66,7 +66,7 @@ export default function CashRequestDetailsSection({
             name='cashRequestDetails.bankAccount'
             value={values.bankAccount}
             onChange={(value) => setFieldValue('cashRequestDetails.bankAccount', value)}
-            placeholder='[text input]'
+            placeholder='Enter bank account'
           />
         </div>
         <div className='col-md-6'>
@@ -75,7 +75,7 @@ export default function CashRequestDetailsSection({
             name='cashRequestDetails.currency'
             value={values.currency}
             onChange={(value) => setFieldValue('cashRequestDetails.currency', value)}
-            placeholder='[text input]'
+            placeholder='Enter currency'
           />
         </div>
       </div>

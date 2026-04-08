@@ -61,27 +61,6 @@ export const updateFleetRequest = async (
 }
 
 /**
- * POST /api/fleet-request/draft
- * Save fleet request as draft
- */
-export const saveFleetRequestDraftAPI = async (values: FleetForm): Promise<{
-  message: string
-  data: FleetForm
-}> => {
-  const response = await client().post('/fleet-request/draft', values)
-  return response.data
-}
-
-/**
- * GET /api/fleet-request/draft?request_by=...
- * Get fleet request draft by user
- */
-export const getFleetRequestDraft = async (request_by: string): Promise<FleetForm> => {
-  const response = await client().get(`/fleet-request/draft?request_by=${request_by}`)
-  return response.data.data
-}
-
-/**
  * PUT /api/fleet-request/:id/status
  * Update workorder status
  */

@@ -26,7 +26,7 @@ export default function WorkforceSpecsSection({
             name='workforceSpecs.jobTitle'
             value={values.jobTitle}
             onChange={(value) => setFieldValue('workforceSpecs.jobTitle', value)}
-            placeholder='[text input]'
+            placeholder='Enter job title'
             required
           />
         </div>
@@ -75,7 +75,7 @@ export default function WorkforceSpecsSection({
             name='workforceSpecs.workSchedule'
             value={values.workSchedule}
             onChange={(value) => setFieldValue('workforceSpecs.workSchedule', value)}
-            placeholder='[text input]'
+            placeholder='Enter work schedule'
           />
         </div>
         <div className='col-md-4'>
@@ -84,7 +84,7 @@ export default function WorkforceSpecsSection({
             name='workforceSpecs.workLocation'
             value={values.workLocation}
             onChange={(value) => setFieldValue('workforceSpecs.workLocation', value)}
-            placeholder='[text input]'
+            placeholder='Enter work location'
           />
         </div>
       </div>

@@ -45,7 +45,7 @@ export default function SecurityClearanceSection({
             value={values.comments}
             onChange={(value) => setFieldValue('securityClearance.comments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter comments'
           />
         </div>
       </div>

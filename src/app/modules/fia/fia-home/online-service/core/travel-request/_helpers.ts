@@ -7,63 +7,29 @@ import {
 
 /**
  * Travel Request Helper Functions
- * Mengikuti pola accommodation-request: sessionStorage untuk draft, API untuk submit
  */
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 /**
- * Get Travel Request Form
- * Flow (mengikuti accommodation-request):
- * 1. Cek sessionStorage untuk draft
- * 2. Jika ada draft, return draft
- * 3. Jika tidak ada, ambil new form dari API
- * 4. Jika API gagal, fallback ke dummy data
+ * Get Travel Request Form — API, atau dummy jika API gagal
  */
 export async function getTravelRequestForm(
   cat: OnlineCategoryKey, 
   type: string
 ): Promise<TravelRequestForm> {
   console.log('🔍 Travel Request API: getForm called for', cat, type)
-  
-  // Step 1: Cek sessionStorage untuk draft (seperti accommodation-request)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Travel Request API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Travel Request API: No draft found, fetching from API')
-  
+
   try {
-    // Step 2: Ambil new form dari API
     const formData = await getTravelRequestNew()
     console.log('✅ Travel Request API: Fetched new form from API:', formData)
     return formData
   } catch (error) {
     console.error('❌ Error fetching travel request form from API, using fallback:', error)
-    // Step 3: Fallback ke dummy data jika API gagal
     return getDummyTravelRequestForm(cat, type)
   }
 }
 
 /**
- * Save draft to sessionStorage (mengikuti accommodation-request)
- * Tidak perlu API untuk draft, cukup sessionStorage
- */
-export async function saveTravelRequestDraft(
-  cat: OnlineCategoryKey, 
-  type: string, 
-  payload: TravelRequestForm
-): Promise<void> {
-  console.log('💾 Travel Request API: Saving draft for', cat, type)
-  await delay(200) // Simulasi delay seperti accommodation-request
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
-/**
  * Submit Travel Request
- * Menggunakan API untuk submit (seperti postAccommodationRequest)
  */
 export async function submitTravelRequest(
   cat: OnlineCategoryKey, 
@@ -75,9 +41,6 @@ export async function submitTravelRequest(
   try {
     const response = await postTravelRequest(payload)
     console.log('✅ Travel Request API: Submitted successfully:', response)
-    
-    // Clear draft dari sessionStorage setelah submit berhasil
-    sessionStorage.removeItem(`draft:${cat}:${type}`)
     
     // Extract requestId dari response
     const requestId = response.data?.header?.requestId || 

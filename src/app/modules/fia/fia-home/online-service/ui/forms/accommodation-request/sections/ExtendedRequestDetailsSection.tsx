@@ -25,7 +25,7 @@ export default function ExtendedRequestDetailsSection({
             name='extendedRequestDetails.visitorName'
             value={values.visitorName}
             onChange={(value) => setFieldValue('extendedRequestDetails.visitorName', value)}
-            placeholder='[text input]'
+            placeholder='Enter visitor name'
             required
           />
         </div>
@@ -45,7 +45,7 @@ export default function ExtendedRequestDetailsSection({
             value={values.comments}
             onChange={(value) => setFieldValue('extendedRequestDetails.comments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter comments'
           />
         </div>
       </div>

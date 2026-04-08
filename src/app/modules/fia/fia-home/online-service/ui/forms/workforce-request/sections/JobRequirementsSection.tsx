@@ -23,7 +23,7 @@ export default function JobRequirementsSection({
             value={values.jobDescription}
             onChange={(value) => setFieldValue('jobRequirements.jobDescription', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter job description'
             required
           />
         </div>
@@ -34,7 +34,7 @@ export default function JobRequirementsSection({
             value={values.keyResponsibilities}
             onChange={(value) => setFieldValue('jobRequirements.keyResponsibilities', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter key responsibilities'
           />
         </div>
         <div className='col-md-4'>
@@ -44,7 +44,7 @@ export default function JobRequirementsSection({
             value={values.requiredSkills}
             onChange={(value) => setFieldValue('jobRequirements.requiredSkills', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter required skills'
           />
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function JobRequirementsSection({
             name='jobRequirements.experience'
             value={values.experience}
             onChange={(value) => setFieldValue('jobRequirements.experience', value)}
-            placeholder='[text input]'
+            placeholder='Enter experience'
           />
         </div>
         <div className='col-md-4'>
@@ -65,7 +65,7 @@ export default function JobRequirementsSection({
             name='jobRequirements.education'
             value={values.education}
             onChange={(value) => setFieldValue('jobRequirements.education', value)}
-            placeholder='[text input]'
+            placeholder='Enter education'
           />
         </div>
       </div>

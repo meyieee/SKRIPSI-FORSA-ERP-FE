@@ -42,7 +42,7 @@ export default function ApprovalsSection({
             name='approvals.humanResource'
             value={values.humanResource}
             onChange={(value) => setFieldValue('approvals.humanResource', value)}
-            placeholder='[text input]'
+            placeholder='Enter human resource'
           />
         </div>
       </div>

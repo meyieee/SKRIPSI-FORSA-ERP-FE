@@ -22,7 +22,7 @@ export default function FormSelect({
   value,
   onChange,
   options,
-  placeholder = '[combo]',
+  placeholder = 'choose your option',
   required = false,
   className = '',
 }: FormSelectProps) {

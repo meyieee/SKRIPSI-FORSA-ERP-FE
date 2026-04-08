@@ -10,5 +10,4 @@ export { default as EmployeeSearchTypeahead } from './EmployeeSearchTypeahead'
 export { default as FormLoadingState } from './FormLoadingState'
 export { default as SuccessModal } from './SuccessModal'
 export { default as ErrorModal } from './ErrorModal'
-export { default as DraftSavedModal } from './DraftSavedModal'
 

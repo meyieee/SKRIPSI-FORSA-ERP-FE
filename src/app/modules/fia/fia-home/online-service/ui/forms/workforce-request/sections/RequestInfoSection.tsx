@@ -122,11 +122,11 @@ export default function RequestInfoSection({
         </div>
         <div className='col-md-4'>
           <FormField
-            label='Section'
+            label='Cost Center'
             name='requestInfo.costCenter'
             value={values.costCenter}
             onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
-            placeholder='[combo]'
+            placeholder='Enter cost center'
           />
         </div>
         <div className='col-md-4'>
@@ -148,7 +148,7 @@ export default function RequestInfoSection({
             value={values.requestDescription}
             onChange={(value) => setFieldValue('requestInfo.requestDescription', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter request description'
             required
           />
         </div>
@@ -159,7 +159,7 @@ export default function RequestInfoSection({
             value={values.justification}
             onChange={(value) => setFieldValue('requestInfo.justification', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter justification'
           />
         </div>
         <div className='col-md-4'>
@@ -169,7 +169,7 @@ export default function RequestInfoSection({
             value={values.commentRemarkNote}
             onChange={(value) => setFieldValue('requestInfo.commentRemarkNote', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter comment, remark, or note'
           />
         </div>
       </div>
@@ -183,7 +183,7 @@ export default function RequestInfoSection({
             value={values.additionalComments}
             onChange={(value) => setFieldValue('requestInfo.additionalComments', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter additional comments or information'
           />
         </div>
         <div className='col-md-4'>

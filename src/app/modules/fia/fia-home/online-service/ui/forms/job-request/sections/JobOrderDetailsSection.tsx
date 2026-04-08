@@ -28,7 +28,7 @@ export default function JobOrderDetailsSection({
             value={values.jobType}
             onChange={(value) => setFieldValue('jobOrder.jobType', value)}
             options={getJobTypeOptions()}
-            placeholder='[combo]'
+            placeholder='Select job type'
             required
           />
         </div>
@@ -39,7 +39,7 @@ export default function JobOrderDetailsSection({
             value={values.location}
             onChange={(value) => setFieldValue('jobOrder.location', value)}
             options={locationOptions}
-            placeholder='[combo]'
+            placeholder='Select location'
           />
         </div>
         <div className='col-md-4'>
@@ -49,7 +49,7 @@ export default function JobOrderDetailsSection({
             value={values.assetEquipment}
             onChange={(value) => setFieldValue('jobOrder.assetEquipment', value)}
             options={assetEquipmentOptions}
-            placeholder='[combo]'
+            placeholder='Select asset / equipment no.'
             required
           />
         </div>

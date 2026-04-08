@@ -24,7 +24,7 @@ export default function VisitorRegistrationSection({
             name='visitorRegistration.visitorId'
             value={values.visitorId}
             onChange={(value) => setFieldValue('visitorRegistration.visitorId', value)}
-            placeholder='[text input]'
+            placeholder='Enter visitor ID'
           />
         </div>
         <div className='col-md-4'>

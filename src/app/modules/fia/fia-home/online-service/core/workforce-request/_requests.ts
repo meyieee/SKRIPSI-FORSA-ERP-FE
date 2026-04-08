@@ -20,7 +20,6 @@ export const getWorkforceRequestList = async (filters?: {
   status?: string
   limit?: number
   offset?: number
-  include_draft?: string
 }): Promise<{
   data: WorkforceRequestForm[]
   pagination: {
@@ -34,7 +33,6 @@ export const getWorkforceRequestList = async (filters?: {
   if (filters?.status) params.append('status', filters.status)
   if (filters?.limit) params.append('limit', filters.limit.toString())
   if (filters?.offset) params.append('offset', filters.offset.toString())
-  if (filters?.include_draft) params.append('include_draft', filters.include_draft)
   
   const queryString = params.toString()
   const url = queryString ? `/workforce-request?${queryString}` : '/workforce-request'

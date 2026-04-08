@@ -22,7 +22,7 @@ export default function WorkRequirementsSection({
             value={values.specialInstructions}
             onChange={(value) => setFieldValue('workRequirements.specialInstructions', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter special instructions'
           />
         </div>
         <div className='col-md-6'>
@@ -32,7 +32,7 @@ export default function WorkRequirementsSection({
             value={values.safetyPrecautions}
             onChange={(value) => setFieldValue('workRequirements.safetyPrecautions', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter safety precautions'
           />
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function WorkRequirementsSection({
             value={values.materialRequired}
             onChange={(value) => setFieldValue('workRequirements.materialRequired', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter material required'
           />
         </div>
         <div className='col-md-6'>
@@ -54,7 +54,7 @@ export default function WorkRequirementsSection({
             value={values.toolRequired}
             onChange={(value) => setFieldValue('workRequirements.toolRequired', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter tool required'
           />
         </div>
       </div>

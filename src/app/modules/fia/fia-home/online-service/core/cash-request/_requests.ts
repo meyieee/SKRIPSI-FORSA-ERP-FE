@@ -20,7 +20,6 @@ export const getCashRequestList = async (filters?: {
   status?: string
   limit?: number
   offset?: number
-  include_draft?: string
 }): Promise<{
   data: CashRequestForm[]
   pagination: {
@@ -34,7 +33,6 @@ export const getCashRequestList = async (filters?: {
   if (filters?.status) params.append('status', filters.status)
   if (filters?.limit) params.append('limit', filters.limit.toString())
   if (filters?.offset) params.append('offset', filters.offset.toString())
-  if (filters?.include_draft) params.append('include_draft', filters.include_draft)
   const queryString = params.toString()
   const url = queryString ? `/cash-request?${queryString}` : '/cash-request'
   
@@ -59,26 +57,6 @@ export const updateCashRequest = async (
 }> => {
   const response = await client().put(`/cash-request/${id}`, values)
   return response.data
-}
-/**
- * POST /api/cash-request/draft
- * Save Cash Request as Draft
- */
-export const saveCashRequestDraftAPI = async (values: CashRequestForm): Promise<{
-  message: string
-  data: CashRequestForm
-}> => {
-  const response = await client().post('/cash-request/draft', values)
-  return response.data
-}
-
-/**
- * GET /api/cash-request/draft?request_by=...
- * Get Cash Request Draft by user
- */
-export const getCashRequestDraft = async (request_by: string): Promise<CashRequestForm> => {
-  const response = await client().get(`/cash-request/draft?request_by=${request_by}`)
-  return response.data.data
 }
 
 /**

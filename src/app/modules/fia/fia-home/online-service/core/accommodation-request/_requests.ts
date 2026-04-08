@@ -34,7 +34,6 @@ export const getAccommodationRequestList = async (filters?: {
   status?: string
   limit?: number
   offset?: number
-  include_draft?: string
 }): Promise<{
   data: AccommodationRequestForm[]
   pagination: {
@@ -48,7 +47,6 @@ export const getAccommodationRequestList = async (filters?: {
   if (filters?.status) params.append('status', filters.status)
   if (filters?.limit) params.append('limit', filters.limit.toString())
   if (filters?.offset) params.append('offset', filters.offset.toString())
-  if (filters?.include_draft) params.append('include_draft', filters.include_draft)
   
   const queryString = params.toString()
   const url = queryString ? `/accommodation-request?${queryString}` : '/accommodation-request'

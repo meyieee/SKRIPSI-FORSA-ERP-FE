@@ -34,7 +34,6 @@ export const getTransportRequestList = async (filters?: {
   status?: string
   limit?: number
   offset?: number
-  include_draft?: string
 }): Promise<{
   data: TransportRequestForm[]
   pagination: {
@@ -48,7 +47,6 @@ export const getTransportRequestList = async (filters?: {
   if (filters?.status) params.append('status', filters.status)
   if (filters?.limit) params.append('limit', filters.limit.toString())
   if (filters?.offset) params.append('offset', filters.offset.toString())
-  if (filters?.include_draft) params.append('include_draft', filters.include_draft)
   
   const queryString = params.toString()
   const url = queryString ? `/transport-request?${queryString}` : '/transport-request'
@@ -82,27 +80,6 @@ export const updateTransportRequest = async (
 }> => {
   const response = await client().put(`/transport-request/${id}`, values)
   return response.data
-}
-
-/**
- * POST /api/transport-request/draft
- * Save Transport Request as Draft
- */
-export const saveTransportRequestDraftAPI = async (values: TransportRequestForm): Promise<{
-  message: string
-  data: TransportRequestForm
-}> => {
-  const response = await client().post('/transport-request/draft', values)
-  return response.data
-}
-
-/**
- * GET /api/transport-request/draft?request_by=...
- * Get Transport Request Draft by user
- */
-export const getTransportRequestDraft = async (request_by: string): Promise<TransportRequestForm> => {
-  const response = await client().get(`/transport-request/draft?request_by=${request_by}`)
-  return response.data.data
 }
 
 /**

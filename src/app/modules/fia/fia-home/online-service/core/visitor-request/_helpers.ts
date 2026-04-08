@@ -7,63 +7,29 @@ import {
 
 /**
  * Visitor Request Helper Functions
- * Mengikuti pola accommodation-request: sessionStorage untuk draft, API untuk submit
  */
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 /**
- * Get Visitor Request Form
- * Flow (mengikuti accommodation-request):
- * 1. Cek sessionStorage untuk draft
- * 2. Jika ada draft, return draft
- * 3. Jika tidak ada, ambil new form dari API
- * 4. Jika API gagal, fallback ke dummy data
+ * Get Visitor Request Form — API, atau dummy jika API gagal
  */
 export async function getVisitorRequestForm(
   cat: OnlineCategoryKey, 
   type: string
 ): Promise<VisitorRequestForm> {
   console.log('🔍 Visitor Request API: getForm called for', cat, type)
-  
-  // Step 1: Cek sessionStorage untuk draft (seperti accommodation-request)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Visitor Request API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Visitor Request API: No draft found, fetching from API')
-  
+
   try {
-    // Step 2: Ambil new form dari API
     const formData = await getVisitorRequestNew()
     console.log('✅ Visitor Request API: Fetched new form from API:', formData)
     return formData
   } catch (error) {
     console.error('❌ Error fetching visitor request form from API, using fallback:', error)
-    // Step 3: Fallback ke dummy data jika API gagal
     return getDummyVisitorRequestForm(cat, type)
   }
 }
 
 /**
- * Save draft to sessionStorage (mengikuti accommodation-request)
- * Tidak perlu API untuk draft, cukup sessionStorage
- */
-export async function saveVisitorRequestDraft(
-  cat: OnlineCategoryKey, 
-  type: string, 
-  payload: VisitorRequestForm
-): Promise<void> {
-  console.log('💾 Visitor Request API: Saving draft for', cat, type)
-  await delay(200) // Simulasi delay seperti accommodation-request
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
-/**
  * Submit Visitor Request
- * Menggunakan API untuk submit (seperti postAccommodationRequest)
  */
 export async function submitVisitorRequest(
   cat: OnlineCategoryKey, 
@@ -75,9 +41,6 @@ export async function submitVisitorRequest(
   try {
     const response = await postVisitorRequest(payload)
     console.log('✅ Visitor Request API: Submitted successfully:', response)
-    
-    // Clear draft dari sessionStorage setelah submit berhasil
-    sessionStorage.removeItem(`draft:${cat}:${type}`)
     
     // Extract requestId dari response
     const requestId = response.data?.header?.requestId || 

@@ -8,7 +8,6 @@ import { useAuth } from '../../../../../../../modules/auth'
 import {
   getFleetRequestNew,
   postFleetRequest,
-  saveFleetRequestDraft,
   validateFleetRequestAll,
   getRequestPurposeOptions,
   getPriorityOptions,
@@ -27,7 +26,6 @@ import {
   FormLoadingState,
   SuccessModal,
   ErrorModal,
-  DraftSavedModal
 } from '../common/components'
 import { useFormNotification } from '../common/hooks'
 import RequestInfoSection from './sections/RequestInfoSection'
@@ -49,7 +47,6 @@ function FleetRequestForm({ cat, type }: Props) {
   const {
     showSuccess,
     showError,
-    showDraftSaved,
     successMessage,
     errorMessage,
     errorDetails,
@@ -57,7 +54,6 @@ function FleetRequestForm({ cat, type }: Props) {
     successRefRequestNo,
     showSuccessModal,
     showErrorModal,
-    showDraftSavedModal,
     closeAllModals
   } = useFormNotification()
 
@@ -136,27 +132,6 @@ function FleetRequestForm({ cat, type }: Props) {
     }
   }
 
-  // Handle save draft
-  const onSave = async (values: FleetFormType) => {
-    if (!values) return
-    try {
-      await saveFleetRequestDraft(cat, type, values)
-      showDraftSavedModal()
-    } catch (e: any) {
-      showErrorModal(e.message || 'Save failed')
-    }
-  }
-
-  // Handle cancel
-  const onCancel = async () => {
-    try {
-      // Reset form by refetching data
-      queryClient.invalidateQueries({ queryKey: [cache_fleetrequest_new] })
-    } catch (e: any) {
-      showErrorModal(e.message || 'Reset failed')
-    }
-  }
-
   // Loading state
   if (loading || optionsLoading) {
     return (
@@ -213,17 +188,11 @@ function FleetRequestForm({ cat, type }: Props) {
         message={errorMessage}
         errorDetails={errorDetails}
       />
-      <DraftSavedModal
-        show={showDraftSaved}
-        onClose={closeAllModals}
-        autoClose={true}
-        autoCloseDelay={2000}
-      />
 
-    <div className='card'>
+      <div className='card'>
       <Formik
         initialValues={(() => {
-          // requestBy: current user; requestFor: dari API/draft saja (kosong = user pilih typeahead)
+          // requestBy: current user; requestFor: dari API (kosong = user pilih typeahead)
           if (data && currentUser) {
             const currentUserId = currentUser.id_number || currentUser.id?.toString() || ''
             return {
@@ -253,8 +222,6 @@ function FleetRequestForm({ cat, type }: Props) {
               </div>
               <div className='d-flex gap-2'>
                 <button className='btn btn-success' onClick={() => onSubmit(formProps.values, formProps)} disabled={submitting}>SUBMIT</button>
-                <button className='btn btn-secondary' onClick={onCancel} disabled={submitting}>CANCEL</button>
-                <button className='btn btn-primary' onClick={() => onSave(formProps.values)} disabled={submitting}>SAVE</button>
               </div>
             </div>
             <div className='card-body'>

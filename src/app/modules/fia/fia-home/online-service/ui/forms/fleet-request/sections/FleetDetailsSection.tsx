@@ -57,7 +57,7 @@ export default function FleetDetailsSection({
             value={values.additionInformation}
             onChange={(value) => setFieldValue('fleetDetails.additionInformation', value)}
             rows={1}
-            placeholder='[text input]'
+            placeholder='Enter additional information'
           />
         </div>
         <div className='col-md-6'>

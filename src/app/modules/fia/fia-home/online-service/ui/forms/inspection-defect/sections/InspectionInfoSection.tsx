@@ -63,7 +63,7 @@ export default function InspectionInfoSection({
             value={safeValues.inspectionDescription}
             onChange={(value) => setFieldValue('inspectionInfo.inspectionDescription', value)}
             rows={2}
-            placeholder='[text input]'
+            placeholder='Enter inspection description'
             required
           />
         </div>

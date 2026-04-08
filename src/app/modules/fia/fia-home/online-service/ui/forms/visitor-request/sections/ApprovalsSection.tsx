@@ -33,7 +33,7 @@ export default function ApprovalsSection({
             name='approvals.departmentHead'
             value={values.departmentHead}
             onChange={(value) => setFieldValue('approvals.departmentHead', value)}
-            placeholder='[combo]'
+            placeholder='Enter department head'
           />
         </div>
         <div className='col-md-4'>
@@ -42,7 +42,7 @@ export default function ApprovalsSection({
             name='approvals.relatedManager'
             value={values.relatedManager}
             onChange={(value) => setFieldValue('approvals.relatedManager', value)}
-            placeholder='[combo]'
+            placeholder='Enter related manager'
           />
         </div>
       </div>

@@ -90,7 +90,7 @@ export default function InspectionDetailInfoSection({
               name='inspectionDetailInfo.location'
               value={safeValues.location}
               onChange={(value) => setFieldValue('inspectionDetailInfo.location', value)}
-              placeholder='[text input]'
+              placeholder='Enter location'
             />
           </div>
           <div className='col-md-4'>
@@ -113,7 +113,7 @@ export default function InspectionDetailInfoSection({
               value={safeValues.notesComments}
               onChange={(value) => setFieldValue('inspectionDetailInfo.notesComments', value)}
               rows={2}
-              placeholder='[text input]'
+              placeholder='Enter notes or comments'
             />
           </div>
           <div className='col-md-6'>
@@ -123,7 +123,7 @@ export default function InspectionDetailInfoSection({
               value={safeValues.additionalNotes}
               onChange={(value) => setFieldValue('inspectionDetailInfo.additionalNotes', value)}
               rows={2}
-              placeholder='[text input]'
+              placeholder='Enter additional notes'
             />
           </div>
         </div>

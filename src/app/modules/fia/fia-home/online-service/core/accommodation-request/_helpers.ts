@@ -7,63 +7,29 @@ import {
 
 /**
  * Accommodation Request Helper Functions
- * Mengikuti pola job-request: sessionStorage untuk draft, API untuk submit
  */
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 /**
- * Get Accommodation Request Form
- * Flow (mengikuti job-request):
- * 1. Cek sessionStorage untuk draft
- * 2. Jika ada draft, return draft
- * 3. Jika tidak ada, ambil new form dari API
- * 4. Jika API gagal, fallback ke dummy data
+ * Get Accommodation Request Form — API, atau dummy jika API gagal
  */
 export async function getAccommodationRequestForm(
   cat: OnlineCategoryKey, 
   type: string
 ): Promise<AccommodationRequestForm> {
   console.log('🔍 Accommodation Request API: getForm called for', cat, type)
-  
-  // Step 1: Cek sessionStorage untuk draft (seperti job-request)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Accommodation Request API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Accommodation Request API: No draft found, fetching from API')
-  
+
   try {
-    // Step 2: Ambil new form dari API
     const formData = await getAccommodationRequestNew()
     console.log('✅ Accommodation Request API: Fetched new form from API:', formData)
     return formData
   } catch (error) {
     console.error('❌ Error fetching accommodation request form from API, using fallback:', error)
-    // Step 3: Fallback ke dummy data jika API gagal
     return getDummyAccommodationRequestForm(cat, type)
   }
 }
 
 /**
- * Save draft to sessionStorage (mengikuti job-request)
- * Tidak perlu API untuk draft, cukup sessionStorage
- */
-export async function saveAccommodationRequestDraft(
-  cat: OnlineCategoryKey, 
-  type: string, 
-  payload: AccommodationRequestForm
-): Promise<void> {
-  console.log('💾 Accommodation Request API: Saving draft for', cat, type)
-  await delay(200) // Simulasi delay seperti job-request
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
-/**
  * Submit Accommodation Request
- * Menggunakan API untuk submit (seperti postJobRequest)
  */
 export async function submitAccommodationRequest(
   cat: OnlineCategoryKey, 
@@ -75,9 +41,6 @@ export async function submitAccommodationRequest(
   try {
     const response = await postAccommodationRequest(payload)
     console.log('✅ Accommodation Request API: Submitted successfully:', response)
-    
-    // Clear draft dari sessionStorage setelah submit berhasil
-    sessionStorage.removeItem(`draft:${cat}:${type}`)
     
     // Extract requestId dari response
     const requestId = response.data?.header?.requestId || 

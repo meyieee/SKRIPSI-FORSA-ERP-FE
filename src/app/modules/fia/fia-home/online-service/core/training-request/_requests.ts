@@ -59,25 +59,3 @@ export const updateTrainingRequest = async (
   const response = await client().put(`/training-request/${id}`, values)
   return response.data
 }
-
-/**
- * POST /api/training-request/draft
- * Save training request as draft
- */
-export const saveTrainingRequestDraftAPI = async (values: TrainingRequestForm): Promise<{
-  message: string
-  data: TrainingRequestForm
-}> => {
-  const response = await client().post('/training-request/draft', values)
-  return response.data
-}
-
-/**
- * GET /api/training-request/draft?request_by=...
- * Get training request draft by user
- */
-export const getTrainingRequestDraft = async (request_by: string): Promise<TrainingRequestForm> => {
-  const response = await client().get(`/training-request/draft?request_by=${request_by}`)
-  return response.data.data
-}
-

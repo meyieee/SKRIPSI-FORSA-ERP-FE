@@ -29,7 +29,7 @@ export default function TransferDetailsSection({
             name='transferDetails.currentOwner'
             value={values.currentOwner}
             onChange={(value) => setFieldValue('transferDetails.currentOwner', value)}
-            placeholder='[text input]'
+            placeholder='Enter current owner'
           />
         </div>
         <div className='col-md-4'>

@@ -7,63 +7,29 @@ import {
 
 /**
  * Workforce Request Helper Functions
- * Mengikuti pola accommodation-request: sessionStorage untuk draft, API untuk submit
  */
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
-
 /**
- * Get Workforce Request Form
- * Flow (mengikuti accommodation-request):
- * 1. Cek sessionStorage untuk draft
- * 2. Jika ada draft, return draft
- * 3. Jika tidak ada, ambil new form dari API
- * 4. Jika API gagal, fallback ke dummy data
+ * Get Workforce Request Form — API, atau dummy jika API gagal
  */
 export async function getWorkforceRequestForm(
   cat: OnlineCategoryKey, 
   type: string
 ): Promise<WorkforceRequestForm> {
   console.log('🔍 Workforce Request API: getForm called for', cat, type)
-  
-  // Step 1: Cek sessionStorage untuk draft (seperti accommodation-request)
-  const draft = sessionStorage.getItem(`draft:${cat}:${type}`)
-  if (draft) {
-    console.log('📄 Workforce Request API: Found draft, returning cached data')
-    return JSON.parse(draft)
-  }
-  
-  console.log('🆕 Workforce Request API: No draft found, fetching from API')
-  
+
   try {
-    // Step 2: Ambil new form dari API
     const formData = await getWorkforceRequestNew()
     console.log('✅ Workforce Request API: Fetched new form from API:', formData)
     return formData
   } catch (error) {
     console.error('❌ Error fetching workforce request form from API, using fallback:', error)
-    // Step 3: Fallback ke dummy data jika API gagal
     return getDummyWorkforceRequestForm(cat, type)
   }
 }
 
 /**
- * Save draft to sessionStorage (mengikuti accommodation-request)
- * Tidak perlu API untuk draft, cukup sessionStorage
- */
-export async function saveWorkforceRequestDraft(
-  cat: OnlineCategoryKey, 
-  type: string, 
-  payload: WorkforceRequestForm
-): Promise<void> {
-  console.log('💾 Workforce Request API: Saving draft for', cat, type)
-  await delay(200) // Simulasi delay seperti accommodation-request
-  sessionStorage.setItem(`draft:${cat}:${type}`, JSON.stringify(payload))
-}
-
-/**
  * Submit Workforce Request
- * Menggunakan API untuk submit (seperti postAccommodationRequest)
  */
 export async function submitWorkforceRequest(
   cat: OnlineCategoryKey, 
@@ -75,9 +41,6 @@ export async function submitWorkforceRequest(
   try {
     const response = await postWorkforceRequest(payload)
     console.log('✅ Workforce Request API: Submitted successfully:', response)
-    
-    // Clear draft dari sessionStorage setelah submit berhasil
-    sessionStorage.removeItem(`draft:${cat}:${type}`)
     
     // Extract requestId dari response
     const requestId = response.data?.header?.requestId || 

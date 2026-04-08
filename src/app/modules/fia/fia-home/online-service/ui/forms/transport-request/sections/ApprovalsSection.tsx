@@ -42,7 +42,7 @@ export default function ApprovalsSection({
             name='approvals.relatedManager'
             value={values.relatedManager}
             onChange={(value) => setFieldValue('approvals.relatedManager', value)}
-            placeholder='[text input]'
+            placeholder='Enter related manager'
           />
         </div>
       </div>
