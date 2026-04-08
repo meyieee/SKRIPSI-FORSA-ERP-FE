@@ -127,7 +127,7 @@ export default function RequestInfoSection({
         </div>
         <div className='col-md-4'>
           <FormSelect
-            label='Cost Center'
+            label='Section'   
             name='requestInfo.costCenter'
             value={values.costCenter}
             onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
