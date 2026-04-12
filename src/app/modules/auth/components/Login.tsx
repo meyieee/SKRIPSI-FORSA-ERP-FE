@@ -74,6 +74,7 @@ export function Login() {
         </button> */}
 
       <header className='text-center mb-10'>
+        <p className='text-muted fw-semibold fs-6 mb-3'>Welcome back. Please sign in to continue.</p>
         <h1 className='text-dark mb-3'>Sign In to FORSA</h1>
       </header>
 
