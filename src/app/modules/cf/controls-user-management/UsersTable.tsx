@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom'
 import { KTCard, KTCardBody, KTSVG, fullUrlServer, toAbsoluteUrl } from '../../../../_metronic'
 import { useAuth } from '../../auth'
 import { UserData } from './core/_models'
-import { getUsers, resetPasswordUser, updateStatusUsers } from './core/_requests'
+import { getRoleCategories, getUsers, resetPasswordUser, updateStatusUsers } from './core/_requests'
 import { AlertMessengerContext, CodeNameDisplay, ConfirmModalType1, ConfirmModalType3, DataNotFound, FrontEndPagination, Loading, SearchData } from '../../../components'
 import { ConvertDateTime, functionCheckComTypeRoutesAPI, SocketListenerRoomReactQuery, SocketListenerRoomUseState, UseReactQuery } from '../../../functions'
 import { getAPIError } from '../../../types'
-import { cache_users } from '../../../constans'
+import { cache_departments, cache_users } from '../../../constans'
+import { getDepartments } from '../../fia/fia-home/company/core/_requests'
 
 const UsersTable = () => {
   const {currentUser} = useAuth()
@@ -16,6 +17,8 @@ const UsersTable = () => {
   const func1 = () => functionCheckComTypeRoutesAPI(getUsers, currentUser)
   
   const { data, isLoading, error } = UseReactQuery({ func: func1, cacheName: cache_users });
+  const { data: departments } = UseReactQuery({ func: getDepartments, cacheName: cache_departments });
+  const { data: roleCategories } = UseReactQuery({ func: getRoleCategories, cacheName: 'user-role-categories' });
   const errorMsg = (error as getAPIError)?.response?.data?.message;
 
   const [filteredData, setFilteredData] = useState<UserData[] | any | []>([])
@@ -44,12 +47,12 @@ const UsersTable = () => {
   
   const filterByRole = (data: any[], value: string) => {
     if (value === "") return data;
-    return data.filter((item) => item.role === value);
+    return data.filter((item) => item['roleDetail.role_category'] === value);
   };
 
   const filterByDepartment = (data: any[], value: string) => {
     if (value === "") return data;
-    return data.filter((item) => item.department === value);
+    return data.filter((item) => item['employees.department_detail.dept_code'] === value);
   };
 
   const handleApplyFilter = () => {
@@ -62,17 +65,40 @@ const UsersTable = () => {
   const handleResetFilter = () => {
     setFilterRole('')
     setFilterDepartment('')
+    setFilteredData(data)
   }
 
   const searchItem = (value: [], query: string) => { 
     // Handle search filter based on fetched value
-    const keys = ['name', 'employees.branch_detail.com_code', 'role', 'employees.dept_code']
+    const normalizedQuery = query.toLowerCase()
+    const keys = ['name', 'employees.branch_detail.com_code', 'role', 'roleDetail.role_category', 'employees.department_detail.dept_code']
     return value?.filter((item: any) =>
-      keys.some((key) => item[key]?.toLowerCase()?.includes(query))
+      keys.some((key) => String(item[key] || '').toLowerCase().includes(normalizedQuery))
     )
   }
 
   const searchData = searchItem(filteredData, searchTerm) // Apply search filter by inputting the data and the value
+
+  const roleOptions = useMemo(() => {
+    const rows = Array.isArray(roleCategories) ? roleCategories : []
+    return rows
+      .map((item: string) => String(item || '').trim())
+      .filter((item, index, arr) => item && arr.indexOf(item) === index)
+      .sort((a, b) => a.localeCompare(b))
+  }, [roleCategories])
+
+  const departmentOptions = useMemo(() => {
+    const rows = Array.isArray(departments) ? departments : []
+    return rows
+      .map((item: any) => ({
+        value: String(item.dept_code || '').trim(),
+        label: String(item.dept_des || item.dept_code || '').trim(),
+      }))
+      .filter((item, index, arr) =>
+        item.value && arr.findIndex((row) => row.value === item.value) === index
+      )
+      .sort((a, b) => a.label.localeCompare(b.label))
+  }, [departments])
 
   let pageSize = 10 // Set up number of items to display per page in the table
   const currentTableData = useMemo(() => { // Handle table pagination
@@ -140,12 +166,14 @@ const UsersTable = () => {
                     value={filterRole}
                     onChange={(e) => setFilterRole(e.target.value)}
                   >
-                    <option value=''></option>
-                    <option value='administrator'>Administrator</option>
-                    <option value='manager'>Manager</option>
-                    <option value='supervisor'>Supervisor</option>
-                    <option value='clerk'>Clerk</option>
-                    <option value='portal'>Portal</option>
+                    <option value='' disabled hidden>
+                      Select role category
+                    </option>
+                    {roleOptions.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 {/* end::Input group */}
@@ -162,14 +190,15 @@ const UsersTable = () => {
                     data-hide-search='true'
                     value={filterDepartment}
                     onChange={(e) => setFilterDepartment(e.target.value)}
-                    disabled={filterRole === 'administrator'}
                   >
-                    <option value=''></option>
-                    <option value='finance'>Finance</option>
-                    <option value='operations'>Operations</option>
-                    <option value='resource'>Resource</option>
-                    <option value='supply'>Supply</option>
-                    <option value='admin'>Admin</option>
+                    <option value='' disabled hidden>
+                      Select department
+                    </option>
+                    {departmentOptions.map((department) => (
+                      <option key={department.value} value={department.value}>
+                        {department.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 {/* end::Input group */}
@@ -226,7 +255,6 @@ const UsersTable = () => {
                 <th className='min-w-100px'>Department</th>
                 <th className='min-w-100px'>Role</th>
                 <th className='min-w-100px'>Status</th>
-                <th className='min-w-100px'>Remarks</th>
                 <th className='min-w-100px'>Joined day</th>
                 <th className='min-w-100px text-end'>Actions</th>
               </tr>
@@ -271,16 +299,6 @@ const UsersTable = () => {
                       }
                     </td>
                     <td>
-                      <div className='d-flex align-items-center'>
-                        <div className='d-flex flex-column'>
-                          <span className='text-gray-800 text-hover-primary mb-1'>
-                            {row.remarks}
-                          </span>
-                          <span>{row.updatedAt && `Updated status at: ${ConvertDateTime(row.updatedAt).date}`}</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
                       <span className='min-w-125px'>{ConvertDateTime(row.createdAt).date}</span>
                     </td>
                     <td className='text-end'>
@@ -317,7 +335,7 @@ const UsersTable = () => {
                     </td>
                   </tr>
                 )
-              }) : <DataNotFound colSpan={10} errorMsg={errorMsg} />}
+              }) : <DataNotFound colSpan={7} errorMsg={errorMsg} />}
             </tbody>
           </table>
         </div>

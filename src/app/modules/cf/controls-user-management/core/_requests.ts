@@ -8,6 +8,11 @@ const getUsers = async (branch_code: string | null | undefined) => {
   return response.data.data;
 }
 
+const getRoleCategories = async () => {
+  const response = await client().get('/users/role-categories')
+  return response.data.data;
+}
+
 const addUser = async (values: UserData) => {
   return await client().post('/users', values)
 }
@@ -54,4 +59,4 @@ const getUserById = async(id:string|undefined)=>{
   return response.data.data; 
 }
 
-export { getUsers, addUser, updateUser, updateStatusUsers, updatePasswordUsers, resetPasswordUser, getUserById }
+export { getUsers, getRoleCategories, addUser, updateUser, updateStatusUsers, updatePasswordUsers, resetPasswordUser, getUserById }

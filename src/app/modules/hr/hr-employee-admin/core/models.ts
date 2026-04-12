@@ -103,6 +103,8 @@ export interface EmployeeRegisterData {
   ['com_detail.com_name']?: string
   ['department_detail.dept_des']?: string
   ['department_detail.dept_code']?: string
+  ['section_detail.section_code']?: string
+  ['section_detail.section_description']?: string
 }
 
 export const getEmptyEmployeeRegisterValues = (
@@ -205,25 +207,34 @@ export const getEmptyEmployeeRegisterValues = (
 export const employeeRegisterSimpleSchema = Yup.object({
   id: Yup.string().optional(),
   id_number: Yup.string()
-    .required('Required')
-    .matches(/^\S*$/, 'ID number must not contain spaces'),
-  first_name: Yup.string().required('Required'),
-  last_name: Yup.string().required('Required'),
-  job_title: Yup.string().required('Required'),
-  employee_type: Yup.string().required('Required'),
-  employee_class: Yup.string().required('Required'),
-  employment_type: Yup.string().required('Required'),
-  branch_code: Yup.string().required('Required'),
+    .matches(/^\S*$/, 'ID number must not contain spaces')
+    .required('Required'),
+  first_name: Yup.string(),
+  middle_name: Yup.string(),
+  last_name: Yup.string(),
+  gender: Yup.string(),
+  date_of_birth: Yup.string(),
+  point_of_birth: Yup.string(),
+  marital_status: Yup.string(),
+  religion: Yup.string(),
+  reg_date: Yup.string(),
+  job_title: Yup.string(),
+  job_level: Yup.string().required('Required'),
+  individual_level: Yup.string().required('Required'),
+  employee_type: Yup.string(),
+  employee_class: Yup.string(),
+  employment_type: Yup.string(),
+  branch_code: Yup.string(),
   emp_company: Yup.string().required('Required'),
   dept_code: Yup.string().required('Required'),
+  section_code: Yup.string().required('Required'),
   cost_center: Yup.string().required('Required'),
-  account_code: Yup.string().required('Required'),
-  office_code: Yup.string().required('Required'),
-  status: Yup.string().required('Required'),
-  status_date: Yup.string().required('Required'),
-  reg_date: Yup.string().required('Required'),
+  account_code: Yup.string(),
+  office_code: Yup.string(),
+  status: Yup.string(),
+  status_date: Yup.string(),
   reg_by: Yup.string().nullable(),
-  photo: Yup.mixed().nullable().optional(),
+  photo: Yup.mixed().nullable().required('Required'),
 })
 
 const latestValues = (data: EmployeeRegisterData | undefined | null): EmployeeRegisterData => {

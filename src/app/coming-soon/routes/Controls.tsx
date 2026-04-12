@@ -6,6 +6,9 @@ import { UsersTable } from "../../modules/cf/controls-user-management/UsersTable
 import { UserCreate } from "../../modules/cf/controls-user-management/add-edit/UserCreate";
 import { UserUpdate } from "../../modules/cf/controls-user-management/add-edit/UserUpdate";
 import { EmployeeRegisterAddAdminGate } from "../../modules/hr/hr-employee-admin/EmployeeRegisterAddAdminGate";
+import { EmployeeManagementTable } from "../../modules/hr/hr-employee-admin/EmployeeManagementTable";
+import { EmployeeRegisterEdit } from "../../modules/hr/hr-employee-admin/EmployeeRegisterEdit";
+import { ProfileProvider } from "../../modules/fia/fia-resource/personal-info/components/ProfileContext";
 
 const accountSettingsBreadcrumbs: Array<PageLink> = [
   {
@@ -55,7 +58,18 @@ return (
         }
       />
       <Route
-        path='employee-register/add'
+        path='employee-management'
+        element={
+        <>
+          <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>Employee Management</PageTitle>
+          <ProfileProvider>
+            <EmployeeManagementTable />
+          </ProfileProvider>
+        </>
+        }
+      />
+      <Route
+        path='employee-management/add'
         element={
         <>
           <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>Add Employee</PageTitle>
@@ -63,6 +77,16 @@ return (
         </>
         }
       />
+      <Route
+        path='employee-management/edit/:id'
+        element={
+        <>
+          <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>Update Employee</PageTitle>
+          <EmployeeRegisterEdit />
+        </>
+        }
+      />
+      <Route path='employee-register/add' element={<Navigate to='/controls/employee-management/add' replace />} />
       <Route
         path='change-password'
         element={

@@ -102,7 +102,7 @@ const InlinePersonalInfoPanel: React.FC = () => {
   return (
     <div className='mt-6'>
       {/* Header  */}
-      <GeneralInfo showMainNav={false} />
+      <GeneralInfo showMainNav={false} allowEmployeeSearch={false} />
 
       {/* Main Tabs Lokal  */}
       <div className='ms-3 mb-3'>

@@ -10,11 +10,16 @@ export type UserData = {
   branch_code: string
   status: boolean
   department: string
+  full_name?: string
+  com_name?: string
+  department_des?: string
   'employees.branch_detail.com_code'?: string
   'employees.branch_detail.com_name'?: string
   'employees.branch_detail.com_type'?: string
   'employees.department_detail.dept_des'?: string
   'employees.department_detail.dept_code'?: string
+  'roleDetail.role_name'?: string
+  'roleDetail.role_category'?: string
   'employees.photo'?: string
   remarks?: string
   createdAt?: string | Date

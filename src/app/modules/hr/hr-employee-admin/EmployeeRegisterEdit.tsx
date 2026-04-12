@@ -38,10 +38,11 @@ const EmployeeRegisterEdit: FC = () => {
     <EmployeeRegisterSimpleForm
       mode="edit"
       initialValues={latestValues(data)}
+      backTo='/controls/employee-management'
       onSuccess={() => {
         void queryClient.invalidateQueries({ queryKey: [cache_employeeregister_id] })
         void queryClient.invalidateQueries({ queryKey: [cache_employeeregister] })
-        setTimeout(() => navigate('/controls/account-settings'), 400)
+        setTimeout(() => navigate('/controls/employee-management'), 400)
       }}
     />
   )

@@ -58,6 +58,13 @@ export interface CostCenter {
   description?: string
 }
 
+export interface Section {
+  id: number
+  section_code?: string
+  section_description?: string
+  dept_code?: string
+}
+
 export interface Location {
   id: number
   name: string

@@ -1,10 +1,11 @@
 import { useState, useContext } from 'react'
 import { Form, Formik } from 'formik'
-import { AlertMessengerContext, BtnSubmit } from '../../../../components'
+import { AlertMessengerContext } from '../../../../components'
 import { UserData, createUserSchemas } from '../core/_models'
 import { addUser } from '../core/_requests'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UserForm } from './UserForm'
+import { KTSVG } from '../../../../../_metronic'
 
 const UserCreate = () => {
   let navigate = useNavigate()
@@ -59,7 +60,21 @@ const UserCreate = () => {
         {(formProps) => (
           <Form className='mx-auto mw-1000px w-100' id='kt_create_account_form'>
             <UserForm formProps={formProps} isUpdate={false}/>
-            <BtnSubmit isSubmit={isSubmit}  />
+            <div className='d-flex justify-content-end align-items-center gap-3 pt-15'>
+              <Link to='/controls/account-settings' className='btn btn-icon btn-light-primary' title='Back to table'>
+                <KTSVG path='/media/icons/duotune/arrows/arr063.svg' className='svg-icon-2 m-0' />
+              </Link>
+              <button
+                type='submit'
+                disabled={isSubmit}
+                className='btn btn-lg btn-primary'
+              >
+                <span className='indicator-label'>
+                  Submit
+                  <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-3 ms-2 me-0' />
+                </span>
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

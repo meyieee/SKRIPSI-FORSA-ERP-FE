@@ -3,13 +3,10 @@ import api from 'axios'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {useFormik} from 'formik'
-import {checkingExistingAdmin, login} from '../core/_requests'
+import {login} from '../core/_requests'
 import {useAuth} from '../core/Auth'
 import { fullUrlServer } from '../../../functions/base_url'
-import {Link} from 'react-router-dom'
-import { UseReactQuery } from '../../../functions'
-import { cache_check_existing_admin } from '../../../constans'
-import {AuthModel, UserModel} from '../core/_models'
+import {AuthModel} from '../core/_models'
 
 api.defaults.baseURL = `${fullUrlServer}/api`;
 
@@ -30,8 +27,6 @@ const initialValues = {
 }
 
 export function Login() {
-  const { data } = UseReactQuery({ func: checkingExistingAdmin, cacheName: cache_check_existing_admin });
-
   const [loading, setLoading] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
 
@@ -86,14 +81,7 @@ export function Login() {
         <p className='mb-lg-15 alert alert-danger'>
           <span className='alert-text font-weight-bold'>{formik.status}</span>
         </p>
-      ) : (
-        <section className='mb-10 bg-light-info p-8 rounded'>
-          <p className='text-info'>
-            Use UserName <strong>vernon</strong> and password <strong>1234</strong> to
-            continue.
-          </p>
-        </section>
-      )}
+      ) : null}
 
       <section className='fv-row mb-10'>
         <label className='form-label fs-6 fw-bolder text-dark'>Username</label>
@@ -161,11 +149,6 @@ export function Login() {
           )}
         </button>
       </section>
-      {
-        data && 
-        data === 200 &&
-        <Link to='/auth/registration' className='link-primary fw-bolder' style={{marginLeft: '5px'}}> Create an Administrator Account</Link>
-      }
     </form>
   )
 }

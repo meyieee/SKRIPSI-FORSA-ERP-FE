@@ -13,9 +13,10 @@ import {normalizeName} from '../../components/functions/normalizeName'
 type Props = {
   className?: string
   showMainNav?: boolean
+  allowEmployeeSearch?: boolean
 }
 
-const GeneralInfo: FC<Props> = ({className, showMainNav}) => {
+const GeneralInfo: FC<Props> = ({className, showMainNav, allowEmployeeSearch = true}) => {
   const {profile, getPhotoUrl, setPersonalInfoPayload, role} = useProfile()
 
   // dropdown search state
@@ -177,7 +178,7 @@ const GeneralInfo: FC<Props> = ({className, showMainNav}) => {
           )}
         </div>
 
-        {role === 'admin' && (
+        {role === 'admin' && allowEmployeeSearch && (
           <div className='d-flex justify-content-between flex-column ms-auto'>
             {canSearchEmployee && (
               <div className='d-flex flex-column p-5 ms-auto' style={{position: 'relative'}}>

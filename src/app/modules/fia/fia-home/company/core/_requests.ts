@@ -1,5 +1,5 @@
 import { client } from '../../../../../functions'
-import { Company, Department, BusinessUnit, CostCenter, Location } from './_models'
+import { Company, Department, BusinessUnit, CostCenter, Location, Section } from './_models'
 
 /**
  * Company Module - API Request Functions
@@ -144,7 +144,16 @@ export const getBusinessUnits = async (): Promise<BusinessUnit[]> => {
  * Get all cost centers
  */
 export const getCostCenters = async (): Promise<CostCenter[]> => {
-  const response = await client().get('/cost-centers')
+  const response = await client().get('/costcenter')
+  return response.data.data
+}
+
+/**
+ * GET /api/sections
+ * Get all sections
+ */
+export const getSections = async (): Promise<Section[]> => {
+  const response = await client().get('/sections')
   return response.data.data
 }
 

@@ -7,6 +7,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react'
+import {useSearchParams} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../../../_metronic'
 import type {PersonalInfoResponse} from '../../personal-info/core/_requests'
 import {fetchPersonalInfo, toServerFileUrl} from '../../personal-info/core/_requests'
@@ -134,6 +135,7 @@ const ProfileContext = createContext<ProfileContextType | undefined>(undefined)
 
 export const ProfileProvider = ({children}: {children: ReactNode}) => {
   const {currentUser} = useAuth() // pastikan auth ter-inisialisasi
+  const [searchParams] = useSearchParams()
 
   const [selectedId, setSelectedId] = useState<string | null>(null)
 
@@ -195,6 +197,20 @@ export const ProfileProvider = ({children}: {children: ReactNode}) => {
       return
     }
 
+    const idFromQuery = String(searchParams.get('employeeId') || '').trim()
+    if (idFromQuery) {
+      didAutoLoadRef.current = true
+      ;(async () => {
+        try {
+          const payload = await fetchPersonalInfo(idFromQuery)
+          setPersonalInfoPayload(payload)
+        } catch (e) {
+          console.error('[PersonalInfo] auto load query employee failed:', e)
+        }
+      })()
+      return
+    }
+
     // ambil idNumber dari auth (utama)
     const idFromAuth = pickId(currentUser)
 
@@ -218,7 +234,7 @@ export const ProfileProvider = ({children}: {children: ReactNode}) => {
         // kalau mau: didAutoLoadRef.current = false  (biar bisa retry)
       }
     })()
-  }, [currentUser, selectedId, setPersonalInfoPayload])
+  }, [currentUser, searchParams, selectedId, setPersonalInfoPayload])
 
   return (
     <ProfileContext.Provider

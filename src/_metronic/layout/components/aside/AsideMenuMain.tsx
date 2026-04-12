@@ -92,7 +92,7 @@ export function AsideMenuMain() {
             <AsideMenuItem to='/controls/account-settings' title='Account Settings' hasBullet={true} />
           )}
           {showAddEmployee && (
-            <AsideMenuItem to='/controls/employee-register/add' title='Add Employee' hasBullet={true} />
+            <AsideMenuItem to='/controls/employee-management' title='Employee Management' hasBullet={true} />
           )}
           {showChangePassword && (
             <AsideMenuItem to='/controls/change-password' title='Change Password' hasBullet={true} />

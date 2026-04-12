@@ -12,15 +12,20 @@ const EmployeeRegisterAdd: FC = () => {
   const location = useLocation() as { state?: { successReturn?: string } }
   const queryClient = useQueryClient()
 
-  const initialValues = getEmptyEmployeeRegisterValues(currentUser?.id_number)
+  const initialValues = {
+    ...getEmptyEmployeeRegisterValues(currentUser?.id_number),
+    emp_company: currentUser?.['employees.branch_detail.com_code'] || '',
+    branch_code: currentUser?.['employees.branch_detail.com_code'] || '',
+  }
 
   return (
     <EmployeeRegisterSimpleForm
       mode="add"
       initialValues={initialValues}
+      backTo='/controls/employee-management'
       onSuccess={() => {
         void queryClient.invalidateQueries({ queryKey: [cache_employeeregister] })
-        const fallback = '/controls/account-settings'
+        const fallback = '/controls/employee-management'
         setTimeout(() => {
           navigate(location.state?.successReturn ?? fallback)
         }, 400)
