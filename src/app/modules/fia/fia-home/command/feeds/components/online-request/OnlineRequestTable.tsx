@@ -30,24 +30,24 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
   }
 
   const getStatusClass = (status: string) => {
-    if (status === 'Waiting Approval' || status === 'Waiting for Approval') {
-      return 'badge badge-warning fs-7 fw-semibold'
-    }
-    if (status === 'Waiting for Verification') {
-      return 'badge badge-info fs-7 fw-semibold'
-    }
-    if (status === 'Waiting for Review') {
-      return 'badge badge-primary fs-7 fw-semibold'
-    }
-    if (status.startsWith('Approval -') || status.startsWith('Approver -')) {
-      return 'badge badge-warning fs-7 fw-semibold'
-    }
-    if (status === 'Cancelled') {
+    const s = normalizeStatus(status)
+
+    if (s === 'Cancelled') return 'badge badge-danger fs-7 fw-semibold'
+    if (s === 'Rejected' || s.startsWith('Rejected By ')) {
       return 'badge badge-danger fs-7 fw-semibold'
     }
-    if (status === 'Approved') {
+    if (s === 'Approved' || s.startsWith('Approved By ')) {
       return 'badge badge-success fs-7 fw-semibold'
     }
+    if (s === 'Pending') return 'badge badge-dark fs-7 fw-semibold'
+    if (s === 'Waiting for Verification') return 'badge badge-info fs-7 fw-semibold'
+    if (s === 'Waiting for Review') return 'badge badge-primary fs-7 fw-semibold'
+    if (s.startsWith('Approval -')) return 'badge badge-warning fs-7 fw-semibold'
+    if (s.startsWith('Approver -')) return 'badge badge-warning fs-7 fw-semibold'
+    if (s === 'Waiting Approval' || s === 'Waiting for Approval') {
+      return 'badge badge-warning fs-7 fw-semibold'
+    }
+
     return 'badge badge-light fs-7 fw-semibold'
   }
 
@@ -111,18 +111,20 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
                       </span>
                     </td>
                     <td className='text-end'>
-                      {onView && (
-                        <button
-                          type='button'
-                          className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
-                          onClick={() => handleView(request)}
-                        >
-                          <KTSVG
-                            path='/media/icons/duotune/general/gen004.svg'
-                            className='svg-icon-3'
-                          />
-                        </button>
-                      )}
+                      <div className='d-flex justify-content-end flex-shrink-0'>
+                        {onView && (
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
+                            onClick={() => handleView(request)}
+                          >
+                            <KTSVG
+                              path='/media/icons/duotune/general/gen004.svg'
+                              className='svg-icon-3'
+                            />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))

@@ -1,12 +1,7 @@
 import React from 'react'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 import { FeedsFilters } from '../core/types'
-import {
-  defaultSiteOptions,
-  defaultDepartmentOptions,
-  defaultSectionOptions,
-  defaultElementOptions,
-} from '../core/constants'
+import { useFeedsFilterOptions } from '../core/useFeedsFilterOptions'
 
 type Props = {
   filters: FeedsFilters
@@ -14,28 +9,24 @@ type Props = {
 }
 
 const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange }) => {
+  const { departmentOptions, sectionOptions } = useFeedsFilterOptions(filters.department)
+
   const handleChange = (field: keyof FeedsFilters, value: string) => {
+    if (field === 'department') {
+      onFilterChange({ ...filters, department: value, section: '' })
+      return
+    }
+
     onFilterChange({ ...filters, [field]: value })
   }
 
   const handleReset = () => {
-    onFilterChange({ site: '', department: '', section: '', element: '', date: '' })
+    onFilterChange({ department: '', section: '', date: '' })
   }
 
   return (
     <div className='mt-3 mb-3 p-3 border rounded'>
-      <Row className='g-3 align-items-end row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6'>
-        <Col>
-          <Form.Label className='fw-semibold'>Site | Branch</Form.Label>
-          <Form.Select value={filters.site} onChange={(e) => handleChange('site', e.target.value)}>
-            <option value=''>default: All</option>
-            {defaultSiteOptions.map((site) => (
-              <option key={site} value={site}>
-                {site}
-              </option>
-            ))}
-          </Form.Select>
-        </Col>
+      <Row className='g-3 align-items-end row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4'>
         <Col>
           <Form.Label className='fw-semibold'>Department</Form.Label>
           <Form.Select
@@ -43,9 +34,9 @@ const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange }) => {
             onChange={(e) => handleChange('department', e.target.value)}
           >
             <option value=''>default: All</option>
-            {defaultDepartmentOptions.map((dept) => (
-              <option key={dept} value={dept}>
-                {dept}
+            {departmentOptions.map((dept) => (
+              <option key={dept.value} value={dept.value}>
+                {dept.label}
               </option>
             ))}
           </Form.Select>
@@ -57,23 +48,9 @@ const FeedsFilterBar: React.FC<Props> = ({ filters, onFilterChange }) => {
             onChange={(e) => handleChange('section', e.target.value)}
           >
             <option value=''>default: All</option>
-            {defaultSectionOptions.map((section) => (
-              <option key={section} value={section}>
-                {section}
-              </option>
-            ))}
-          </Form.Select>
-        </Col>
-        <Col>
-          <Form.Label className='fw-semibold'>Element</Form.Label>
-          <Form.Select
-            value={filters.element}
-            onChange={(e) => handleChange('element', e.target.value)}
-          >
-            <option value=''>default: All</option>
-            {defaultElementOptions.map((element) => (
-              <option key={element} value={element}>
-                {element}
+            {sectionOptions.map((section) => (
+              <option key={section.value} value={section.value}>
+                {section.label}
               </option>
             ))}
           </Form.Select>

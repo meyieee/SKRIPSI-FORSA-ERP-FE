@@ -34,7 +34,7 @@ import { useFormNotification } from '../common/hooks'
 import RequestInfoSection from './sections/RequestInfoSection'
 import InspectionInfoSection from './sections/InspectionInfoSection'
 import InspectionDetailInfoSection from './sections/InspectionDetailInfoSection'
-import DefectDetailsSection from './sections/DefectDetailsSection'
+import { formatLocalDate } from '../../../core/_date'
 import './InspectionDefectForm.scss'
 
 type Props = {
@@ -181,7 +181,7 @@ function InspectionDefectForm({ cat, type }: Props) {
             // requestBy: current user; requestFor: dari API (kosong = user pilih typeahead)
             // Pastikan semua nested objects ada dengan default values
             const defaultInspectionInfo = {
-              inspectionDate: new Date().toISOString().slice(0, 10),
+              inspectionDate: formatLocalDate(new Date()),
               inspectionType: '',
               inspectionDescription: '',
               inspectionBy: '',
@@ -275,15 +275,6 @@ function InspectionDefectForm({ cat, type }: Props) {
                         getAssetOptions={getAssetOptions}
                       />
 
-                      <DefectDetailsSection
-                        values={formProps.values.defectDetails}
-                        setFieldValue={formProps.setFieldValue}
-                        getConditionOptions={getConditionOptions}
-                        getCategoryOptions={getCategoryOptions}
-                        getActionTakenOptions={getActionTakenOptions}
-                        getResultOptions={getResultOptions}
-                        getStatusOptions={getStatusOptions}
-                      />
                     </Form>
                   </div>
                 </div>

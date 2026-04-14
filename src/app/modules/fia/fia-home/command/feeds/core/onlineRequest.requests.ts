@@ -29,7 +29,6 @@ const mapListItem = (item: any, index: number): OnlineRequest =>
     site: item?.site ?? item?.site_branch ?? item?.siteBranch ?? '',
     department: item?.department ?? item?.dept ?? '',
     section: item?.section ?? '',
-    element: item?.element ?? '',
   })
 
 const extractArray = (payload: any): any[] => {
@@ -51,10 +50,8 @@ const extractObject = (payload: any): Record<string, unknown> | null => {
 const toParams = (query?: OnlineRequestListQuery) => {
   if (!query) return undefined
   const params: Record<string, string> = {}
-  if (query.site) params.site = query.site
   if (query.department) params.department = query.department
   if (query.section) params.section = query.section
-  if (query.element) params.element = query.element
   if (query.date) params.date = query.date
   return Object.keys(params).length > 0 ? params : undefined
 }

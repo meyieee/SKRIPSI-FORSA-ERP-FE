@@ -4,6 +4,7 @@ import FormSection from '../../common/components/FormSection'
 import FormField from '../../common/components/FormField'
 import FormSelect from '../../common/components/FormSelect'
 import FormTextarea from '../../common/components/FormTextarea'
+import { formatLocalDate } from '../../../../core/_date'
 
 type InspectionInfoSectionProps = {
   values: InspectionInfo
@@ -18,7 +19,7 @@ export default function InspectionInfoSection({
 }: InspectionInfoSectionProps) {
   // Fallback untuk values jika undefined
   const safeValues = values || {
-    inspectionDate: new Date().toISOString().slice(0, 10),
+    inspectionDate: formatLocalDate(new Date()),
     inspectionType: '',
     inspectionDescription: '',
     inspectionBy: '',

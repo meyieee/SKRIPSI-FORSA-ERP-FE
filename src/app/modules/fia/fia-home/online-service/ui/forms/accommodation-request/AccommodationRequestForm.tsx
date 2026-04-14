@@ -216,8 +216,6 @@ function AccommodationRequestForm({ cat, type }: Props) {
                         setFieldValue={formProps.setFieldValue}
                         getRequestPurposeOptions={getRequestPurposeOptions}
                         getPriorityOptions={getPriorityOptions}
-                        branchSiteOptions={branchSiteOptions}
-                        getLocationOptions={getLocationOptions}
                         currentUser={currentUser}
                       />
 

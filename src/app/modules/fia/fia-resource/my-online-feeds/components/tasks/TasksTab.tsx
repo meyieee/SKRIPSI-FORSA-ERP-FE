@@ -269,13 +269,17 @@ const TasksTab = () => {
     }
   }
 
-  const getCompleteStyle = (complete: string) =>
-    complete
-      ? {backgroundColor: 'var(--bs-primary-bg-subtle)', color: 'var(--bs-primary-text-emphasis)'}
-      : {
-          backgroundColor: 'var(--bs-secondary-bg-subtle)',
-          color: 'var(--bs-secondary-text-emphasis)',
-        }
+  const getTaskStatus = (complete: string) => (complete ? 'Completed' : 'Outstanding')
+
+  const getStatusClass = (status: string) => {
+    if (status === 'Completed') {
+      return 'badge badge-success fs-7 fw-semibold'
+    }
+    if (status === 'Outstanding') {
+      return 'badge badge-warning fs-7 fw-semibold'
+    }
+    return 'badge badge-light fs-7 fw-semibold'
+  }
 
   return (
     <div>
@@ -318,6 +322,7 @@ const TasksTab = () => {
             {displayRows.map((row) => {
               const displayName =
                 activeScope === 'assigned' ? row.assigned_to ?? '-' : row.assigned_by
+              const taskStatus = getTaskStatus(row.complete)
 
               return (
                 <tr key={row.id} style={{cursor: 'pointer'}}>
@@ -336,9 +341,7 @@ const TasksTab = () => {
                     <span className={getPriorityClass(row.priority)}>{row.priority}</span>
                   </td>
                   <td className='min-w-100px'>
-                    <span className='badge fs-7 fw-semibold' style={getCompleteStyle(row.complete)}>
-                      {row.complete || 'Outstanding'}
-                    </span>
+                    <span className={getStatusClass(taskStatus)}>{taskStatus}</span>
                   </td>
                   <td className='min-w-50px'>{row.task_no}</td>
 

@@ -73,6 +73,7 @@ export function validateAssetRequestAll(v: AssetRequestForm): string[] {
   if (!v.requestInfo.requestDate) errs.push('Request Date is required')
   if (!v.requestInfo.requestBy) errs.push('Request By is required')
   if (!v.requestInfo.requestPurpose) errs.push('Request Purpose is required')
+  if (!v.requestInfo.priority) errs.push('Priority is required')
   if (!v.assetDetails.assetType) errs.push('Asset Type is required')
   if (!v.assetDetails.assetModel) errs.push('Asset Model is required')
   if (!v.assetDetails.quantity || v.assetDetails.quantity < 1) errs.push('Quantity must be at least 1')

@@ -90,8 +90,6 @@ export function validateTrainingRequest(values: TrainingRequestForm): string[] {
   if (!values.requestInfo.requestPurpose) errors.push('Request Purpose is required')
   if (!values.requestInfo.requestDescription) errors.push('Request Description is required')
   if (!values.requestInfo.priority) errors.push('Priority is required')
-  if (!values.requestInfo.department) errors.push('Department is required')
-  
   if (!values.trainingDetails.trainingTitle) errors.push('Training Title is required')
   if (!values.trainingDetails.trainingDuration) errors.push('Training Duration is required')
   if (!values.trainingDetails.trainingMethod) errors.push('Training Method is required')

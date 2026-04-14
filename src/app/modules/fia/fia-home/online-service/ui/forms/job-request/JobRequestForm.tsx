@@ -241,10 +241,6 @@ function JobRequestForm({ cat, type }: Props) {
                       setFieldValue={formProps.setFieldValue}
                       getRequestPurposeOptions={getRequestPurposeOptions}
                       getPriorityOptions={getPriorityOptions}
-                      branchSiteOptions={branchSiteOptions}
-                      locationOptions={locationOptions}
-                      departmentOptions={departmentOptions}
-                      costCenterOptions={costCenterOptions}
                       currentUser={currentUser}
                     />
 

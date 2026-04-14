@@ -14,21 +14,19 @@ const OnlineRosterTab: React.FC<Props> = ({ filters }) => {
   const [showRosterModal, setShowRosterModal] = useState(false)
   const [selectedRoster, setSelectedRoster] = useState<OnlineRoster | null>(null)
 
+  const includesInsensitive = (source: string | undefined, target: string) =>
+    String(source ?? '')
+      .toLowerCase()
+      .includes(target.toLowerCase())
+
   const filteredRoster = useMemo(() => {
     let result: OnlineRoster[] = [...roster]
 
-    // Apply filter logic
-    if (filters.site) {
-      result = result.filter((r) => r.siteBranch === filters.site)
-    }
     if (filters.department) {
-      result = result.filter((r) => r.department === filters.department)
+      result = result.filter((r) => includesInsensitive(r.department, filters.department))
     }
     if (filters.section) {
-      result = result.filter((r) => r.section === filters.section)
-    }
-    if (filters.element) {
-      result = result.filter((r) => r.element === filters.element)
+      result = result.filter((r) => includesInsensitive(r.section, filters.section))
     }
 
     return result

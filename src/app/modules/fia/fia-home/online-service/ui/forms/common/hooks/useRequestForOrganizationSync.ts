@@ -8,13 +8,12 @@ export type RequestForOrgSync = {
   orgReadOnly: boolean
   displayBranchSite: string
   displayDepartment: string
-  displayCostCenter: string
 }
 
 function formatCodeName(code: string, name: string) {
   const c = (code || '').trim()
   const n = (name || '').trim()
-  if (c && n) return `${c} – ${n}`
+  if (c && n) return `${c} - ${n}`
   return c || n || ''
 }
 
@@ -28,8 +27,8 @@ function parseError(e: unknown): string {
 }
 
 /**
- * When Request For is set: fetch HR org (branch / dept / cost center codes) and keep fields in sync.
- * When cleared after a selection: clears org fields. Initial load with empty Request For does not wipe branch/dept/cc.
+ * When Request For is set: fetch HR org (branch / department) and keep fields in sync.
+ * When cleared after a selection: clears org fields. Initial load with empty Request For does not wipe branch/department.
  */
 export function useRequestForOrganizationSync(
   requestFor: string | undefined,
@@ -41,7 +40,6 @@ export function useRequestForOrganizationSync(
   const [labels, setLabels] = useState<{
     branchSite: string
     department: string
-    costCenter: string
   } | null>(null)
 
   const prevRequestForRef = useRef<string | undefined>(undefined)
@@ -53,7 +51,6 @@ export function useRequestForOrganizationSync(
 
     const branchKey = `${prefix}branchSite`
     const deptKey = `${prefix}department`
-    const ccKey = `${prefix}costCenter`
 
     if (!id) {
       setOrgLoading(false)
@@ -64,7 +61,6 @@ export function useRequestForOrganizationSync(
       if (hadRequestFor) {
         setFieldValue(branchKey, '')
         setFieldValue(deptKey, '')
-        setFieldValue(ccKey, '')
       }
       return
     }
@@ -73,9 +69,8 @@ export function useRequestForOrganizationSync(
     setOrgLoading(true)
     setOrgError(null)
     setLabels({
-      branchSite: 'Loading…',
-      department: 'Loading…',
-      costCenter: 'Loading…',
+      branchSite: 'Loading...',
+      department: 'Loading...',
     })
 
     getOnlineServiceEmployeeOrg(id)
@@ -83,11 +78,9 @@ export function useRequestForOrganizationSync(
         if (cancelled) return
         setFieldValue(branchKey, org.branch_code)
         setFieldValue(deptKey, org.dept_code)
-        setFieldValue(ccKey, org.cost_center)
         setLabels({
           branchSite: formatCodeName(org.branch_code, org.branch_name),
           department: formatCodeName(org.dept_code, org.dept_name),
-          costCenter: formatCodeName(org.cost_center, org.cost_center_name),
         })
         setOrgLoading(false)
       })
@@ -96,7 +89,6 @@ export function useRequestForOrganizationSync(
         setOrgError(parseError(e))
         setFieldValue(branchKey, '')
         setFieldValue(deptKey, '')
-        setFieldValue(ccKey, '')
         setLabels(null)
         setOrgLoading(false)
         console.error('getOnlineServiceEmployeeOrg', e)
@@ -117,6 +109,5 @@ export function useRequestForOrganizationSync(
     orgReadOnly,
     displayBranchSite: labels?.branchSite ?? '',
     displayDepartment: labels?.department ?? '',
-    displayCostCenter: labels?.costCenter ?? '',
   }
 }

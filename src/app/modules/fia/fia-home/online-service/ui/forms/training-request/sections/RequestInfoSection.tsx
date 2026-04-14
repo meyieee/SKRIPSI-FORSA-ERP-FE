@@ -8,7 +8,7 @@ import FormTextarea from '../../common/components/FormTextarea'
 import FormFileUpload from '../../common/components/FormFileUpload'
 import EmployeeSearchTypeahead from '../../common/components/EmployeeSearchTypeahead'
 import OrgLockedOrManualField from '../../common/components/OrgLockedOrManualField'
-import { useRequestForOrganizationSync } from '../../common/hooks'
+import { useOrgMasterOptions, useRequestForOrganizationSync } from '../../common/hooks'
 
 type RequestInfoSectionProps = {
   values: TrainingRequestInfo
@@ -32,20 +32,22 @@ export default function RequestInfoSection({
   currentUser,
 }: RequestInfoSectionProps) {
   const orgSync = useRequestForOrganizationSync(values.requestFor, setFieldValue)
+  const { departmentOptions } = useOrgMasterOptions(values.department)
 
-  // Helper untuk mendapatkan name/username dari current user untuk display
+  // Helper untuk mendapatkan nama lengkap current user untuk display
   const getCurrentUserName = (): string => {
     if (!currentUser) return values.requestBy || ''
-    
-    // Prioritas: name > username > fullname > first_name + last_name > id_number
-    if (currentUser.name) return currentUser.name
-    if (currentUser.username) return currentUser.username
+    if (currentUser.display_name) return currentUser.display_name
     if (currentUser.fullname) return currentUser.fullname
+    if (currentUser['employees.first_name'] || currentUser['employees.last_name']) {
+      return `${currentUser['employees.first_name'] || ''} ${currentUser['employees.middle_name'] || ''} ${currentUser['employees.last_name'] || ''}`.replace(/\s+/g, ' ').trim()
+    }
     if (currentUser.first_name || currentUser.last_name) {
       return `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim()
     }
+    if (currentUser.name) return currentUser.name
+    if (currentUser.username) return currentUser.username
     if (currentUser.id_number) return currentUser.id_number
-    
     return values.requestBy || ''
   }
   return (
@@ -105,69 +107,7 @@ export default function RequestInfoSection({
             value={values.priority}
             onChange={(value) => setFieldValue('requestInfo.priority', value)}
             options={getPriorityOptions()}
-          />
-        </div>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayBranchSite}
-            label='Branch|Site'
-            name='requestInfo.branchSite'
-            manual={
-              <FormSelect
-                label='Branch|Site'
-                name='requestInfo.branchSite'
-                value={values.branchSite}
-                onChange={(value) => setFieldValue('requestInfo.branchSite', value)}
-                options={branchSiteOptions}
-              />
-            }
-          />
-        </div>
-      </div>
-
-      <div className='row'>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayDepartment}
-            label='Department'
-            name='requestInfo.department'
-            manual={
-              <FormSelect
-                label='Department'
-                name='requestInfo.department'
-                value={values.department}
-                onChange={(value) => setFieldValue('requestInfo.department', value)}
-                options={getDepartmentOptions()}
-              />
-            }
-          />
-        </div>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayCostCenter}
-            label='Cost Center'
-            name='requestInfo.costCenter'
-            manual={
-              <FormField
-                label='Cost Center'
-                name='requestInfo.costCenter'
-                value={values.costCenter}
-                onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
-                placeholder='Enter cost center'
-              />
-            }
-          />
-        </div>
-        <div className='col-md-4'>
-          <FormSelect
-            label='Location'
-            name='requestInfo.location'
-            value={values.location}
-            onChange={(value) => setFieldValue('requestInfo.location', value)}
-            options={locationOptions}
+            required
           />
         </div>
       </div>

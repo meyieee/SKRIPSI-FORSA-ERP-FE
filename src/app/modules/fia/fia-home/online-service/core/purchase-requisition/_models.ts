@@ -103,24 +103,9 @@ export function validatePurchaseRequisition(values: PurchaseRequisitionForm): st
   
   if (!values.requestInfo.requisitionDate) errors.push('Requisition Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
+  if (!values.requestInfo.priority) errors.push('Priority is required')
   if (!values.requestInfo.amount) errors.push('Amount is required')
   if (!values.requisitionInfo.supplier) errors.push('Supplier is required')
-  
-  const hasValidItem = values.itemDetails.some(item => item.stock_description.trim() !== '')
-  if (!hasValidItem) {
-    errors.push('At least one item must have a description')
-  }
-  
-  values.itemDetails.forEach((item, index) => {
-    if (item.stock_description.trim() !== '') {
-      if (!item.quantity || parseFloat(item.quantity) <= 0) {
-        errors.push(`Item ${index + 1}: Quantity must be greater than 0`)
-      }
-      if (!item.unit_price || parseFloat(item.unit_price) <= 0) {
-        errors.push(`Item ${index + 1}: Unit Price must be greater than 0`)
-      }
-    }
-  })
   
   return errors
 }

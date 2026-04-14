@@ -45,8 +45,15 @@ const TaskViewModal: React.FC<TaskViewModalProps> = ({
     }
   }
 
-  const getCompleteClass = (complete: string) =>
-    complete ? 'badge badge-primary fs-7 fw-semibold' : 'badge badge-secondary fs-7 fw-semibold'
+  const getStatusClass = (currentStatus: 'Outstanding' | 'Completed') => {
+    if (currentStatus === 'Completed') {
+      return 'badge badge-success fs-7 fw-semibold'
+    }
+    if (currentStatus === 'Outstanding') {
+      return 'badge badge-warning fs-7 fw-semibold'
+    }
+    return 'badge badge-light fs-7 fw-semibold'
+  }
 
   const handleSave = async () => {
     if (!task || !onSaveStatus) return
@@ -102,8 +109,8 @@ const TaskViewModal: React.FC<TaskViewModalProps> = ({
           <span className='label'>Complete:</span>
 
           {!editable ? (
-            <span className={getCompleteClass(task.complete)}>
-              {task.complete || 'Outstanding'}
+            <span className={getStatusClass(status)}>
+              {status}
             </span>
           ) : (
             <div style={{minWidth: 220}}>

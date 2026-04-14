@@ -84,6 +84,7 @@ export function validateFleetRequestAll(v: FleetForm): string[] {
   if (!v.requestInfo.requestDate) errs.push('Request Date is required')
   if (!v.requestInfo.requestBy) errs.push('Request By is required')
   if (!v.requestInfo.requestPurpose) errs.push('Request Purpose is required')
+  if (!v.requestInfo.priority) errs.push('Priority is required')
   if (!v.fleetDetails.fleetType) errs.push('Fleet Type is required')
   if (!v.fleetDetails.numberOfUnits) errs.push('Number of Units is required')
   

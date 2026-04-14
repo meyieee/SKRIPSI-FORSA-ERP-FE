@@ -62,18 +62,20 @@ const OnlineReminderTable: React.FC<Props> = ({ reminders, onView }) => {
                     )}
                   </td>
                   <td className='text-end'>
-                    {onView && (
-                      <button
-                        type='button'
-                        className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
-                        onClick={() => handleView(reminder)}
-                      >
-                        <KTSVG
-                          path='/media/icons/duotune/general/gen004.svg'
-                          className='svg-icon-3'
-                        />
-                      </button>
-                    )}
+                    <div className='d-flex justify-content-end flex-shrink-0'>
+                      {onView && (
+                        <button
+                          type='button'
+                          className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
+                          onClick={() => handleView(reminder)}
+                        >
+                          <KTSVG
+                            path='/media/icons/duotune/general/gen004.svg'
+                            className='svg-icon-3'
+                          />
+                        </button>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))

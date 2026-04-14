@@ -93,6 +93,7 @@ export function validateTransportRequest(values: TransportRequestForm): string[]
   if (!values.requestInfo.requestDate) errors.push('Request Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
   if (!values.requestInfo.requestPurpose) errors.push('Request Purpose is required')
+  if (!values.requestInfo.priority) errors.push('Priority is required')
   if (!values.transportationDetails.destination) errors.push('Destination is required')
   if (!values.transportationDetails.modeOfTransport) errors.push('Mode of Transport is required')
   if (!values.transportationDetails.noOfPassengers) errors.push('Number of Passengers is required')

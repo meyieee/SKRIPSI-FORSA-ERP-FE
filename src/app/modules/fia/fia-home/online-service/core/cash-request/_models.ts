@@ -73,6 +73,7 @@ export function validateCashRequestAll(v: CashRequestForm): string[] {
   if (!v.requestInfo.requestDate) errs.push('Request Date is required')
   if (!v.requestInfo.requestBy) errs.push('Request By is required')
   if (!v.requestInfo.requestPurpose) errs.push('Request Purpose is required')
+  if (!v.requestInfo.priority) errs.push('Priority is required')
   if (!v.cashRequestDetails.expenseType) errs.push('Expense Type is required')
   if (!v.cashRequestDetails.amountRequest || v.cashRequestDetails.amountRequest <= 0) errs.push('Amount Request must be greater than 0')
   if (!v.cashRequestDetails.paymentMethod) errs.push('Payment Method is required')
