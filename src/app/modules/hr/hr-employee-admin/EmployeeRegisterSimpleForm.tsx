@@ -8,7 +8,7 @@ import { useAuth } from '../../auth'
 import { UseReactQuery } from '../../../functions'
 import { cache_departments } from '../../../constans'
 import { getDepartments, getSections } from '../../fia/fia-home/company/core/_requests'
-import { KTSVG } from '../../../../_metronic'
+import {fullUrlServer, KTSVG, toAbsoluteUrl} from '../../../../_metronic'
 
 type Props = {
   mode: 'add' | 'edit'
@@ -228,21 +228,32 @@ const getIdPrefixFromDate = (value?: string) => {
   return `${year}${month}`
 }
 
-const buildIdSuggestions = (regDate: string, employees: EmployeeRegisterData[] | undefined) => {
+const buildIdSuggestions = (
+  regDate: string,
+  employees: EmployeeRegisterData[] | undefined,
+  currentIdNumber?: string
+) => {
   const prefix = getIdPrefixFromDate(regDate)
   const rows = Array.isArray(employees) ? employees : []
-  const usedNumbers = rows
+  const usedNumbers = new Set(
+    rows
     .map((item) => String(item.id_number || '').trim())
     .filter((item) => new RegExp(`^${prefix}-\\d{3}$`).test(item))
-    .map((item) => Number(item.split('-')[1]))
-    .filter((item) => Number.isFinite(item))
+    .filter((item) => item !== String(currentIdNumber || '').trim())
+  )
 
-  const startNumber = usedNumbers.length > 0 ? Math.max(...usedNumbers) + 1 : 1
+  const suggestions: string[] = []
+  let runningNumber = 1
 
-  return Array.from({ length: 6 }, (_, index) => {
-    const runningNumber = String(startNumber + index).padStart(3, '0')
-    return `${prefix}-${runningNumber}`
-  })
+  while (suggestions.length < 6 && runningNumber <= 999) {
+    const candidate = `${prefix}-${String(runningNumber).padStart(3, '0')}`
+    if (!usedNumbers.has(candidate)) {
+      suggestions.push(candidate)
+    }
+    runningNumber += 1
+  }
+
+  return suggestions
 }
 
 const parseServerErrorMessage = (message?: string) => {
@@ -292,6 +303,96 @@ const ScrollToAlertEffect: FC<{ active: boolean; targetRef: RefObject<HTMLDivEle
   }, [active, targetRef])
 
   return null
+}
+
+const defaultAvatarUrl = toAbsoluteUrl('/media/svg/avatars/blank.svg')
+
+const PhotoFieldSection: FC<{
+  mode: 'add' | 'edit'
+  photo: string | File | null
+  hasError: boolean
+  submitCount: number
+  setFieldValue: (
+    field: string,
+    value: any,
+    shouldValidate?: boolean
+  ) => Promise<void | FormikHelpers<EmployeeRegisterData>> | void
+}> = ({mode, photo, hasError, submitCount, setFieldValue}) => {
+  const [previewUrl, setPreviewUrl] = useState(defaultAvatarUrl)
+
+  useEffect(() => {
+    if (photo instanceof File) {
+      const objectUrl = URL.createObjectURL(photo)
+      setPreviewUrl(objectUrl)
+      return () => URL.revokeObjectURL(objectUrl)
+    }
+
+    if (typeof photo === 'string' && photo.trim()) {
+      setPreviewUrl(`${fullUrlServer}/${photo.replace(/^\/+/, '')}`)
+      return
+    }
+
+    setPreviewUrl(defaultAvatarUrl)
+  }, [photo])
+
+  return (
+    <div className="mb-10">
+      <h3 className="fw-bolder text-dark mb-5">
+        Photo {mode === 'add' ? <span className="text-danger">*</span> : null}
+      </h3>
+
+      <div className="d-flex align-items-start gap-5 flex-wrap">
+        <img
+          src={previewUrl}
+          alt="Employee profile"
+          className="rounded border"
+          style={{width: '120px', height: '140px', objectFit: 'cover'}}
+          onError={(e) => {
+            e.currentTarget.onerror = null
+            e.currentTarget.src = defaultAvatarUrl
+          }}
+        />
+
+        <div className="flex-grow-1" style={{minWidth: 280}}>
+          <input
+            type="file"
+            accept="image/*"
+            className={`form-control${hasError && submitCount > 0 ? ' is-invalid' : ''}`}
+            onChange={(e) => setFieldValue('photo', e.target.files?.[0] ?? null)}
+          />
+
+          {mode === 'edit' && typeof photo === 'string' && photo ? (
+            <div className="d-flex flex-wrap align-items-center gap-3 mt-2">
+              <div className="text-muted small">Current file: {photo}</div>
+              <button
+                type="button"
+                className="btn btn-sm btn-light-danger"
+                onClick={() => setFieldValue('photo', null)}
+              >
+                Remove photo
+              </button>
+            </div>
+          ) : null}
+
+          {mode === 'edit' && photo instanceof File ? (
+            <div className="text-muted mt-2 small">
+              New photo selected. Save changes to replace the previous photo.
+            </div>
+          ) : null}
+
+          {mode === 'edit' && photo === null ? (
+            <div className="text-muted mt-2 small">
+              Photo will be removed after you save this employee.
+            </div>
+          ) : null}
+
+          <div className="text-danger mt-1">
+            <ErrorMessage name="photo" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const EmployeeRegisterSimpleForm: FC<Props> = ({ mode, initialValues, onSuccess, backTo }) => {
@@ -448,7 +549,7 @@ const EmployeeRegisterSimpleForm: FC<Props> = ({ mode, initialValues, onSuccess,
                 ]
               : companyOptions
 
-            const baseIdSuggestions = buildIdSuggestions(values.reg_date, employees)
+            const baseIdSuggestions = buildIdSuggestions(values.reg_date, employees, values.id_number)
             const idSuggestions = filterIdSuggestions
               ? baseIdSuggestions.filter((item) =>
                   item.includes(String(values.id_number || '').trim())
@@ -658,23 +759,13 @@ const EmployeeRegisterSimpleForm: FC<Props> = ({ mode, initialValues, onSuccess,
                   </div>
                 ))}
 
-                <div className="mb-10">
-                  <h3 className="fw-bolder text-dark mb-5">
-                    Photo <span className="text-danger">*</span>
-                  </h3>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    className={`form-control${errors.photo && submitCount > 0 ? ' is-invalid' : ''}`}
-                    onChange={(e) => setFieldValue('photo', e.target.files?.[0] ?? null)}
-                  />
-                  {mode === 'edit' && typeof values.photo === 'string' && values.photo ? (
-                    <div className="text-muted mt-2 small">Current file: {values.photo}</div>
-                  ) : null}
-                  <div className="text-danger mt-1">
-                    <ErrorMessage name="photo" />
-                  </div>
-                </div>
+                <PhotoFieldSection
+                  mode={mode}
+                  photo={values.photo}
+                  hasError={Boolean(errors.photo)}
+                  submitCount={submitCount}
+                  setFieldValue={setFieldValue}
+                />
 
                 <div className={backTo ? 'd-flex justify-content-end align-items-center gap-3 pt-5' : ''}>
                   {backTo ? (

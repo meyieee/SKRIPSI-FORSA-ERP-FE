@@ -1,9 +1,15 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import {useAuth} from '../../../../app/modules/auth/core/Auth'
-import { fullUrlServer, toAbsoluteUrl } from '../../../helpers'
+import {toAbsoluteUrl} from '../../../helpers'
 
-const HeaderUserMenu: FC = () => {
+const defaultAvatarUrl = toAbsoluteUrl('/media/svg/avatars/blank.svg')
+
+type Props = {
+  avatarUrl?: string | null
+}
+
+const HeaderUserMenu: FC<Props> = ({avatarUrl}) => {
   const {currentUser, logout} = useAuth()
   return (
     <div
@@ -13,12 +19,18 @@ const HeaderUserMenu: FC = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-          { 
-          currentUser?.['employees.photo'] 
-						? <img src={`${fullUrlServer}/${currentUser?.['employees.photo']}` } alt='Logo' />
-						: 
-            <img src={toAbsoluteUrl('/media/avatars/blank.png')} alt='Logo' />
-					}
+          {avatarUrl ? (
+              <img
+                src={avatarUrl}
+                alt='Profile'
+                onError={(e) => {
+                  e.currentTarget.onerror = null
+                  e.currentTarget.src = defaultAvatarUrl
+                }}
+              />
+            )
+            : <img src={defaultAvatarUrl} alt='Profile' />
+          }
           </div>
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>

@@ -11,6 +11,8 @@ import {useCanAccessRoute} from '../../../../../../custom-hooks'
 import {default as socket} from '../../../../../../functions/socket'
 import {useAuth} from '../../../../../auth'
 
+const defaultAvatarUrl = '/media/svg/avatars/blank.svg'
+
 const parseDDMMYY = (s?: string) => {
   if (!s) return 0
   // support: "20-12-25" atau "20-12-2025"
@@ -329,7 +331,14 @@ const TasksTab = () => {
                   <td className='min-w-140px'>
                     <div className='d-flex align-items-center'>
                       <div className='symbol symbol-45px me-3'>
-                        <img src={getAvatarUrl(row.image_key)} alt={displayName} />
+                        <img
+                          src={getAvatarUrl(row.image_key)}
+                          alt={displayName}
+                          onError={(e) => {
+                            e.currentTarget.onerror = null
+                            e.currentTarget.src = defaultAvatarUrl
+                          }}
+                        />
                       </div>
                       <span>{displayName}</span>
                     </div>

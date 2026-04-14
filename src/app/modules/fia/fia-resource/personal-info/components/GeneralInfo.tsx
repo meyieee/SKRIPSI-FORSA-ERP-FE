@@ -10,6 +10,8 @@ import {
 } from '../../personal-info/core/_requests'
 import {normalizeName} from '../../components/functions/normalizeName'
 
+const defaultAvatarUrl = '/media/svg/avatars/blank.svg'
+
 type Props = {
   className?: string
   showMainNav?: boolean
@@ -143,6 +145,10 @@ const GeneralInfo: FC<Props> = ({className, showMainNav, allowEmployeeSearch = t
               alt=''
               className='rounded'
               style={{width: '110px', height: '140px', objectFit: 'cover'}}
+              onError={(e) => {
+                e.currentTarget.onerror = null
+                e.currentTarget.src = defaultAvatarUrl
+              }}
             />
           </div>
 
