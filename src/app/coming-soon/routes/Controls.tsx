@@ -9,6 +9,7 @@ import { EmployeeRegisterAddAdminGate } from "../../modules/hr/hr-employee-admin
 import { EmployeeManagementTable } from "../../modules/hr/hr-employee-admin/EmployeeManagementTable";
 import { EmployeeRegisterEdit } from "../../modules/hr/hr-employee-admin/EmployeeRegisterEdit";
 import { ProfileProvider } from "../../modules/fia/fia-resource/personal-info/components/ProfileContext";
+import { RbacFeatureManagementPage } from "../../modules/cf/rbac-feature-management/RbacFeatureManagementPage";
 
 const accountSettingsBreadcrumbs: Array<PageLink> = [
   {
@@ -97,6 +98,15 @@ return (
         }
       />
       <Route path='command-center' element={<Navigate to='/home/command_center' replace />} />
+      <Route
+        path='rbac-features'
+        element={
+        <>
+          <PageTitle breadcrumbs={accountSettingsBreadcrumbs}>RBAC Features</PageTitle>
+          <RbacFeatureManagementPage />
+        </>
+        }
+      />
       </Route>
       <Route index element={<Navigate to='/controls/account-settings' />} />
     </Routes>

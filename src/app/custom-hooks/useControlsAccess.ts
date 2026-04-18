@@ -13,6 +13,7 @@ export const CONTROLS_ACCESS_ROUTE_PATHS = [
   '/controls/account-settings',
   '/controls/change-password',
   '/controls/employee-register/add',
+  '/controls/rbac-features',
   '/control-file/master/acc/view',
 ] as const
 
@@ -48,6 +49,7 @@ export const useControlsAccess = () => {
   const canChangePassword = useCanAccessRoute('/controls/change-password')
   const canEmployeeRegisterAdd = useCanAccessRoute('/controls/employee-register/add')
   const canGlAccountView = useCanAccessRoute('/control-file/master/acc/view')
+  const canRbacFeatures = useCanAccessRoute('/controls/rbac-features')
 
   const anyControls = useCanAccessAnyControlsRoute()
 
@@ -62,6 +64,8 @@ export const useControlsAccess = () => {
     showChangePassword: umbrella || canChangePassword,
     /** Sub-item: Add Employee (tbl_emp_regs) */
     showAddEmployee: umbrella || canEmployeeRegisterAdd,
+    /** RBAC feature & role-privilege management (super_admin) */
+    showRbacFeatures: canRbacFeatures,
     /** Mount PrivateRoutes: controls/* (account-settings, change-password) */
     canAccessControlsRoutes: showSection,
     /** Mount PrivateRoutes: control-file/master/acc/* (GL account) */

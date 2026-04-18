@@ -8,6 +8,7 @@ export function AsideMenuMain() {
     showAccountSettings,
     showAddEmployee,
     showChangePassword,
+    showRbacFeatures,
   } = useControlsAccess()
 
   const canAccessOverview = useCanAccessRoute('/home/overview')
@@ -96,6 +97,9 @@ export function AsideMenuMain() {
           )}
           {showChangePassword && (
             <AsideMenuItem to='/controls/change-password' title='Change Password' hasBullet={true} />
+          )}
+          {showRbacFeatures && (
+            <AsideMenuItem to='/controls/rbac-features' title='RBAC Features' hasBullet={true} />
           )}
         </AsideMenuItemWithSub>
       )}

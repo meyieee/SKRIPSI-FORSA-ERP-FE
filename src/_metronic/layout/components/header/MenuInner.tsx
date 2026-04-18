@@ -28,6 +28,7 @@ export function MenuInner() {
     showAccountSettings,
     showAddEmployee,
     showChangePassword,
+    showRbacFeatures,
   } = useControlsAccess()
 
   const canAccessOverview = useCanAccessRoute('/home/overview')
@@ -148,6 +149,13 @@ export function MenuInner() {
           )}
           {showChangePassword && (
             <MenuItem to='/controls/change-password' title='Change Password' icon='/media/icons/duotune/communication/com006.svg' />
+          )}
+          {showRbacFeatures && (
+            <MenuItem
+              to='/controls/rbac-features'
+              title='RBAC Features'
+              icon='/media/icons/duotune/technology/teh004.svg'
+            />
           )}
         </MenuInnerWithSub>
       )}
