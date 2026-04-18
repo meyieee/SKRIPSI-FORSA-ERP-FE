@@ -104,6 +104,7 @@ export function validateWorkforceRequestAll(v: WorkforceRequestForm): string[] {
     all.push(...validateWorkforceRequest(s, v))
   })
   if (!v.requestInfo.requestBy) all.push('Request By is required')
+  if (!v.requestInfo.priority) all.push('Priority is required')
   if (!v.requestInfo.requestDescription) all.push('Request Description is required')
   return all
 }

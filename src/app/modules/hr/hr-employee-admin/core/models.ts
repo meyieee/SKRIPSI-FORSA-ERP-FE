@@ -234,7 +234,7 @@ export const employeeRegisterSimpleSchema = Yup.object({
   status: Yup.string(),
   status_date: Yup.string(),
   reg_by: Yup.string().nullable(),
-  photo: Yup.mixed().nullable().required('Required'),
+  photo: Yup.mixed().nullable(),
 })
 
 const latestValues = (data: EmployeeRegisterData | undefined | null): EmployeeRegisterData => {

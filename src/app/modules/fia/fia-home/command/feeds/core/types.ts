@@ -1,8 +1,6 @@
 export interface FeedsFilters {
-  site: string
   department: string
   section: string
-  element: string
   date: string
 }
 
@@ -48,7 +46,6 @@ export interface OnlineRoster {
   siteBranch: string
   department: string
   section: string
-  element: string
   workgroup: string
   crew: string
   empNo: string

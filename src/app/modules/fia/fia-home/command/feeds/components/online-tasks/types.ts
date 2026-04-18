@@ -4,7 +4,6 @@ export interface OnlineTask extends BaseOnlineTask {
   site?: string
   department?: string
   section?: string
-  element?: string
   tasksDateIso?: string
 }
 
@@ -42,7 +41,6 @@ export interface OnlineTaskListQuery {
   site?: string
   department?: string
   section?: string
-  element?: string
   date?: string
 }
 
@@ -131,7 +129,6 @@ export const normalizeOnlineTask = (task: Partial<OnlineTask>): OnlineTask => {
     site: task.site ? String(task.site) : '',
     department: task.department ? String(task.department) : '',
     section: task.section ? String(task.section) : '',
-    element: task.element ? String(task.element) : '',
   }
 }
 
@@ -141,10 +138,8 @@ const includesInsensitive = (source: string | undefined, target: string) =>
     .includes(target.toLowerCase())
 
 export const matchesOnlineTaskFilters = (task: OnlineTask, filters: FeedsFilters) => {
-  if (filters.site && !includesInsensitive(task.site, filters.site)) return false
   if (filters.department && !includesInsensitive(task.department, filters.department)) return false
   if (filters.section && !includesInsensitive(task.section, filters.section)) return false
-  if (filters.element && !includesInsensitive(task.element, filters.element)) return false
   if (filters.date) {
     const rowIso = task.tasksDateIso || toIsoDate(task.tasksDate)
     if (rowIso !== filters.date) return false

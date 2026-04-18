@@ -26,7 +26,6 @@ import {
 import { useFormNotification } from '../common/hooks'
 import RequestInfoSection from './sections/RequestInfoSection'
 import RequisitionInformationSection from './sections/RequisitionInformationSection'
-import ItemDetailsSection from './sections/ItemDetailsSection'
 import './PurchaseRequisitionForm.scss'
 
 type Props = {
@@ -248,7 +247,6 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
                         branchSiteOptions={branchSiteOptions}
                         locationOptions={locationOptions}
                         departmentOptions={departmentOptions}
-                        costCenterOptions={costCenterOptions}
                         currentUser={currentUser}
                       />
 
@@ -257,11 +255,6 @@ function PurchaseRequisitionForm({ cat, type }: Props) {
                         setFieldValue={formProps.setFieldValue}
                       />
 
-                      <ItemDetailsSection
-                        values={formProps.values.itemDetails}
-                        setFieldValue={formProps.setFieldValue}
-                        onUpdateEstimatedTotal={(total) => formProps.setFieldValue('estimatedTotalCost', total)}
-                      />
                     </Form>
                   </div>
                 </div>

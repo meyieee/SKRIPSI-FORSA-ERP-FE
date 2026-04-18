@@ -112,6 +112,7 @@ export function validateVisitorRequest(values: VisitorRequestForm): string[] {
   if (!values.requestInfo.requestDate) errors.push('Request Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
   if (!values.requestInfo.requestPurpose) errors.push('Request Purpose is required')
+  if (!values.requestInfo.priority) errors.push('Priority is required')
   if (!values.visitorDetails.visitorName) errors.push('Visitor Name is required')
   if (!values.visitDetails.dateOfVisit) errors.push('Date of Visit is required')
   if (!values.visitDetails.timeOfVisit) errors.push('Time of Visit is required')

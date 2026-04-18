@@ -114,22 +114,13 @@ export function validateInspectionDefect(values: InspectionDefectForm): string[]
   if (!values.requestInfo.requestDate) errors.push('Request Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
   if (!values.requestInfo.requestPurpose) errors.push('Request Purpose is required')
+  if (!values.requestInfo.priority) errors.push('Priority is required')
   if (!values.requestInfo.requestDescription) errors.push('Request Description is required')
   
   if (!values.inspectionInfo.inspectionDate) errors.push('Inspection Date is required')
   if (!values.inspectionInfo.inspectionType) errors.push('Inspection Type is required')
   if (!values.inspectionInfo.inspectionDescription) errors.push('Inspection Description is required')
   if (!values.inspectionInfo.inspectionBy) errors.push('Inspection By is required')
-  
-  if (values.defectDetails.length === 0) {
-    errors.push('At least one defect detail is required')
-  } else {
-    values.defectDetails.forEach((defect, index) => {
-      if (!defect.defectDescription) {
-        errors.push(`Defect Description for row ${index + 1} is required`)
-      }
-    })
-  }
   
   return errors
 }

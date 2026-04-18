@@ -6,6 +6,8 @@ import {searchAssignees, AssigneeItem} from '../../../core/tasks/_requests'
 import {fullUrlServer} from '../../../../../../../functions' // sesuaikan path
 import {useAuth} from '../../../../../../auth'
 
+const defaultAvatarUrl = `${fullUrlServer}/media/svg/avatars/blank.svg`
+
 interface CreateETaskModalProps {
   show: boolean
   onHide: () => void
@@ -341,12 +343,16 @@ const CreateETaskModal: React.FC<CreateETaskModalProps> = ({show, onHide, select
                         src={
                           p.photo
                             ? `${fullUrlServer}/${p.photo}`
-                            : `${fullUrlServer}/media/avatars/blank.png`
+                            : defaultAvatarUrl
                         }
                         alt=''
                         width={28}
                         height={28}
                         style={{borderRadius: '50%', objectFit: 'cover'}}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null
+                          e.currentTarget.src = defaultAvatarUrl
+                        }}
                       />
                       <div style={{lineHeight: 1.2}}>
                         <div style={{fontWeight: 600}}>{cleanLabel(p.full_name)}</div>
@@ -529,12 +535,16 @@ const CreateETaskModal: React.FC<CreateETaskModalProps> = ({show, onHide, select
                               src={
                                 p.photo
                                   ? `${fullUrlServer}/${p.photo}`
-                                  : `${fullUrlServer}/media/avatars/blank.png`
+                                  : defaultAvatarUrl
                               }
                               alt=''
                               width={28}
                               height={28}
                               style={{borderRadius: '50%', objectFit: 'cover'}}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null
+                                e.currentTarget.src = defaultAvatarUrl
+                              }}
                             />
                             <div style={{lineHeight: 1.2}}>
                               <div style={{fontWeight: 600}}>

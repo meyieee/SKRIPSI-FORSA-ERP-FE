@@ -87,22 +87,14 @@ const RosterTab: React.FC = () => {
     setInitialTitle('')
   }
 
-  // klik tanggal kosong / tanggal yang sudah ada note
+  // klik tanggal selalu membuka mode tambah agenda baru untuk tanggal itu
   const handleDateClick = (arg: any) => {
     const dateStr: string = arg.dateStr // "YYYY-MM-DD"
-    const existing = events.find((e) => e.date === dateStr)
 
     setSelectedDate(dateStr)
-
-    if (existing) {
-      setEditMode(true)
-      setSelectedNoteId(Number(existing.id))
-      setInitialTitle(existing.title)
-    } else {
-      setEditMode(false)
-      setSelectedNoteId(null)
-      setInitialTitle('')
-    }
+    setEditMode(false)
+    setSelectedNoteId(null)
+    setInitialTitle('')
 
     setShowModal(true)
   }

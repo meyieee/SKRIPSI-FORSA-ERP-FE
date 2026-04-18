@@ -4,7 +4,6 @@ export interface OnlineRequest extends BaseOnlineRequest {
   site?: string
   department?: string
   section?: string
-  element?: string
   requestDateIso?: string
 }
 
@@ -25,7 +24,6 @@ export interface OnlineRequestListQuery {
   site?: string
   department?: string
   section?: string
-  element?: string
   date?: string
 }
 
@@ -103,7 +101,6 @@ export const normalizeOnlineRequest = (request: Partial<OnlineRequest>): OnlineR
     site: request.site ? String(request.site) : '',
     department: request.department ? String(request.department) : '',
     section: request.section ? String(request.section) : '',
-    element: request.element ? String(request.element) : '',
   }
 }
 
@@ -113,10 +110,8 @@ const includesInsensitive = (source: string | undefined, target: string) =>
     .includes(target.toLowerCase())
 
 export const matchesOnlineRequestFilters = (request: OnlineRequest, filters: FeedsFilters) => {
-  if (filters.site && !includesInsensitive(request.site, filters.site)) return false
   if (filters.department && !includesInsensitive(request.department, filters.department)) return false
   if (filters.section && !includesInsensitive(request.section, filters.section)) return false
-  if (filters.element && !includesInsensitive(request.element, filters.element)) return false
 
   if (filters.date) {
     const rowIso = request.requestDateIso || toIsoDate(request.requestDate)

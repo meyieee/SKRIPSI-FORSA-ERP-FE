@@ -25,7 +25,6 @@ import {
 import { useFormNotification } from '../common/hooks'
 import RequestInfoSection from './sections/RequestInfoSection'
 import TravelDetailsSection from './sections/TravelDetailsSection'
-import TravelersTable from './sections/TravelersTable'
 import './TravelRequestForm.scss'
 
 type Props = {
@@ -210,9 +209,6 @@ function TravelRequestForm({ cat, type }: Props) {
                         setFieldValue={formProps.setFieldValue}
                         getRequestPurposeOptions={getRequestPurposeOptions}
                         getPriorityOptions={getPriorityOptions}
-                        branchSiteOptions={branchSiteOptions}
-                        getLocationOptions={getLocationOptions}
-                        getDepartmentOptions={getDepartmentOptions}
                         currentUser={currentUser}
                       />
 
@@ -221,10 +217,6 @@ function TravelRequestForm({ cat, type }: Props) {
                         setFieldValue={formProps.setFieldValue}
                       />
 
-                      <TravelersTable
-                        travelers={formProps.values.travelers}
-                        setFieldValue={formProps.setFieldValue}
-                      />
                     </Form>
                   </div>
                 </div>

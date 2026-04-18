@@ -6,7 +6,6 @@ import FormField from '../../common/components/FormField'
 import FormSelect from '../../common/components/FormSelect'
 import FormTextarea from '../../common/components/FormTextarea'
 import EmployeeSearchTypeahead from '../../common/components/EmployeeSearchTypeahead'
-import OrgLockedOrManualField from '../../common/components/OrgLockedOrManualField'
 import { useRequestForOrganizationSync } from '../../common/hooks'
 
 type RequestInfoSectionProps = {
@@ -14,10 +13,6 @@ type RequestInfoSectionProps = {
   setFieldValue: (field: string, value: any) => void
   getRequestPurposeOptions: () => Array<{ value: string; label: string }>
   getPriorityOptions: () => Array<{ value: string; label: string }>
-  branchSiteOptions: Array<{ value: string; label: string }>
-  locationOptions: Array<{ value: string; label: string }>
-  departmentOptions: Array<{ value: string; label: string }>
-  costCenterOptions: Array<{ value: string; label: string }>
   currentUser?: UserModel | null
 }
 
@@ -26,27 +21,24 @@ export default function RequestInfoSection({
   setFieldValue,
   getRequestPurposeOptions,
   getPriorityOptions,
-  branchSiteOptions,
-  locationOptions,
-  departmentOptions,
-  costCenterOptions,
   currentUser,
 }: RequestInfoSectionProps) {
   const orgSync = useRequestForOrganizationSync(values.requestFor, setFieldValue)
 
-  // Helper untuk mendapatkan name/username dari current user untuk display
+  // Helper untuk mendapatkan nama lengkap current user untuk display
   const getCurrentUserName = (): string => {
     if (!currentUser) return values.requestBy || ''
-    
-    // Prioritas: name > username > fullname > first_name + last_name > id_number
-    if (currentUser.name) return currentUser.name
-    if (currentUser.username) return currentUser.username
+    if (currentUser.display_name) return currentUser.display_name
     if (currentUser.fullname) return currentUser.fullname
+    if (currentUser['employees.first_name'] || currentUser['employees.last_name']) {
+      return `${currentUser['employees.first_name'] || ''} ${currentUser['employees.middle_name'] || ''} ${currentUser['employees.last_name'] || ''}`.replace(/\s+/g, ' ').trim()
+    }
     if (currentUser.first_name || currentUser.last_name) {
       return `${currentUser.first_name || ''} ${currentUser.last_name || ''}`.trim()
     }
+    if (currentUser.name) return currentUser.name
+    if (currentUser.username) return currentUser.username
     if (currentUser.id_number) return currentUser.id_number
-    
     return values.requestBy || ''
   }
   return (
@@ -106,75 +98,7 @@ export default function RequestInfoSection({
             value={values.priority}
             onChange={(value) => setFieldValue('requestInfo.priority', value)}
             options={getPriorityOptions()}
-          />
-        </div>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayBranchSite}
-            label='Branch|Site'
-            name='requestInfo.branchSite'
-            manual={
-              <FormSelect
-                label='Branch|Site'
-                name='requestInfo.branchSite'
-                value={values.branchSite}
-                onChange={(value) => setFieldValue('requestInfo.branchSite', value)}
-                options={branchSiteOptions}
-                placeholder='Select branch / site'
-              />
-            }
-          />
-        </div>
-      </div>
-
-      <div className='row'>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayDepartment}
-            label='Department'
-            name='requestInfo.department'
-            manual={
-              <FormSelect
-                label='Department'
-                name='requestInfo.department'
-                value={values.department}
-                onChange={(value) => setFieldValue('requestInfo.department', value)}
-                options={departmentOptions}
-                placeholder='Select department'
-                required
-              />
-            }
-          />
-        </div>
-        <div className='col-md-4'>
-          <OrgLockedOrManualField
-            orgReadOnly={orgSync.orgReadOnly}
-            displayValue={orgSync.displayCostCenter}
-            label='Cost Center'
-            name='requestInfo.costCenter'
-            manual={
-              <FormSelect
-                label='Cost Center'
-                name='requestInfo.costCenter'
-                value={values.costCenter}
-                onChange={(value) => setFieldValue('requestInfo.costCenter', value)}
-                options={costCenterOptions}
-                placeholder='Select cost center'
-                required
-              />
-            }
-          />
-        </div>
-        <div className='col-md-4'>
-          <FormSelect
-            label='Location'
-            name='requestInfo.location'
-            value={values.location}
-            onChange={(value) => setFieldValue('requestInfo.location', value)}
-            options={locationOptions}
-            placeholder='Select location'
+            required
           />
         </div>
       </div>

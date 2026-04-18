@@ -97,18 +97,20 @@ const OnlineTaskTable: React.FC<Props> = ({ tasks, onView, isLoading = false, er
                       <span className={getStatusClass(task.status)}>{normalizeStatus(task.status)}</span>
                     </td>
                     <td className='text-end'>
-                      {onView && (
-                        <button
-                          type='button'
-                          className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
-                          onClick={() => handleView(task)}
-                        >
-                          <KTSVG
-                            path='/media/icons/duotune/general/gen004.svg'
-                            className='svg-icon-3'
-                          />
-                        </button>
-                      )}
+                      <div className='d-flex justify-content-end flex-shrink-0'>
+                        {onView && (
+                          <button
+                            type='button'
+                            className='btn btn-sm btn-link btn-color-dark btn-active-color-primary me-1'
+                            onClick={() => handleView(task)}
+                          >
+                            <KTSVG
+                              path='/media/icons/duotune/general/gen004.svg'
+                              className='svg-icon-3'
+                            />
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))

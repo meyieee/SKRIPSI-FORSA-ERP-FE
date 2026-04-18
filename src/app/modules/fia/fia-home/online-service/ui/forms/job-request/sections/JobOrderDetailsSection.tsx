@@ -40,6 +40,7 @@ export default function JobOrderDetailsSection({
             onChange={(value) => setFieldValue('jobOrder.location', value)}
             options={locationOptions}
             placeholder='Select location'
+            required
           />
         </div>
         <div className='col-md-4'>

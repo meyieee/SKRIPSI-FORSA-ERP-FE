@@ -1,10 +1,16 @@
-import {FC} from 'react'
+import {FC, useEffect, useState} from 'react'
 import clsx from 'clsx'
 import {fullUrlServer, KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderUserMenu, ThemeModeSwitcher} from '../../../partials'
 import {useLayout} from '../../core'
 import {useAuth} from '../../../../app/modules/auth/core/Auth'
+import {
+  fetchPersonalInfo,
+  toServerFileUrl,
+} from '../../../../app/modules/fia/fia-resource/personal-info/core/_requests'
 // import CompanySizeContext from './CompanySizeContext'
+
+const defaultAvatarUrl = toAbsoluteUrl('/media/svg/avatars/blank.svg')
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
@@ -17,6 +23,45 @@ const Topbar: FC = () => {
   // const { updateCompanySize } = useContext(CompanySizeContext);
   const {config} = useLayout()
   const {currentUser} = useAuth()
+  const [avatarUrl, setAvatarUrl] = useState<string>(defaultAvatarUrl)
+
+  useEffect(() => {
+    let isMounted = true
+
+    const directPhoto = String(currentUser?.['employees.photo'] || '').trim()
+    if (directPhoto) {
+      setAvatarUrl(`${fullUrlServer}/${directPhoto.replace(/^\/+/, '')}`)
+      return () => {
+        isMounted = false
+      }
+    }
+
+    const idNumber = String(currentUser?.id_number || '').trim()
+    if (!idNumber) {
+      setAvatarUrl(defaultAvatarUrl)
+      return () => {
+        isMounted = false
+      }
+    }
+
+    ;(async () => {
+      try {
+        const payload = await fetchPersonalInfo(idNumber)
+        const photoUrl = toServerFileUrl(payload?.header?.photo || '')
+        if (isMounted) {
+          setAvatarUrl(photoUrl || defaultAvatarUrl)
+        }
+      } catch {
+        if (isMounted) {
+          setAvatarUrl(defaultAvatarUrl)
+        }
+      }
+    })()
+
+    return () => {
+      isMounted = false
+    }
+  }, [currentUser])
 
   // function onFilterValueSelected(e: any) {
   //   return updateCompanySize(e.target.value)
@@ -62,13 +107,16 @@ const Topbar: FC = () => {
           data-kt-menu-placement='bottom-end'
           data-kt-menu-flip='bottom'
         >
-          {currentUser?.['employees.photo'] ? (
-            <img src={`${fullUrlServer}/${currentUser['employees.photo']}`} alt='Logo' />
-          ) : (
-            <img src={toAbsoluteUrl('/media/avatars/blank.png')} alt='Logo' />
-          )}
+          <img
+            src={avatarUrl}
+            alt='Profile'
+            onError={(e) => {
+              e.currentTarget.onerror = null
+              e.currentTarget.src = defaultAvatarUrl
+            }}
+          />
         </div>
-        <HeaderUserMenu />
+        <HeaderUserMenu avatarUrl={avatarUrl} />
         {/* end::Toggle */}
       </div>
       {/* end::User */}

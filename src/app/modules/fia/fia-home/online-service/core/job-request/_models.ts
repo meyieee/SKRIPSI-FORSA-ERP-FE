@@ -95,6 +95,7 @@ export function validateJobRequestAll(v: JobRequestForm): string[] {
   if (!v.requestInfo.requestDate) errs.push('Request Date is required')
   if (!v.requestInfo.requestBy) errs.push('Request By is required')
   if (!v.requestInfo.requestPurpose) errs.push('Request Purpose is required')
+  if (!v.requestInfo.priority) errs.push('Priority is required')
   if (!v.jobOrder.jobType) errs.push('Job Type is required')
   if (!v.jobOrder.location) errs.push('Location is required')
   

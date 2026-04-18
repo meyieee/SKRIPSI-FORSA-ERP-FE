@@ -94,6 +94,7 @@ export function validateAccommodationRequest(values: AccommodationRequestForm): 
   if (!values.requestInfo.requestDate) errors.push('Request Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
   if (!values.requestInfo.requestPurpose) errors.push('Request Purpose is required')
+  if (!values.requestInfo.priority) errors.push('Priority is required')
   if (!values.extendedRequestDetails.visitorName) errors.push('Visitor Name is required')
   if (!values.accommodationRequirements.accommodationType) errors.push('Accommodation Type is required')
   if (!values.accommodationRequirements.numberOfNights) errors.push('Number of Nights is required')

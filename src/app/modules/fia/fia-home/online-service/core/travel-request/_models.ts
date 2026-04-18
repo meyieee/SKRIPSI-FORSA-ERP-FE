@@ -96,17 +96,11 @@ export function validateTravelRequest(v: TravelRequestForm): string[] {
   
   if (!v.requestInfo.requestDate) errs.push('Request Date is required')
   if (!v.requestInfo.requestPurpose) errs.push('Request Purpose is required')
+  if (!v.requestInfo.priority) errs.push('Priority is required')
   if (!v.requestInfo.requestDescription) errs.push('Request Description is required')
   if (!v.travelDetails.numberOfPerson || v.travelDetails.numberOfPerson < 1) errs.push('Number of Person must be at least 1')
   if (!v.travelDetails.departure) errs.push('Departure is required')
   if (!v.travelDetails.return) errs.push('Return is required')
-  
-  // Validate travelers
-  v.travelers.forEach((traveler, index) => {
-    if (!traveler.lastName) errs.push(`Traveler ${index + 1}: Last Name is required`)
-    if (!traveler.firstName) errs.push(`Traveler ${index + 1}: First Name is required`)
-    if (!traveler.category) errs.push(`Traveler ${index + 1}: Category is required`)
-  })
   
   return errs
 }
