@@ -126,8 +126,15 @@ const HeaderUserMenu: FC = () => {
       </div>
 
       <div className='menu-item px-5'>
-        {/* <a href='/#' onClick={logout} className='menu-link px-5'> */}
-        <a onClick={logout} className='menu-link px-5'>
+        <a
+          href='#'
+          data-testid='user-menu-sign-out'
+          className='menu-link px-5'
+          onClick={(e) => {
+            e.preventDefault()
+            logout()
+          }}
+        >
           Sign Out
         </a>
       </div>

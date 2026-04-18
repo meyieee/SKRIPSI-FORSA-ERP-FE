@@ -6,10 +6,14 @@ export type UserData = {
   id_number: string
   name: string
   password?: string
-  role: string
-  branch_code: string
-  status: boolean
-  department: string
+  role?: string
+  role_id?: number
+  employee_id?: string
+  user_name?: string
+  branch_code?: string
+  status?: boolean
+  department?: string
+
   full_name?: string
   com_name?: string
   department_des?: string
@@ -35,6 +39,21 @@ export const createUserSchemas = Yup.object().shape({
   role: Yup.string()
     .max(100, 'Maximum characters reached')
     .required('This field is required'),
+})
+
+export const createV1UserSchemas = Yup.object().shape({
+  user_name: Yup.string()
+    .max(25, 'Maximum characters reached')
+    .min(4, 'Minimum characters reached')
+    .matches(/^\S*$/, 'Spaces are not allowed')
+    .required('This field is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters long'),
+  role_id: Yup.number()
+    .required('Role is required'),
+  employee_id: Yup.string()
+    .required('Employee must be correctly selected')
 })
 
 export const PasswordUpdateSchema = Yup.object().shape({

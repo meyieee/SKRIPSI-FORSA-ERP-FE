@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react'
 import { Form, Formik } from 'formik'
 import { AlertMessengerContext } from '../../../../components'
-import { UserData, createUserSchemas } from '../core/_models'
-import { addUser } from '../core/_requests'
+import { UserData, createV1UserSchemas } from '../core/_models'
+import { addV1User } from '../core/_requests'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserForm } from './UserForm'
 import { KTSVG } from '../../../../../_metronic'
@@ -15,6 +15,10 @@ const UserCreate = () => {
   const initValues = {
     id_number: '',
     name: '',
+    employee_id: '',
+    role_id: '',
+    user_name: '',
+    password: '',
     role: '',
     status: true,
     branch_code: '',
@@ -40,9 +44,9 @@ const UserCreate = () => {
     });
   };
 
-  const submitStep = (values: UserData) => {
+  const submitStep = (values: any) => {
     setIsSubmit(true)
-    addUser(values)
+    addV1User(values)
     .then(res => {
       onSuccess(res.data.message)
       setTimeout(() => {
@@ -56,7 +60,7 @@ const UserCreate = () => {
   }
 
 	return (
-      <Formik validationSchema={createUserSchemas} initialValues={initValues} onSubmit={submitStep}>
+      <Formik validationSchema={createV1UserSchemas} initialValues={initValues} onSubmit={submitStep}>
         {(formProps) => (
           <Form className='mx-auto mw-1000px w-100' id='kt_create_account_form'>
             <UserForm formProps={formProps} isUpdate={false}/>

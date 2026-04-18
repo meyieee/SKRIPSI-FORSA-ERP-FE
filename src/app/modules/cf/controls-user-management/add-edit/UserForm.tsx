@@ -1,3 +1,4 @@
+import { getRolesApi } from '../core/_requests'
 import { ErrorMessage, Field } from 'formik'
 import { ChangeEvent, Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -12,29 +13,6 @@ type Props = {
   isUpdate: boolean
 }
 
-const roleOptions = [
-  {value: 'administrator', label: 'Administrator'},
-  {value: 'fin_manager', label: 'Manager, Finance'},
-  {value: 'ops_manager', label: 'Manager, Operations'},
-  {value: 'hr_manager', label: 'Manager, Resource'},
-  {value: 'scm_manager', label: 'Manager, Supply'},
-  {value: 'fin_supervisor', label: 'Supervisor, Finance'},
-  {value: 'ops_supervisor', label: 'Supervisor, Operations'},
-  {value: 'hr_supervisor', label: 'Supervisor, Resource'},
-  {value: 'scm_supervisor', label: 'Supervisor, Supply'},
-  {value: 'fin_invoice_admin_clerk', label: 'Finance Clerk, Invoice Admin'},
-  {value: 'fin_transaction_clerk', label: 'Finance Clerk, Transaction'},
-  {value: 'ops_work_job_order_clerk', label: 'Operations Supervisor, Work | Job Order'},
-  {value: 'ops_asset_mgt_clerk', label: 'Operations Supervisor, Asset Management'},
-  {value: 'ops_reading_fuel_clerk', label: 'Operations Supervisor, Reading | Fuel'},
-  {value: 'ops_pm_system_clerk', label: 'Operations Supervisor, PM System'},
-  {value: 'hr_employee_admin_clerk', label: 'Resource Supervisor, Employee Admin'},
-  {value: 'scm_replenish_pr_clerk', label: 'Supply Supervisor, Replenish | PR'},
-  {value: 'scm_purchasing_clerk', label: 'Supply Supervisor, Purchasing'},
-  {value: 'scm_issue_request_clerk', label: 'Supply Supervisor, Issue | Request'},
-  {value: 'scm_inventory_clerk', label: 'Supply Supervisor, Inventory'},
-  {value: 'portal', label: 'Portal'},
-]
 
 const getEmployeeFullName = (employee: EmployeeRegisterRow) =>
   `${employee.first_name || ''} ${employee.last_name || ''}`.trim()
@@ -81,6 +59,15 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
   const funcGetEmployee = () => functionCheckComTypeRoutesAPI(getEmployee, currentUser)
   const {data: employees} = UseReactQuery({func: funcGetEmployee, cacheName: cache_employeeregister})
 
+  const { data: dbRolesData } = UseReactQuery({ func: getRolesApi, cacheName: 'active_roles' })
+  const dynamicRoleOptions = useMemo(() => {
+    if (!dbRolesData) return [];
+    return dbRolesData.map((item: any) => ({
+      value: String(item.id),
+      label: item.description || item.role_name
+    }))
+  }, [dbRolesData]);
+
   const [employeeQuery, setEmployeeQuery] = useState('')
   const [showEmployeeDropdown, setShowEmployeeDropdown] = useState(false)
   const [showUsernameDropdown, setShowUsernameDropdown] = useState(false)
@@ -124,12 +111,12 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
   }, [filterUsernameSuggestions, usernameSuggestions, values.name])
 
   const availableRoleOptions = useMemo(() => {
-    const currentRole = String(values.role || '').trim()
-    if (!currentRole) return roleOptions
-    const exists = roleOptions.some((item) => item.value === currentRole)
-    if (exists) return roleOptions
-    return [{value: currentRole, label: currentRole}, ...roleOptions]
-  }, [values.role])
+    const currentRole = values.role_id;
+    if (!currentRole) return dynamicRoleOptions
+    const exists = dynamicRoleOptions.some((item: any) => item.value === currentRole)
+    if (exists) return dynamicRoleOptions
+    return [{value: currentRole, label: currentRole}, ...dynamicRoleOptions]
+  }, [values.role_id, dynamicRoleOptions])
 
   useEffect(() => {
     if (!values.id_number) {
@@ -148,6 +135,7 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
     setEmployeeQuery(fullName)
     setShowEmployeeDropdown(false)
     setFieldValue('id_number', employee.id_number)
+    setFieldValue('employee_id', employee.id_number)
     setFieldValue('full_name', fullName)
     setFieldValue('department', employee['department_detail.dept_code'] || '')
     setFieldValue('department_des', employee['department_detail.dept_des'] || '')
@@ -205,6 +193,7 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
 
                   if (!inputValue.trim()) {
                     setFieldValue('id_number', '')
+                    setFieldValue('employee_id', '')
                     setFieldValue('full_name', '')
                     setFieldValue('department', '')
                     setFieldValue('department_des', '')
@@ -274,7 +263,7 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
 
           <div className='position-relative'>
             <Field
-              name='name'
+              name='user_name'
               className='form-control form-control-sm form-control-solid'
               autoComplete='off'
               onFocus={() => {
@@ -284,7 +273,8 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
                 }
               }}
               onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                setFieldValue('name', e.target.value)
+                setFieldValue('user_name', e.target.value)
+                setFieldValue('name', e.target.value) // backward compatibility just in case
                 setFilterUsernameSuggestions(true)
                 if (usernameSuggestions.length > 0) {
                   setShowUsernameDropdown(true)
@@ -320,6 +310,7 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
                     style={{cursor: 'pointer'}}
                     onMouseDown={(e) => {
                       e.preventDefault()
+                      setFieldValue('user_name', item)
                       setFieldValue('name', item)
                       setFilterUsernameSuggestions(false)
                       setShowUsernameDropdown(false)
@@ -337,7 +328,24 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
           )}
 
           <div className='text-danger mt-2'>
-            <ErrorMessage name='name' />
+            <ErrorMessage name='user_name' />
+          </div>
+        </section>
+      </div>
+
+      <div className='row mb-5'>
+        <section className='col-md-6'>
+          <label className='d-flex align-items-center form-label'>
+            <span className='required'>Password</span>
+          </label>
+          <Field
+            type='password'
+            name='password'
+            className='form-control form-control-lg form-control-solid'
+            autoComplete='new-password'
+          />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='password' />
           </div>
         </section>
       </div>
@@ -351,18 +359,18 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
           <Field
             className='form-select form-select-lg form-select-solid'
             as='select'
-            name='role'
+            name='role_id'
             autoComplete='off'
           >
             <option value=''>Select Role</option>
-            {availableRoleOptions.map((item) => (
+            {availableRoleOptions.map((item: any) => (
               <option key={item.value} value={item.value}>
                 {item.label}
               </option>
             ))}
           </Field>
           <div className='text-danger mt-2'>
-            <ErrorMessage name='role' />
+            <ErrorMessage name='role_id' />
           </div>
         </section>
 

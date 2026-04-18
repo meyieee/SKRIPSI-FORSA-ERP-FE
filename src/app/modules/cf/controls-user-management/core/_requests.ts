@@ -13,7 +13,17 @@ const getRoleCategories = async () => {
   return response.data.data;
 }
 
+const getRolesApi = async () => {
+  const response = await client().get('/v1/roles');
+  return response.data.data;
+}
+
+const addV1User = async (values: any) => {
+  return await client().post('/v1/users/create', values);
+}
+
 const addUser = async (values: UserData) => {
+
   return await client().post('/users', values)
 }
 
@@ -59,4 +69,4 @@ const getUserById = async(id:string|undefined)=>{
   return response.data.data; 
 }
 
-export { getUsers, getRoleCategories, addUser, updateUser, updateStatusUsers, updatePasswordUsers, resetPasswordUser, getUserById }
+export { getUsers, getRolesApi, getRoleCategories, addUser, addV1User, updateUser, updateStatusUsers, updatePasswordUsers, resetPasswordUser, getUserById }
