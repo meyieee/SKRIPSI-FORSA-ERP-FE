@@ -1,6 +1,7 @@
 // src/module-fia-resource/core/personal-info/_requests.ts
-const API_BASE =
-  process.env.REACT_APP_API_BASE_URL?.replace(/\/+$/, '') || 'http://localhost:3000/api'
+import {apiBaseUrl} from '../../../../../functions/base_url'
+
+const API_BASE = apiBaseUrl
 
 export type PersonSearchItem = {
   id_number: string

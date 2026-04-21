@@ -13,6 +13,14 @@ import {MenuComponent} from '../assets/ts/components'
 
 const MasterLayout = () => {
   const location = useLocation()
+
+  useEffect(() => {
+    document.body.classList.add('app-page-body')
+    return () => {
+      document.body.classList.remove('app-page-body')
+    }
+  }, [])
+
   useEffect(() => {
     setTimeout(() => {
       MenuComponent.reinitialization()

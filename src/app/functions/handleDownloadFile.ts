@@ -2,6 +2,11 @@ import { saveAs } from 'file-saver';
 import { fullUrlServer } from './base_url';
 
 export const handleDownloadFile = (file: string | undefined | null) => {
+  if (!file) {
+    alert("Failed to download file.");
+    return;
+  }
+
   const fileURL = `${fullUrlServer}/${file}`;
   
   fetch(fileURL, {

@@ -5,10 +5,10 @@ import clsx from 'clsx'
 import {useFormik} from 'formik'
 import {login} from '../core/_requests'
 import {useAuth} from '../core/Auth'
-import { fullUrlServer } from '../../../functions/base_url'
+import { apiBaseUrl } from '../../../functions/base_url'
 import {AuthModel} from '../core/_models'
 
-api.defaults.baseURL = `${fullUrlServer}/api`;
+api.defaults.baseURL = apiBaseUrl;
 
 const loginSchema = Yup.object().shape({
   name: Yup.string()
@@ -67,15 +67,20 @@ export function Login() {
       onSubmit={formik.handleSubmit}
       noValidate
       id='kt_login_signin_form'
+      style={{maxWidth: 340, margin: '0 auto'}}
     >
        
        {/* <button type='button' onClick={getDummyUserSession}>
           testing temp token
         </button> */}
 
-      <header className='text-center mb-10'>
-        <p className='text-muted fw-semibold fs-6 mb-3'>Welcome back. Please sign in to continue.</p>
-        <h1 className='text-dark mb-3'>Sign In to FORSA</h1>
+      <header className='text-center mb-5'>
+        <p className='text-muted fw-semibold mb-2' style={{fontSize: '0.82rem'}}>
+          Welcome back. Please sign in to continue.
+        </p>
+        <h1 className='text-dark mb-1' style={{fontSize: 'clamp(1.18rem, 2vw, 1.55rem)'}}>
+          Sign In to FORSA
+        </h1>
       </header>
 
       {formik.status ? (
@@ -84,13 +89,15 @@ export function Login() {
         </p>
       ) : null}
 
-      <section className='fv-row mb-10'>
-        <label className='form-label fs-6 fw-bolder text-dark'>Username</label>
+      <section className='fv-row mb-4'>
+        <label className='form-label fw-bolder text-dark mb-2' style={{fontSize: '0.84rem'}}>
+          Username
+        </label>
         <input
           placeholder='Username'
           {...formik.getFieldProps('name')}
           className={clsx(
-            'form-control form-control-lg form-control-solid',
+            'form-control form-control-solid',
             {'is-invalid': formik.touched.name && formik.errors.name},
             {
               'is-valid': formik.touched.name && !formik.errors.name,
@@ -98,6 +105,7 @@ export function Login() {
           )}
           name='name'
           autoComplete='off'
+          style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
         />
         {formik.touched.name && formik.errors.name && (
           <p className='fv-plugins-message-container'>
@@ -106,9 +114,11 @@ export function Login() {
         )}
       </section>
 
-      <section className='fv-row mb-10'>
+      <section className='fv-row mb-5'>
         <section className='d-flex justify-content-between mt-n5'>
-          <label className='form-label fw-bolder text-dark fs-6'>Password</label>
+          <label className='form-label fw-bolder text-dark mb-2' style={{fontSize: '0.84rem'}}>
+            Password
+          </label>
         </section>
         <input
           placeholder="Password"
@@ -116,7 +126,7 @@ export function Login() {
           autoComplete='off'
           {...formik.getFieldProps('password')}
           className={clsx(
-            'form-control form-control-lg form-control-solid',
+            'form-control form-control-solid',
             {
               'is-invalid': formik.touched.password && formik.errors.password,
             },
@@ -124,6 +134,7 @@ export function Login() {
               'is-valid': formik.touched.password && !formik.errors.password,
             }
           )}
+          style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
         />
         {formik.touched.password && formik.errors.password && (
           <section className='fv-plugins-message-container'>
@@ -138,8 +149,9 @@ export function Login() {
         <button
           type='submit'
           id='kt_sign_in_submit'
-          className='btn btn-lg btn-primary w-100 mb-5'
+          className='btn btn-primary w-100 mb-4'
           disabled={formik.isSubmitting || !formik.isValid}
+          style={{minHeight: 44, fontSize: '0.9rem', fontWeight: 700}}
         >
           {!loading && <span className='indicator-label'>Continue</span>}
           {loading && (

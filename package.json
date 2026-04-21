@@ -91,7 +91,7 @@
     "format": "prettier --write .",
     "rtl": "webpack --config webpack-rtl.config.js"
   },
-  "proxy": "http://localhost:3000/api",
+  "proxy": "http://127.0.0.1:3000",
   "eslintConfig": {
     "extends": [
       "react-app",

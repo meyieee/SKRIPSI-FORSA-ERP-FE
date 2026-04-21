@@ -3,6 +3,7 @@ import React, {useEffect, useLayoutEffect, useMemo, useRef, useState} from 'reac
 import {useChat} from './ChatContext'
 import {useTasksContext} from '../TasksContext'
 import {useAuth} from '../../../../../../auth'
+import {fullUrlServer} from '../../../../../../../functions/base_url'
 import type {ChatAttachment} from './ChatContext'
 import '../scss/tasksstyles.scss'
 import DeleteConfirmAlert from './DeleteConfirmAlert'
@@ -18,6 +19,7 @@ const ChatWindow: React.FC = () => {
   const [draftAtts, setDraftAtts] = useState<DraftAttachment[]>([])
   const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null)
   const [activeDeleteId, setActiveDeleteId] = useState<string | null>(null)
+  const [previewImage, setPreviewImage] = useState<{src: string; alt: string} | null>(null)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -273,25 +275,28 @@ const ChatWindow: React.FC = () => {
                   {m.text && <div className='small mb-2'>{m.text}</div>}
 
                   {m.attachments?.map((a, idx) => {
-                    const baseServer = process.env.REACT_APP_API_BASE_URL
-                      ? process.env.REACT_APP_API_BASE_URL.replace(/\/+$/, '').replace(/\/api$/, '')
-                      : 'http://localhost:3000'
-
-                    const fileUrl = a.url?.startsWith('http') ? a.url : `${baseServer}/${a.url}`
+                    const fileUrl = a.url?.startsWith('http') ? a.url : `${fullUrlServer}/${a.url}`
 
                     return (
                       <div key={idx} className='mb-2'>
                         {a.type === 'image' ? (
-                          <img
-                            src={fileUrl}
-                            alt={a.name}
-                            style={{maxWidth: '100%', borderRadius: 6}}
-                            onLoad={() => {
-                              if (shouldAutoScrollRef.current) {
-                                requestAnimationFrame(scrollToBottom)
-                              }
-                            }}
-                          />
+                          <button
+                            type='button'
+                            className='chat-image-thumb'
+                            onClick={() => setPreviewImage({src: fileUrl, alt: a.name})}
+                            title='Open image'
+                            aria-label={`Open image ${a.name}`}
+                          >
+                            <img
+                              src={fileUrl}
+                              alt={a.name}
+                              onLoad={() => {
+                                if (shouldAutoScrollRef.current) {
+                                  requestAnimationFrame(scrollToBottom)
+                                }
+                              }}
+                            />
+                          </button>
                         ) : (
                           <a href={fileUrl} download={a.name} className='text-decoration-underline'>
                             {a.name}
@@ -397,6 +402,32 @@ const ChatWindow: React.FC = () => {
           setPendingDeleteId(null)
         }}
       />
+
+      {previewImage && (
+        <div
+          className='chat-image-preview'
+          role='dialog'
+          aria-modal='true'
+          aria-label='Image preview'
+          onClick={() => setPreviewImage(null)}
+        >
+          <button
+            type='button'
+            className='chat-image-preview__close'
+            onClick={() => setPreviewImage(null)}
+            aria-label='Close preview'
+            title='Close preview'
+          >
+            <i className='bi bi-x-lg' />
+          </button>
+          <img
+            className='chat-image-preview__img'
+            src={previewImage.src}
+            alt={previewImage.alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   )
 }

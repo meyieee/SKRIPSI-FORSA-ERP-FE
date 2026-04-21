@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, {useEffect, useMemo, useRef} from 'react'
 import { KTSVG } from '../../../../../../../../_metronic'
 import { OnlineRoster } from './types'
 
@@ -66,6 +66,10 @@ const Cell: React.FC<{code?: string | null}> = ({code}) => {
 }
 
 const OnlineRosterTable: React.FC<Props> = ({ roster, selectedDate, onView }) => {
+  const topScrollRef = useRef<HTMLDivElement>(null)
+  const topScrollInnerRef = useRef<HTMLDivElement>(null)
+  const bottomScrollRef = useRef<HTMLDivElement>(null)
+
   console.log('Roster data:', roster.length)
   console.log('Selected date:', selectedDate)
   console.log('First roster attendance:', roster[0]?.attendance)
@@ -83,6 +87,45 @@ const OnlineRosterTable: React.FC<Props> = ({ roster, selectedDate, onView }) =>
     )
     return sorted
   }, [roster])
+
+  useEffect(() => {
+    const topEl = topScrollRef.current
+    const topInnerEl = topScrollInnerRef.current
+    const bottomEl = bottomScrollRef.current
+    if (!topEl || !topInnerEl || !bottomEl) return
+
+    const syncWidth = () => {
+      topInnerEl.style.width = `${bottomEl.scrollWidth}px`
+    }
+
+    let fromTop = false
+    let fromBottom = false
+
+    const onTopScroll = () => {
+      if (fromBottom) return
+      fromTop = true
+      bottomEl.scrollLeft = topEl.scrollLeft
+      fromTop = false
+    }
+
+    const onBottomScroll = () => {
+      if (fromTop) return
+      fromBottom = true
+      topEl.scrollLeft = bottomEl.scrollLeft
+      fromBottom = false
+    }
+
+    syncWidth()
+    topEl.addEventListener('scroll', onTopScroll)
+    bottomEl.addEventListener('scroll', onBottomScroll)
+    window.addEventListener('resize', syncWidth)
+
+    return () => {
+      topEl.removeEventListener('scroll', onTopScroll)
+      bottomEl.removeEventListener('scroll', onBottomScroll)
+      window.removeEventListener('resize', syncWidth)
+    }
+  }, [groupedRoster.length, selectedDate])
 
   // Header row for grouping
   const headerRow = (label: string, colSpan: number, tone: 'dept' | 'wg' | 'crew') => {
@@ -112,7 +155,16 @@ const OnlineRosterTable: React.FC<Props> = ({ roster, selectedDate, onView }) =>
       </div>
 
       {/* ===== Table ===== */}
-      <div className='table-responsive'>
+      <div
+        ref={topScrollRef}
+        className='mb-2'
+        style={{overflowX: 'auto', overflowY: 'hidden', maxWidth: '100%', height: 14}}
+        aria-hidden='true'
+      >
+        <div ref={topScrollInnerRef} style={{height: 1}} />
+      </div>
+
+      <div ref={bottomScrollRef} className='table-responsive'>
         <table className='table table-hover table-rounded border table-row-bordered table-row-gray-300 align-middle gs-4 gy-1 gx-3'>
           <thead>
             {/* baris judul kolom utama: abu gelap adaptif */}

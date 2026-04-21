@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { fullUrlServer } from "./base_url";
+import { apiBaseUrl } from "./base_url";
 import { getAuth, normalizeAuth, removeAuth, setAuth } from '../modules/auth/core/AuthHelpers';
 import { forceLogout } from './forceLogout';
 
@@ -14,7 +14,7 @@ export const client = () => {
     }
 
     const axiosInstance = axios.create({
-        baseURL: `${fullUrlServer}/api`,
+        baseURL: apiBaseUrl,
         withCredentials: true
     });
 
@@ -38,7 +38,7 @@ export const client = () => {
 
                 try {
                     //jika akses token sudah kadaluarsa, maka akan dibuatkan akses token yang baru
-                    const { data } = await axios.post(`${fullUrlServer}/api/users/specific`,{ name: result?.user?.name }, { withCredentials: true });
+                    const { data } = await axios.post(`${apiBaseUrl}/users/specific`,{ name: result?.user?.name }, { withCredentials: true });
                     const normalized = normalizeAuth(data);
                     if (!normalized || !normalized.user?.name) {
                         removeAuth();

@@ -1,9 +1,12 @@
-import { FC, useMemo, useState } from 'react'
+import { FC, useEffect, useMemo, useRef, useState } from 'react'
 import { KTCard, KTCardBody } from '../../../../../../_metronic'
 import UpdateStatusForm from './component/UpdateStatusForm'
 import UpdateLocation from './component/UpdateLocation'
 
 const DispatcherContent: FC = () => {
+  const topScrollRef = useRef<HTMLDivElement>(null)
+  const topScrollInnerRef = useRef<HTMLDivElement>(null)
+  const bottomScrollRef = useRef<HTMLDivElement>(null)
   const [activeTab, setActiveTab] = useState('all')
   const [isLocationModalOpen, setIsLocationModalOpen] = useState(false)
   const [pendingLocation, setPendingLocation] = useState('')
@@ -176,6 +179,45 @@ const DispatcherContent: FC = () => {
 
   const [groups, setGroups] = useState(initialGroups)
 
+  useEffect(() => {
+    const topEl = topScrollRef.current
+    const topInnerEl = topScrollInnerRef.current
+    const bottomEl = bottomScrollRef.current
+    if (!topEl || !topInnerEl || !bottomEl) return
+
+    const syncWidth = () => {
+      topInnerEl.style.width = `${bottomEl.scrollWidth}px`
+    }
+
+    let lockTop = false
+    let lockBottom = false
+
+    const handleTopScroll = () => {
+      if (lockBottom) return
+      lockTop = true
+      bottomEl.scrollLeft = topEl.scrollLeft
+      lockTop = false
+    }
+
+    const handleBottomScroll = () => {
+      if (lockTop) return
+      lockBottom = true
+      topEl.scrollLeft = bottomEl.scrollLeft
+      lockBottom = false
+    }
+
+    syncWidth()
+    topEl.addEventListener('scroll', handleTopScroll)
+    bottomEl.addEventListener('scroll', handleBottomScroll)
+    window.addEventListener('resize', syncWidth)
+
+    return () => {
+      topEl.removeEventListener('scroll', handleTopScroll)
+      bottomEl.removeEventListener('scroll', handleBottomScroll)
+      window.removeEventListener('resize', syncWidth)
+    }
+  }, [groups])
+
   // Mock data untuk Status Change History
   const statusHistoryData = [
     {
@@ -324,7 +366,11 @@ const DispatcherContent: FC = () => {
           </div>
 
           {/* Fleet Operation Table (Grouped) - Optimized for single page view */}
-          <div style={{overflowX: 'auto', maxWidth: '100%'}}>
+          <div ref={topScrollRef} className='table-top-scroll mb-2' aria-hidden='true'>
+            <div ref={topScrollInnerRef} className='table-top-scroll__inner' />
+          </div>
+
+          <div ref={bottomScrollRef} style={{overflowX: 'auto', maxWidth: '100%'}}>
             <table className='table table-row-table table-hover table-rounded border table-row-bordered table-row-gray-300 align-middle gs-4 gy-3 gx-3 table-row-gray-100 align-middle gs-0 gy-3'>
               <thead>
                 <tr className='fw-bold bg-secondary'>

@@ -7,7 +7,6 @@ import type {
   TaskCapabilities,
   TasksRow,
 } from './_models'
-import {fullUrlServer} from '../../../../../../functions'
 
 export const getMyTasks = async (params?: GetTasksParams): Promise<TasksRow[]> => {
   const res = await client().get<ApiResponse<TasksRow[]>>('/fia-resource/tasks', {
@@ -48,12 +47,11 @@ export const searchAssignees = async (
   q: string,
   options?: SearchAssigneeOptions
 ): Promise<AssigneeItem[]> => {
-  const res = await client().get(`${fullUrlServer}/api/fia-resource/tasks/assignees`, {
+  const res = await client().get('/fia-resource/tasks/assignees', {
     params: {
       q,
       ...(options?.lowerThanLogin ? {lowerThanLogin: true} : {}),
     },
-    withCredentials: true,
   })
   return (res.data?.data ?? []) as AssigneeItem[]
 }

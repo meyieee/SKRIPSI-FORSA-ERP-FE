@@ -6,10 +6,11 @@ import {WithChildren} from '../../../../_metronic/helpers'
 import {AuthModel, UserModel, PermissionModel} from './_models'
 import {getUserSession, LOGOUT_URL} from './_requests'
 import * as authHelper from './AuthHelpers'
-import { getBranchUserSession, handleSocketJoinRoom, fullUrlServer } from '../../../functions'
+import { getBranchUserSession, handleSocketJoinRoom } from '../../../functions'
+import { apiBaseUrl } from '../../../functions/base_url'
 import { LayoutSplashScreen } from '../../../../_metronic/layout/core'
 
-api.defaults.baseURL = `${fullUrlServer}/api`;
+api.defaults.baseURL = apiBaseUrl;
 
 type AuthContextProps = {
   auth: AuthModel | undefined
@@ -74,7 +75,7 @@ const AuthProvider: FC<WithChildren> = ({children}) => {
     queryClient.clear()
 
     if (auth && auth?.user?.name) {
-      return axios.post(LOGOUT_URL, {name: auth.user.name}, {withCredentials: true})
+      return axios.post(`${apiBaseUrl}${LOGOUT_URL}`, {name: auth.user.name}, {withCredentials: true})
     }
 
     return null

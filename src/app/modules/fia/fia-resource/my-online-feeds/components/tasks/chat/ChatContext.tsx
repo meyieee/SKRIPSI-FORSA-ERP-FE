@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useState, useEffect, useRef} from 'react'
 import {default as socket} from '../../../../../../../functions/socket'
+import {apiBaseUrl} from '../../../../../../../functions/base_url'
 import {getAuth} from '../../../../../../auth'
 
 export type ChatAttachment = {
@@ -32,9 +33,7 @@ type ChatCtx = {
 
 const ChatContext = createContext<ChatCtx | undefined>(undefined)
 
-// Sesuaikan base URL ini dengan env / config project-mu
-const API_BASE =
-  process.env.REACT_APP_API_BASE_URL?.replace(/\/+$/, '') || 'http://localhost:3000/api'
+const API_BASE = apiBaseUrl
 
 export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [selectedTaskId, setSelectedTaskId] = useState<number | null>(null)

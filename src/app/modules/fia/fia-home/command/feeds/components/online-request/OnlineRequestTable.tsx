@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import { KTSVG } from '../../../../../../../../_metronic'
 import { normalizeStatus, OnlineRequest } from './types'
 
@@ -10,6 +10,49 @@ type Props = {
 }
 
 const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = false, error = null }) => {
+  const topScrollRef = useRef<HTMLDivElement>(null)
+  const topScrollInnerRef = useRef<HTMLDivElement>(null)
+  const bottomScrollRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const topEl = topScrollRef.current
+    const topInnerEl = topScrollInnerRef.current
+    const bottomEl = bottomScrollRef.current
+    if (!topEl || !topInnerEl || !bottomEl) return
+
+    const syncWidth = () => {
+      topInnerEl.style.width = `${bottomEl.scrollWidth}px`
+    }
+
+    let fromTop = false
+    let fromBottom = false
+
+    const onTopScroll = () => {
+      if (fromBottom) return
+      fromTop = true
+      bottomEl.scrollLeft = topEl.scrollLeft
+      fromTop = false
+    }
+
+    const onBottomScroll = () => {
+      if (fromTop) return
+      fromBottom = true
+      topEl.scrollLeft = bottomEl.scrollLeft
+      fromBottom = false
+    }
+
+    syncWidth()
+    topEl.addEventListener('scroll', onTopScroll)
+    bottomEl.addEventListener('scroll', onBottomScroll)
+    window.addEventListener('resize', syncWidth)
+
+    return () => {
+      topEl.removeEventListener('scroll', onTopScroll)
+      bottomEl.removeEventListener('scroll', onBottomScroll)
+      window.removeEventListener('resize', syncWidth)
+    }
+  }, [requests.length, isLoading, error])
+
   const handleView = (request: OnlineRequest) => {
     if (onView) {
       onView(request)
@@ -62,7 +105,16 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
         </div>
 
         {/* ===== Table ===== */}
-        <div className='table-responsive'>
+        <div
+          ref={topScrollRef}
+          className='mb-2'
+          style={{overflowX: 'auto', overflowY: 'hidden', maxWidth: '100%', height: 14}}
+          aria-hidden='true'
+        >
+          <div ref={topScrollInnerRef} style={{height: 1}} />
+        </div>
+
+        <div ref={bottomScrollRef} className='table-responsive'>
           {error && <div className='alert alert-warning py-3 mb-3'>{error}</div>}
           <table className='table table-hover table-rounded border table-bordered table-row-gray-300 align-middle text-dark gs-4 gy-1 gx-3'>
             <thead>

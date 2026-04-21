@@ -46,6 +46,46 @@
   border-radius: 6px;
   display: block;
 }
+.chat-image-thumb {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+.chat-image-thumb img {
+  width: min(220px, 100%);
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.chat-image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(15, 23, 42, 0.86);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.chat-image-preview__img {
+  max-width: min(92vw, 900px);
+  max-height: 88vh;
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+.chat-image-preview__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
 
 /* Tombol delete: DI BAWAH bubble, sisi kanan untuk pesan saya */
 .bubble .delete-btn {
