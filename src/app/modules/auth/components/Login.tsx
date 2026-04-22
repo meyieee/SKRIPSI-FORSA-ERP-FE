@@ -1,14 +1,14 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import api from 'axios'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {useFormik} from 'formik'
 import {login} from '../core/_requests'
 import {useAuth} from '../core/Auth'
-import { apiBaseUrl } from '../../../functions/base_url'
+import {apiBaseUrl} from '../../../functions/base_url'
 import {AuthModel} from '../core/_models'
 
-api.defaults.baseURL = apiBaseUrl;
+api.defaults.baseURL = apiBaseUrl
 
 const loginSchema = Yup.object().shape({
   name: Yup.string()
@@ -28,6 +28,7 @@ const initialValues = {
 
 export function Login() {
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
   const {saveAuth, setCurrentUser} = useAuth()
 
   const formik = useFormik({
@@ -38,15 +39,13 @@ export function Login() {
       try {
         const response = await login(values.name, values.password)
         const data = response.data as AuthModel
-        // Ensure permissions array exists
         const authData: AuthModel = {
           token: data.token ?? null,
           id: data.id ?? null,
           user: data.user ?? null,
-          permissions: data.permissions || []
+          permissions: data.permissions || [],
         }
         saveAuth(authData)
-        // Use data.user directly, convert null to undefined
         if (data.user) {
           setCurrentUser(data.user)
         } else {
@@ -61,6 +60,9 @@ export function Login() {
     },
   })
 
+  const isNameValid = formik.touched.name && !formik.errors.name
+  const isPasswordValid = formik.touched.password && !formik.errors.password
+
   return (
     <form
       className='form w-100'
@@ -69,11 +71,6 @@ export function Login() {
       id='kt_login_signin_form'
       style={{maxWidth: 340, margin: '0 auto'}}
     >
-       
-       {/* <button type='button' onClick={getDummyUserSession}>
-          testing temp token
-        </button> */}
-
       <header className='text-center mb-5'>
         <p className='text-muted fw-semibold mb-2' style={{fontSize: '0.82rem'}}>
           Welcome back. Please sign in to continue.
@@ -93,20 +90,21 @@ export function Login() {
         <label className='form-label fw-bolder text-dark mb-2' style={{fontSize: '0.84rem'}}>
           Username
         </label>
-        <input
-          placeholder='Username'
-          {...formik.getFieldProps('name')}
-          className={clsx(
-            'form-control form-control-solid',
-            {'is-invalid': formik.touched.name && formik.errors.name},
-            {
-              'is-valid': formik.touched.name && !formik.errors.name,
-            }
-          )}
-          name='name'
-          autoComplete='off'
-          style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
-        />
+        <div className='d-flex align-items-center gap-2'>
+          <input
+            placeholder='Username'
+            {...formik.getFieldProps('name')}
+            className={clsx('form-control form-control-solid', {
+              'is-invalid': formik.touched.name && formik.errors.name,
+            })}
+            name='name'
+            autoComplete='off'
+            style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
+          />
+          <div style={{width: 20}} className='text-success text-center'>
+            {isNameValid ? <i className='bi bi-check-lg fs-2'></i> : null}
+          </div>
+        </div>
         {formik.touched.name && formik.errors.name && (
           <section className='fv-plugins-message-container'>
             <article className='fv-help-block'>
@@ -122,22 +120,31 @@ export function Login() {
             Password
           </label>
         </section>
-        <input
-          placeholder="Password"
-          type='password'
-          autoComplete='off'
-          {...formik.getFieldProps('password')}
-          className={clsx(
-            'form-control form-control-solid',
-            {
-              'is-invalid': formik.touched.password && formik.errors.password,
-            },
-            {
-              'is-valid': formik.touched.password && !formik.errors.password,
-            }
-          )}
-          style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
-        />
+        <div className='d-flex align-items-center gap-2'>
+          <div className='position-relative flex-grow-1'>
+            <input
+              placeholder='Password'
+              type={showPassword ? 'text' : 'password'}
+              autoComplete='off'
+              {...formik.getFieldProps('password')}
+              className={clsx('form-control form-control-solid', {
+                'is-invalid': formik.touched.password && formik.errors.password,
+              })}
+              style={{minHeight: 42, fontSize: '0.9rem', paddingLeft: '0.9rem', paddingRight: '2.75rem'}}
+            />
+            <button
+              type='button'
+              className='btn btn-icon btn-sm position-absolute top-50 end-0 translate-middle-y me-2 text-muted'
+              onClick={() => setShowPassword((prev) => !prev)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <i className={showPassword ? 'bi bi-eye fs-4' : 'bi bi-eye-slash fs-4'}></i>
+            </button>
+          </div>
+          <div style={{width: 20}} className='text-success text-center'>
+            {isPasswordValid ? <i className='bi bi-check-lg fs-2'></i> : null}
+          </div>
+        </div>
         {formik.touched.password && formik.errors.password && (
           <section className='fv-plugins-message-container'>
             <article className='fv-help-block'>
