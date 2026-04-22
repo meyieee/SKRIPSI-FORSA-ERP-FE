@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Modal, Button, Form} from 'react-bootstrap'
 import {TasksRow} from '../types'
 import {KTSVG} from '../../../../../../../../_metronic'
+import {useEnterShortcut} from '../../../../../../../custom-hooks'
 import '../scss/tasksstyles.scss'
 
 interface TaskViewModalProps {
@@ -29,8 +30,6 @@ const TaskViewModal: React.FC<TaskViewModalProps> = ({
     // kalau complete ada isi -> anggap Completed
     setStatus(task.complete ? 'Completed' : 'Outstanding')
   }, [task])
-
-  if (!task) return null
 
   const getPriorityClass = (priority: string) => {
     switch (priority) {
@@ -65,6 +64,15 @@ const TaskViewModal: React.FC<TaskViewModalProps> = ({
       setSaving(false)
     }
   }
+
+  useEnterShortcut({
+    enabled: show && !!task && editable && !saving,
+    onEnter: () => {
+      void handleSave()
+    },
+  })
+
+  if (!task) return null
 
   return (
     <Modal show={show} onHide={onHide} centered size='lg' className='task-view-modal small-modal'>

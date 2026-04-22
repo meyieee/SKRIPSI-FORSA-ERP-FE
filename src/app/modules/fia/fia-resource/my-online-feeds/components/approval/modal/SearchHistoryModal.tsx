@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {Modal, Button, Form} from 'react-bootstrap'
+import {useEnterShortcut} from '../../../../../../../custom-hooks'
 
 interface HistoryModalProps {
   show: boolean
@@ -52,6 +53,11 @@ const HistoryModal: React.FC<HistoryModalProps> = ({show, onHide, onDateRangeSub
     onHide()
   }
 
+  useEnterShortcut({
+    enabled: show,
+    onEnter: handleSubmit,
+  })
+
   // Handle tanggal input changes
   const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStartDate(e.target.value)
@@ -80,7 +86,12 @@ const HistoryModal: React.FC<HistoryModalProps> = ({show, onHide, onDateRangeSub
           </small>
         </div>
 
-        <Form>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleSubmit()
+          }}
+        >
           <Form.Group className='mb-3'>
             <Form.Label>Start Date</Form.Label>
             <Form.Control
@@ -115,7 +126,7 @@ const HistoryModal: React.FC<HistoryModalProps> = ({show, onHide, onDateRangeSub
         <Button variant='secondary' onClick={handleModalHide}>
           Cancel
         </Button>
-        <Button variant='primary' onClick={handleSubmit}>
+        <Button variant='primary' type='submit' onClick={handleSubmit}>
           Apply Filter
         </Button>
       </Modal.Footer>

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react'
-import { KTSVG } from '../../../../../../../../_metronic'
-import { normalizeStatus, OnlineTask } from './types'
+import {KTSVG} from '../../../../../../../../_metronic'
+import {normalizeStatus, OnlineTask} from './types'
 
 type Props = {
   tasks: OnlineTask[]
@@ -9,7 +9,7 @@ type Props = {
   error?: string | null
 }
 
-const OnlineTaskTable: React.FC<Props> = ({ tasks, onView, isLoading = false, error = null }) => {
+const OnlineTaskTable: React.FC<Props> = ({tasks, onView, isLoading = false, error = null}) => {
   const topScrollRef = useRef<HTMLDivElement>(null)
   const topScrollInnerRef = useRef<HTMLDivElement>(null)
   const bottomScrollRef = useRef<HTMLDivElement>(null)
@@ -90,6 +90,9 @@ const OnlineTaskTable: React.FC<Props> = ({ tasks, onView, isLoading = false, er
         {/* Title */}
         <div className='mb-3'>
           <h3 className='fw-bold fs-3 mb-0'>ONLINE TASKS CONTROL</h3>
+          <div className='small text-muted mt-2'>
+            Showing <span className='fw-semibold'>{total}</span> record{total !== 1 ? 's' : ''}
+          </div>
         </div>
 
         {/* ===== Table ===== */}
@@ -146,7 +149,9 @@ const OnlineTaskTable: React.FC<Props> = ({ tasks, onView, isLoading = false, er
                     <td>{task.tasksDate}</td>
                     <td>{task.expired}</td>
                     <td>
-                      <span className={getStatusClass(task.status)}>{normalizeStatus(task.status)}</span>
+                      <span className={getStatusClass(task.status)}>
+                        {normalizeStatus(task.status)}
+                      </span>
                     </td>
                     <td className='text-end'>
                       <div className='d-flex justify-content-end flex-shrink-0'>
@@ -170,14 +175,9 @@ const OnlineTaskTable: React.FC<Props> = ({ tasks, onView, isLoading = false, er
             </tbody>
           </table>
         </div>
-
-        <div className='small text-muted mt-2'>
-          Showing <span className='fw-semibold'>{total}</span> record{total !== 1 ? 's' : ''}
-        </div>
       </div>
     </div>
   )
 }
 
 export default OnlineTaskTable
-

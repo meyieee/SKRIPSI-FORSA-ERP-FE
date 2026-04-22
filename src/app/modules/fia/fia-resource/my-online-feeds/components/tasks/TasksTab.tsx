@@ -243,6 +243,20 @@ const TasksTab = () => {
     })
   }, [tasksRows, preloadUnreadForTask])
 
+  useEffect(() => {
+    if (!tasksRows.length) return
+
+    const timer = window.setInterval(() => {
+      tasksRows.forEach((row) => {
+        preloadUnreadForTask(row.id)
+      })
+    }, 1500)
+
+    return () => {
+      window.clearInterval(timer)
+    }
+  }, [tasksRows, preloadUnreadForTask])
+
   // Early return AFTER all hooks
   if (!canAccess) {
     return (

@@ -4,6 +4,7 @@ import { ScrollTopComponent } from "../../_metronic/assets/ts/components"
 import { AlertMessengerContext } from "./index"
 import { client } from "../functions"
 import  ViewModal from "./ViewModal"
+import { useEnterShortcut } from "../custom-hooks"
 
 type Props = {
 	data: any[]
@@ -50,6 +51,11 @@ const ExcelPreviewModal: FC<Props & WithChildren> = (props) => {
     handleSubmitAPI(data, onSuccess, onError, setIsSubmit)
     handleClose()
   }
+
+  useEnterShortcut({
+    enabled: show && !isSubmit,
+    onEnter: onSubmit,
+  })
 
 	return (
 		<ViewModal title={'Preview File'} show={show} handleClose={handleClose}>

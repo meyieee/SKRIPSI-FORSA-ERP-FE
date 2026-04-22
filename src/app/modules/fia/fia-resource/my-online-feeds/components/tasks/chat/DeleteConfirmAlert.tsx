@@ -1,5 +1,6 @@
 import React from 'react'
 import {KTSVG} from '../../../../../../../../_metronic'
+import {useEnterShortcut} from '../../../../../../../custom-hooks'
 import '../scss/tasksstyles.scss' // pakai .fixed-alert yang sudah kamu punya
 
 type Props = {
@@ -17,6 +18,11 @@ const DeleteConfirmAlert: React.FC<Props> = ({
   onConfirm,
   onCancel,
 }) => {
+  useEnterShortcut({
+    enabled: show,
+    onEnter: onConfirm,
+  })
+
   if (!show) return null
 
   return (

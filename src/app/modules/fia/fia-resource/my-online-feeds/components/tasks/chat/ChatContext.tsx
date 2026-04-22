@@ -46,10 +46,46 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     selectedTaskIdRef.current = selectedTaskId
   }, [selectedTaskId])
 
+  const getStoredUser = () => {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      return {}
+    }
+    try {
+      const raw = localStorage.getItem('user')
+      return raw ? JSON.parse(raw) : {}
+    } catch {
+      return {}
+    }
+  }
+
   const getLoginIdNumber = () => {
     const auth = getAuth()
     const u: any = auth?.user || {}
-    return String(u?.id_number || u?.idNumber || u?.['employees.id_number'] || '').trim()
+    const storedUser: any = getStoredUser()
+    return String(
+      u?.id_number ||
+        u?.idNumber ||
+        u?.['employees.id_number'] ||
+        storedUser?.id_number ||
+        storedUser?.idNumber ||
+        storedUser?.['employees.id_number'] ||
+        ''
+    ).trim()
+  }
+
+  const getLoginBranchCode = () => {
+    const auth = getAuth()
+    const u: any = auth?.user || {}
+    const storedUser: any = getStoredUser()
+    return String(
+      u?.branch_code ||
+        u?.branchCode ||
+        u?.['employees.branch_detail.branch_code'] ||
+        storedUser?.branch_code ||
+        storedUser?.branchCode ||
+        storedUser?.['employees.branch_detail.branch_code'] ||
+        ''
+    ).trim()
   }
 
   const getOpenedKey = () => {
@@ -72,13 +108,13 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     }
   }
 
-  const markOpenedTask = (taskId: number) => {
+  const markOpenedTask = (taskId: number, openedAt?: number) => {
     try {
       const key = getOpenedKey()
       const raw = localStorage.getItem(key)
       const map = raw ? JSON.parse(raw) : {}
       const next = map && typeof map === 'object' ? map : {}
-      next[String(taskId)] = Date.now()
+      next[String(taskId)] = openedAt ?? Date.now()
       localStorage.setItem(key, JSON.stringify(next))
     } catch {
       // ignore
@@ -137,6 +173,11 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
 
       setMessagesByTask((prev) => ({...prev, [taskId]: chats}))
 
+      if (selectedTaskIdRef.current === taskId) {
+        const latestTs = chats.length ? chats[chats.length - 1].ts : Date.now()
+        markOpenedTask(taskId, latestTs)
+      }
+
       // kalau mau, di sini kamu bisa hitung unread dari backend (misal ada kolom is_read)
       // sementara biarkan saja:
       setUnreadCounts((prev) => ({...prev, [taskId]: 0}))
@@ -148,7 +189,6 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
   const preloadUnreadForTask = async (taskId: number) => {
     if (!taskId) return
     if (selectedTaskIdRef.current === taskId) return
-    if (typeof unreadCounts[taskId] === 'number') return
     if (preloadRef.current.has(taskId)) return
     const lastOpenedAt = getLastOpenedAt(taskId)
 
@@ -180,16 +220,21 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
   const openChat = (taskId: number) => {
     setSelectedTaskId(taskId)
     markOpenedTask(taskId)
-    // kalau belum pernah load dari backend, load dulu
-    if (!messagesByTask[taskId]) {
-      fetchMessagesForTask(taskId)
-    }
+    fetchMessagesForTask(taskId)
     markAsRead(taskId) // reset unread saat dibuka
   }
 
-  const closeChat = () => setSelectedTaskId(null)
+  const closeChat = () => {
+    const currentTaskId = selectedTaskIdRef.current
+    if (currentTaskId) {
+      markOpenedTask(currentTaskId)
+      setUnreadCounts((prev) => ({...prev, [currentTaskId]: 0}))
+    }
+    setSelectedTaskId(null)
+  }
 
   const markAsRead = (taskId: number) => {
+    markOpenedTask(taskId)
     setUnreadCounts((prev) => ({...prev, [taskId]: 0}))
     // kalau mau, kamu bisa panggil endpoint PATCH ke backend untuk set is_read = 1 di sini
   }
@@ -231,9 +276,14 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
 
       setMessagesByTask((prev) => {
         const arr = prev[taskId] ? [...prev[taskId]] : []
+        if (arr.some((item) => item.id === saved.id)) {
+          return prev
+        }
         arr.push(saved)
         return {...prev, [taskId]: arr}
       })
+
+      await fetchMessagesForTask(taskId)
     } catch (err) {
       console.error('sendMessage error:', err)
     }
@@ -268,39 +318,51 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
   // (optional) kalau kamu nanti pakai WebSocket / SSE:
   // - buka koneksi di useEffect
   useEffect(() => {
-    let branchCode = ''
-    try {
-      const raw = localStorage.getItem('user')
-      const u = raw ? JSON.parse(raw) : null
-      branchCode = u?.branch_code || u?.branchCode || ''
-    } catch {}
+    const branchCode = getLoginBranchCode()
+    const loginIdNumber = getLoginIdNumber()
+    const rooms = [branchCode, loginIdNumber].filter(Boolean)
 
-    if (!branchCode) return
+    if (!rooms.length) return
 
     const joinRoom = () => {
-      socket.emit('join room', branchCode)
-      console.log('[socket] join room:', branchCode)
+      rooms.forEach((room) => {
+        socket.emit('join room', room)
+        console.log('[socket] join room:', room)
+      })
     }
 
-    // kalau socket sudah connect saat effect jalan
+    const handleDisconnect = (reason: string) => console.log('[socket] disconnected:', reason)
+    const handleConnectError = (err: any) => console.log('[socket] connect_error:', err?.message)
+
     if (socket.connected) joinRoom()
-
-    // kalau connect belakangan / reconnect
     socket.on('connect', joinRoom)
-
-    // optional debug
-    socket.on('disconnect', (reason) => console.log('[socket] disconnected:', reason))
-    socket.on('connect_error', (err) => console.log('[socket] connect_error:', err?.message))
+    socket.on('disconnect', handleDisconnect)
+    socket.on('connect_error', handleConnectError)
 
     return () => {
       socket.off('connect', joinRoom)
-      socket.off('disconnect')
-      socket.off('connect_error')
+      socket.off('disconnect', handleDisconnect)
+      socket.off('connect_error', handleConnectError)
 
-      // optional: kalau mau keluar room saat provider unmount
-      socket.emit('leave room', branchCode)
+      rooms.forEach((room) => {
+        socket.emit('leave room', room)
+      })
     }
   }, [])
+
+  useEffect(() => {
+    if (!selectedTaskId) return
+
+    fetchMessagesForTask(selectedTaskId)
+
+    const timer = window.setInterval(() => {
+      fetchMessagesForTask(selectedTaskId)
+    }, 1500)
+
+    return () => {
+      window.clearInterval(timer)
+    }
+  }, [selectedTaskId])
 
   useEffect(() => {
     const handleIncoming = (payload: any) => {
@@ -308,30 +370,38 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
       if (!taskId) return
 
       const myId = getLoginIdNumber()
-      if (!myId) return
 
       const assignedToId = String(payload?.assigned_to_id ?? payload?.assignedToId ?? '')
       const assignedById = String(payload?.assigned_by_id ?? payload?.assignedById ?? '')
       const isMember =
-        (assignedToId && assignedToId === myId) || (assignedById && assignedById === myId)
+        !myId ||
+        (assignedToId && assignedToId === myId) ||
+        (assignedById && assignedById === myId)
       if (!isMember) return
 
       const senderId = String(payload?.sender_id ?? payload?.senderId ?? '')
       if (senderId && senderId === myId) return
 
-      if (selectedTaskIdRef.current === taskId) {
+      setMessagesByTask((prev) => {
         const chat = mapApiToChatMessage(payload)
-        setMessagesByTask((prev) => {
-          const arr = prev[taskId] ? [...prev[taskId]] : []
-          arr.push(chat)
-          return {...prev, [taskId]: arr}
-        })
+        const list = prev[taskId] || []
+        if (list.some((item) => item.id === chat.id)) {
+          return prev
+        }
+        return {...prev, [taskId]: [...list, chat]}
+      })
+
+      fetchMessagesForTask(taskId)
+
+      const createdAt = payload?.created_at ? new Date(payload.created_at).getTime() : Date.now()
+
+      if (selectedTaskIdRef.current === taskId) {
+        markOpenedTask(taskId, createdAt)
         setUnreadCounts((prev) => ({...prev, [taskId]: 0}))
         return
       }
 
       const lastOpenedAt = getLastOpenedAt(taskId)
-      const createdAt = payload?.created_at ? new Date(payload.created_at).getTime() : Date.now()
       if (lastOpenedAt && createdAt <= lastOpenedAt) {
         setUnreadCounts((prev) => ({...prev, [taskId]: 0}))
         return
@@ -340,8 +410,22 @@ export const ChatProvider: React.FC<{children: React.ReactNode}> = ({children}) 
     }
 
     socket.on('tasks-message', handleIncoming)
+
+    const handleDeleted = (payload: any) => {
+      const taskId = Number(payload?.task_id ?? payload?.taskId ?? 0)
+      const messageId = String(payload?.id ?? '')
+      if (!taskId || !messageId) return
+
+      setMessagesByTask((prev) => {
+        const list = prev[taskId] || []
+        return {...prev, [taskId]: list.filter((m) => m.id !== messageId)}
+      })
+    }
+
+    socket.on('tasks-message-deleted', handleDeleted)
     return () => {
       socket.off('tasks-message', handleIncoming)
+      socket.off('tasks-message-deleted', handleDeleted)
     }
   }, [])
   // - kalau ada pesan baru untuk taskId X, panggil setMessagesByTask + update unreadCounts

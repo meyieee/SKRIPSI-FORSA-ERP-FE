@@ -108,9 +108,11 @@ export function Login() {
           style={{minHeight: 42, fontSize: '0.9rem', paddingInline: '0.9rem'}}
         />
         {formik.touched.name && formik.errors.name && (
-          <p className='fv-plugins-message-container'>
-            <span role='alert'>{formik.errors.name}</span>
-          </p>
+          <section className='fv-plugins-message-container'>
+            <article className='fv-help-block'>
+              <span role='alert'>{formik.errors.name}</span>
+            </article>
+          </section>
         )}
       </section>
 

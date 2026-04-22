@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react'
-import { KTSVG } from '../../../../../../../../_metronic'
-import { normalizeStatus, OnlineRequest } from './types'
+import {KTSVG} from '../../../../../../../../_metronic'
+import {normalizeStatus, OnlineRequest} from './types'
 
 type Props = {
   requests: OnlineRequest[]
@@ -9,7 +9,12 @@ type Props = {
   error?: string | null
 }
 
-const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = false, error = null }) => {
+const OnlineRequestTable: React.FC<Props> = ({
+  requests,
+  onView,
+  isLoading = false,
+  error = null,
+}) => {
   const topScrollRef = useRef<HTMLDivElement>(null)
   const topScrollInnerRef = useRef<HTMLDivElement>(null)
   const bottomScrollRef = useRef<HTMLDivElement>(null)
@@ -102,6 +107,9 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
         {/* Title */}
         <div className='mb-3'>
           <h3 className='fw-bold fs-3 mb-0'>ONLINE REQUEST CONTROL</h3>
+          <div className='small text-muted mt-2'>
+            Showing <span className='fw-semibold'>{total}</span> record{total !== 1 ? 's' : ''}
+          </div>
         </div>
 
         {/* ===== Table ===== */}
@@ -184,14 +192,9 @@ const OnlineRequestTable: React.FC<Props> = ({ requests, onView, isLoading = fal
             </tbody>
           </table>
         </div>
-
-        <div className='small text-muted mt-2'>
-          Showing <span className='fw-semibold'>{total}</span> record{total !== 1 ? 's' : ''}
-        </div>
       </div>
     </div>
   )
 }
 
 export default OnlineRequestTable
-
