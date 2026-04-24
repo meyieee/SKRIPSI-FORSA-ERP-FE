@@ -71,7 +71,7 @@ const UsersTable = () => {
   const searchItem = (value: [], query: string) => { 
     // Handle search filter based on fetched value
     const normalizedQuery = query.toLowerCase()
-    const keys = ['name', 'employees.branch_detail.com_code', 'role', 'roleDetail.role_category', 'employees.department_detail.dept_code']
+    const keys = ['name', 'employees.branch_detail.com_code', 'role', 'roleDetail.role_name', 'roleDetail.role_category', 'employees.department_detail.dept_code']
     return value?.filter((item: any) =>
       keys.some((key) => String(item[key] || '').toLowerCase().includes(normalizedQuery))
     )
@@ -261,6 +261,7 @@ const UsersTable = () => {
             </thead>
             <tbody className='text-gray-600'>
               {searchData?.length > 0 ? currentTableData.map((row: UserData) => {
+                const roleLabel = row['roleDetail.role_name'] || row.role
                 return(
                   <tr key={row.id}>
                     <td>
@@ -289,7 +290,7 @@ const UsersTable = () => {
                       <CodeNameDisplay name={row?.['employees.department_detail.dept_des']} code={row?.['employees.department_detail.dept_code']}/>
                     </td>
                     <td>
-                      <div className='badge badge-light-info fw-bolder'>{row.role}</div>
+                      <div className='badge badge-light-info fw-bolder'>{roleLabel}</div>
                     </td>
                     <td>
                       {

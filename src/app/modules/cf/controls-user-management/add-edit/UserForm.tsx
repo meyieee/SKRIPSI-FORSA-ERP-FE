@@ -55,6 +55,7 @@ const buildUsernameSuggestions = (employee?: EmployeeRegisterRow) => {
 export const UserForm = ({formProps, isUpdate}: Props) => {
   const {currentUser} = useAuth()
   const {values, setFieldValue} = formProps
+  const [showPassword, setShowPassword] = useState(false)
 
   const funcGetEmployee = () => functionCheckComTypeRoutesAPI(getEmployee, currentUser)
   const {data: employees} = UseReactQuery({func: funcGetEmployee, cacheName: cache_employeeregister})
@@ -338,12 +339,24 @@ export const UserForm = ({formProps, isUpdate}: Props) => {
           <label className='d-flex align-items-center form-label'>
             <span className='required'>Password</span>
           </label>
-          <Field
-            type='password'
-            name='password'
-            className='form-control form-control-lg form-control-solid'
-            autoComplete='new-password'
-          />
+          <div className='position-relative'>
+            <Field
+              type={showPassword ? 'text' : 'password'}
+              name='password'
+              className='form-control form-control-lg form-control-solid'
+              autoComplete='new-password'
+              placeholder={isUpdate ? 'Leave blank if you do not want to change the password' : ''}
+              style={{paddingRight: '2.75rem'}}
+            />
+            <button
+              type='button'
+              className='btn btn-icon btn-sm position-absolute top-50 end-0 translate-middle-y me-2 text-muted'
+              onClick={() => setShowPassword((prev) => !prev)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
+            >
+              <i className={showPassword ? 'bi bi-eye fs-4' : 'bi bi-eye-slash fs-4'}></i>
+            </button>
+          </div>
           <div className='text-danger mt-2'>
             <ErrorMessage name='password' />
           </div>

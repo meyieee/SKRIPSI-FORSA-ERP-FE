@@ -7,7 +7,7 @@ export type UserData = {
   name: string
   password?: string
   role?: string
-  role_id?: number
+  role_id?: number | string
   employee_id?: string
   user_name?: string
   branch_code?: string
@@ -56,6 +56,23 @@ export const createV1UserSchemas = Yup.object().shape({
     .required('Employee must be correctly selected')
 })
 
+export const updateV1UserSchemas = Yup.object().shape({
+  user_name: Yup.string()
+    .max(25, 'Maximum characters reached')
+    .min(4, 'Minimum characters reached')
+    .matches(/^\S*$/, 'Spaces are not allowed')
+    .required('This field is required'),
+  password: Yup.string()
+    .test('password-length', 'Password must be at least 8 characters long', (value) => {
+      if (!value) return true
+      return value.length >= 8
+    }),
+  role_id: Yup.number()
+    .required('Role is required'),
+  employee_id: Yup.string()
+    .required('Employee must be correctly selected')
+})
+
 export const PasswordUpdateSchema = Yup.object().shape({
   current_password: Yup.string()
     .required('Current Password is required'),
@@ -72,7 +89,11 @@ export const latestValues = (data: UserData )=>{
   const values = {
     id_number: data?.id_number || '',
     name: data?.name || '',
+    user_name: data?.name || '',
+    password: '',
     role: data?.role || '',
+    role_id: data?.role_id ? String(data.role_id) : '',
+    employee_id: data?.id_number || '',
     status: data?.status || true, 
     branch_code:  data?.['employees.branch_detail.com_code'] || '',
     com_name:  data?.['employees.branch_detail.com_name'] || '',

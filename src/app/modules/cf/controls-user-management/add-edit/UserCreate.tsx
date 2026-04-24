@@ -1,14 +1,17 @@
 import { useState, useContext } from 'react'
 import { Form, Formik } from 'formik'
+import { useQueryClient } from '@tanstack/react-query'
 import { AlertMessengerContext } from '../../../../components'
 import { UserData, createV1UserSchemas } from '../core/_models'
 import { addV1User } from '../core/_requests'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserForm } from './UserForm'
 import { KTSVG } from '../../../../../_metronic'
+import { cache_users } from '../../../../constans'
 
 const UserCreate = () => {
   let navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { addSuccessMessage, addErrorMessage } = useContext(AlertMessengerContext);
   const [isSubmit, setIsSubmit] = useState(false)
 
@@ -44,10 +47,12 @@ const UserCreate = () => {
     });
   };
 
-  const submitStep = (values: any) => {
+  const submitStep = async (values: any) => {
     setIsSubmit(true)
     addV1User(values)
-    .then(res => {
+    .then(async (res) => {
+      await queryClient.invalidateQueries({ queryKey: [cache_users] })
+      await queryClient.refetchQueries({ queryKey: [cache_users], type: 'active' })
       onSuccess(res.data.message)
       setTimeout(() => {
         navigate('/controls/account-settings')

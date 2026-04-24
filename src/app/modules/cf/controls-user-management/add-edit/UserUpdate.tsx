@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { Form, Formik } from 'formik'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AlertMessengerContext } from '../../../../components'
-import { UserData, createUserSchemas, latestValues } from '../core/_models'
+import { UserData, latestValues, updateV1UserSchemas } from '../core/_models'
 import { getUserById, updateUser } from '../core/_requests'
 import { UserForm } from './UserForm'
 import { cache_users } from '../../../../constans'
@@ -41,8 +41,19 @@ const UserUpdate = () => {
 
   const submitStep = (values: UserData) => {
     setIsSubmit(true)
-    updateUser(data?.id, values)
-    .then(res => {
+    const payload: Record<string, unknown> = {
+      name: values.user_name || values.name,
+      role_id: values.role_id,
+    }
+
+    if (values.password) {
+      payload.password = values.password
+    }
+
+    updateUser(data?.id, payload)
+    .then(async (res) => {
+      await queryClient.invalidateQueries({ queryKey: [cache_users] })
+      await queryClient.refetchQueries({ queryKey: [cache_users], type: 'active' })
       onSuccess(res.data.message)
       setTimeout(() => {
         navigate('/controls/account-settings')
@@ -59,7 +70,7 @@ const UserUpdate = () => {
   }, [])
 
   return (
-      <Formik validationSchema={createUserSchemas} initialValues={latestValues(data)} onSubmit={submitStep} enableReinitialize={true}>
+      <Formik validationSchema={updateV1UserSchemas} initialValues={latestValues(data)} onSubmit={submitStep} enableReinitialize={true}>
         {(formProps) => (
           <Form className='mx-auto mw-1000px w-100' id='kt_create_account_form'>
             <UserForm formProps={formProps} isUpdate={true} />
