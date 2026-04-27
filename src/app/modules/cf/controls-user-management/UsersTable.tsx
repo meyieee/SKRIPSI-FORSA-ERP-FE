@@ -331,7 +331,7 @@ const UsersTable = () => {
                             : <KTSVG path='/media/icons/duotune/files/fil011.svg' className='svg-icon-3' />
                         }
                         modalTitle={`Are you sure you want to ${row.status ? 'deactivate' : 'activate'} item?`}
-                        buttonTitle='Update Status'
+                        buttonTitle='Delete Employee'
                       />
                     </td>
                   </tr>

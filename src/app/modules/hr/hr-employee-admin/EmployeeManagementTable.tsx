@@ -3,13 +3,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { KTCard, KTCardBody, KTSVG, fullUrlServer, toAbsoluteUrl } from '../../../../_metronic'
 import { useAuth } from '../../auth'
-import { AlertMessengerContext, CodeNameDisplay, ConfirmModalType1, ConfirmModalType3, DataNotFound, FrontEndPagination, Loading, SearchData } from '../../../components'
+import { AlertMessengerContext, CodeNameDisplay, ConfirmModalType3, DataNotFound, FrontEndPagination, Loading, SearchData } from '../../../components'
 import { ConvertDateTime, functionCheckComTypeRoutesAPI, SocketListenerRoomReactQuery, SocketListenerRoomUseState, UseReactQuery } from '../../../functions'
 import { getAPIError } from '../../../types'
 import { cache_departments, cache_employeeregister } from '../../../constans'
 import { getDepartments } from '../../fia/fia-home/company/core/_requests'
 import InlinePersonalInfoPanel from '../../fia/fia-home/command/mastery/components/workforce/InlinePersonalInfoPanel'
-import { resetPasswordUser } from '../../cf/controls-user-management/core/_requests'
 import { fetchPersonalInfo } from '../../fia/fia-resource/personal-info/core/_requests'
 import { useProfile } from '../../fia/fia-resource/personal-info/components/ProfileContext'
 import { EmployeeRegisterData } from './core/models'
@@ -39,12 +38,7 @@ const EmployeeManagementTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const [hasDetail, setHasDetail] = useState(false)
 
-  const { addSuccessMessage, addErrorMessage } = useContext(AlertMessengerContext)
-
-  function onSuccess(msg: string) {
-    const time = new Date().toLocaleString()
-    addSuccessMessage({ title: 'Success!', message: `${msg} - time: ${time}` })
-  }
+  const { addErrorMessage } = useContext(AlertMessengerContext)
 
   function onError(msg: string) {
     const time = new Date().toLocaleString()
@@ -290,14 +284,6 @@ const EmployeeManagementTable = () => {
                       <KTSVG path='/media/icons/duotune/general/gen004.svg' className='svg-icon-3' />
                     </button>
 
-                    <ConfirmModalType1
-                      action={() => resetPasswordUser(row.id_number, onSuccess, onError)}
-                      buttonLabel={<KTSVG path='/media/icons/duotune/general/gen051.svg' className='svg-icon-3' />}
-                      className='btn btn-sm btn-link btn-color-gray-500 btn-active-color-primary'
-                      modalTitle="Are you sure you want to reset this employee's linked user password?"
-                      buttonTitle='Reset Password'
-                    />
-
                     <ConfirmModalType3
                       action={(remarks: string, user_id: string | undefined, success: Function, fail: Function) =>
                         updateStatusEmployee(
@@ -319,7 +305,7 @@ const EmployeeManagementTable = () => {
                           : <KTSVG path='/media/icons/duotune/files/fil011.svg' className='svg-icon-3' />
                       }
                       modalTitle={`Are you sure you want to ${row.status === 'Active' ? 'delete' : 'restore'} item?`}
-                      buttonTitle='Update Status'
+                      buttonTitle='Delete Employee'
                     />
                   </td>
                 </tr>
