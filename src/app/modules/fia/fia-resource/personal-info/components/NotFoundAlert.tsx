@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react'
 import {KTSVG} from '../../../../../../_metronic'
-import './scss/personalinfostyles.scss' // import scss untuk alert
 
 type Props = {
   show: boolean
