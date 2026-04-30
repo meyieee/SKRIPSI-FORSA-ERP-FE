@@ -5,6 +5,7 @@ import { OnlineCategoryKey } from '../../../registry'
 import { UseReactQuery } from '../../../../../../../functions/reactQuery'
 import { cache_visitorrequest_new, cache_visitorrequest_list } from '../../../../../../../constans/CachesName'
 import { useAuth } from '../../../../../../../modules/auth'
+import { fetchDepartmentOptions } from '../../../core/employee-search/_hrMasterOptions'
 import { 
   getVisitorRequestNew,
   postVisitorRequest,
@@ -13,7 +14,6 @@ import {
   getPriorityOptions,
   getBranchSiteOptions,
   getLocationOptions,
-  getDepartmentOptions,
   getClearanceTypeOptions,
   getMeetingRoomOptions,
   getTimeOptions,
@@ -48,6 +48,9 @@ function VisitorRequestForm({ cat, type }: Props) {
   const [branchSiteOptions, setBranchSiteOptions] = useState<
     Array<{ value: string; label: string }>
   >([])
+  const [cfDepartmentOptions, setCfDepartmentOptions] = useState<
+    Array<{ value: string; label: string }>
+  >([])
   const { currentUser } = useAuth()
 
   useEffect(() => {
@@ -60,6 +63,18 @@ function VisitorRequestForm({ cat, type }: Props) {
       }
     }
     void load()
+  }, [])
+
+  useEffect(() => {
+    const loadDepts = async () => {
+      try {
+        const opts = await fetchDepartmentOptions()
+        setCfDepartmentOptions(opts)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    void loadDepts()
   }, [])
   
   // Use form notification hook for modals
@@ -221,7 +236,6 @@ function VisitorRequestForm({ cat, type }: Props) {
                         getPriorityOptions={getPriorityOptions}
                         branchSiteOptions={branchSiteOptions}
                         getLocationOptions={getLocationOptions}
-                        getDepartmentOptions={getDepartmentOptions}
                         currentUser={currentUser}
                       />
 
@@ -240,7 +254,7 @@ function VisitorRequestForm({ cat, type }: Props) {
                       <HostDetailsSection
                         values={formProps.values.hostDetails}
                         setFieldValue={formProps.setFieldValue}
-                        getDepartmentOptions={getDepartmentOptions}
+                        departmentOptions={cfDepartmentOptions}
                       />
 
                       <SecurityClearanceSection

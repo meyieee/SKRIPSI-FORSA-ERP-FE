@@ -102,7 +102,6 @@ function getDummyPurchaseRequisitionForm(
       relevantDocs: '',
       relevantDocsSecond: '',
       location: '',
-      amount: '',
       estimatedTime: '',
       firstService: '',
     },

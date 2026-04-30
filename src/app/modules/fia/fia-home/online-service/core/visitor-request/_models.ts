@@ -156,7 +156,7 @@ export function validateVisitorRequest(values: VisitorRequestForm): string[] {
   }
   
   if (values.hostDetails.contactNumber && 
-      !/^[\+]?[0-9\s\-\(\)]{8,15}$/.test(values.hostDetails.contactNumber)) {
+      !/^[\+]?[0-9\s\-\(\)]{8,28}$/.test(values.hostDetails.contactNumber.trim())) {
     errors.push('Host Contact Number format is invalid')
   }
   

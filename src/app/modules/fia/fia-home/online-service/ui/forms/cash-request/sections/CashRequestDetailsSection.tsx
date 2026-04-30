@@ -3,6 +3,19 @@ import FormSection from '../../common/components/FormSection'
 import FormField from '../../common/components/FormField'
 import FormSelect from '../../common/components/FormSelect'
 
+/** Display Rp.100.000 — stored value remains plain integer (e.g. 100000). */
+function formatAmountRequestDisplay(amount: number): string {
+  if (!amount || amount <= 0) return ''
+  return `Rp.${amount.toLocaleString('id-ID')}`
+}
+
+function parseAmountRequestInput(raw: string): number {
+  const digits = raw.replace(/\D/g, '')
+  if (!digits) return 0
+  const n = Number.parseInt(digits, 10)
+  return Number.isFinite(n) ? n : 0
+}
+
 type CashRequestDetailsSectionProps = {
   values: {
     expenseType: string
@@ -39,11 +52,13 @@ export default function CashRequestDetailsSection({
           <FormField
             label='Amount Request'
             name='cashRequestDetails.amountRequest'
-            value={values.amountRequest}
-            onChange={(value) => setFieldValue('cashRequestDetails.amountRequest', parseFloat(value) || 0)}
-            type='number'
-            min={0}
-            step='0.01'
+            value={formatAmountRequestDisplay(values.amountRequest)}
+            onChange={(value) =>
+              setFieldValue('cashRequestDetails.amountRequest', parseAmountRequestInput(value))
+            }
+            type='text'
+            inputMode='numeric'
+            placeholder='Rp.0'
             required
           />
         </div>

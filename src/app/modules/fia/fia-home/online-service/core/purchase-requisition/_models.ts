@@ -49,7 +49,6 @@ export type PurchaseRequisitionInfo = {
   relevantDocs: string
   relevantDocsSecond: string
   location: string
-  amount: string
   estimatedTime: string
   firstService: string
 }
@@ -104,7 +103,6 @@ export function validatePurchaseRequisition(values: PurchaseRequisitionForm): st
   if (!values.requestInfo.requisitionDate) errors.push('Requisition Date is required')
   if (!values.requestInfo.requestBy) errors.push('Request By is required')
   if (!values.requestInfo.priority) errors.push('Priority is required')
-  if (!values.requestInfo.amount) errors.push('Amount is required')
   if (!values.requisitionInfo.supplier) errors.push('Supplier is required')
   
   return errors

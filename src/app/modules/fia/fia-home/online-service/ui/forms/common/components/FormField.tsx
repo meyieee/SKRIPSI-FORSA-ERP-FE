@@ -14,6 +14,7 @@ type FormFieldProps = {
   min?: string | number
   max?: string | number
   step?: string | number
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode']
 }
 
 export default function FormField({
@@ -29,6 +30,7 @@ export default function FormField({
   min,
   max,
   step,
+  inputMode,
 }: FormFieldProps) {
   return (
     <div className={`mb-2 ${className}`}>
@@ -44,6 +46,7 @@ export default function FormField({
         min={min}
         max={max}
         step={step}
+        inputMode={inputMode}
       />
     </div>
   )

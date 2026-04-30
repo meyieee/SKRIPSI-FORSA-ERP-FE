@@ -7,8 +7,7 @@ import FormSelect from '../../common/components/FormSelect'
 import FormTextarea from '../../common/components/FormTextarea'
 import EmployeeSearchTypeahead from '../../common/components/EmployeeSearchTypeahead'
 import FormFileUpload from '../../common/components/FormFileUpload'
-import OrgLockedOrManualField from '../../common/components/OrgLockedOrManualField'
-import { useOrgMasterOptions, useRequestForOrganizationSync } from '../../common/hooks'
+import { useRequestForOrganizationSync } from '../../common/hooks'
 
 type RequestInfoSectionProps = {
   values: VisitorRequestInfo
@@ -17,7 +16,6 @@ type RequestInfoSectionProps = {
   getPriorityOptions: () => Array<{ value: string; label: string }>
   branchSiteOptions: Array<{ value: string; label: string }>
   getLocationOptions: () => Array<{ value: string; label: string }>
-  getDepartmentOptions: () => Array<{ value: string; label: string }>
   currentUser?: UserModel | null
 }
 
@@ -28,11 +26,9 @@ export default function RequestInfoSection({
   getPriorityOptions,
   branchSiteOptions,
   getLocationOptions,
-  getDepartmentOptions,
   currentUser,
 }: RequestInfoSectionProps) {
   const orgSync = useRequestForOrganizationSync(values.requestFor, setFieldValue)
-  const { departmentOptions } = useOrgMasterOptions(values.department)
 
   // Helper untuk mendapatkan nama lengkap current user untuk display
   const getCurrentUserName = (): string => {

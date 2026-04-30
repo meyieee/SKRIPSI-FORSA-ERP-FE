@@ -225,20 +225,6 @@ export function getYesNoOptions() {
   ]
 }
 
-export function getDepartmentOptions() {
-  return [
-    { value: 'operations', label: 'Operations' },
-    { value: 'human-resources', label: 'Human Resources' },
-    { value: 'finance', label: 'Finance' },
-    { value: 'administration', label: 'Administration' },
-    { value: 'it', label: 'Information Technology' },
-    { value: 'marketing', label: 'Marketing' },
-    { value: 'sales', label: 'Sales' },
-    { value: 'security', label: 'Security' },
-    { value: 'other', label: 'Other' },
-  ]
-}
-
 export function getCostCenterOptions() {
   return [
     { value: 'OPS-1001', label: 'OPS-1001' },

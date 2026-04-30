@@ -130,7 +130,6 @@ const fieldOrderMap: Record<string, string[]> = {
     'additionalComments',
     'relevantDocs',
     'relevantDocsSecond',
-    'amount',
     'estimatedTime',
     'firstService',
   ],
